@@ -1,0 +1,50 @@
+title: Polars for Data Science
+subtitle: From zero to tackling real world data science problems with Polars.
+dataset: iris dataset
+modules:
+- module_name: "Getting Started"
+  module_learning_objective: "Install Polars; become familiar with Polars's lazy-mode versus in-memory mode; understand how to leverage Polars's query optimization."
+  functions_to_learn:
+    - polars.read_csv()
+    - polars.scan_csv()
+    - polars.read_parquet()
+    - polars.DataFrame.head()
+    - polars.DataFrame.select()
+    - polars.LazyFrame.select()
+    - polars.LazyFrame.show_graph()
+  tutorial_sections:
+    - Loading the data with polars.read_csv() and inspecting it with polars.DataFrame.head(). You can already see that Polars is very explicit about datatypes, and you'll be grateful such organization when it comes time to the Expression API. More on that later.
+    - Selecting a few columns with polars.DataFrame.select().
+    - Loading the data with polars.scan_csv() and inspecting it with polars.DataFrame.head()--the result is different! It's not a dataframe, because it's only loaded upon collect.
+    - Selecting a few columns with polars.LazyFrame.select(), then polars.LazyFrame.show_graph()--look, the columns that aren't selected are never read in!
+    - Demonstrating LazyFrame to DataFrame conversion with polars.LazyFrame.collect() from previous tutorial section's LazyFrame query.
+    - "Note: LazyFrames can always be used in place of DataFrames, especially to accelerate code during input and output, for example if you only want to read in a particular column from a parquet file or a particular set of rows from a csv file. For the sake of clarity and for focusing on practical matters, this course will no longer use LazyFrames, but exclusively DataFrames."
+- module_name: "Data Manipulation I: Basics"
+  module_learning_objective: "Become familiar with the Polars API, and be able to perform basic selecting and filtering queries."
+  functions_to_learn:
+    - pl.DataFrame.filter()
+    - pl.DataFrame.sort()
+    - pl.Expr.abs()
+    - pl.Expr.lt()
+    - pl.Expr.ne()
+    - pl.Expr.alias()
+    - pl.Expr.suffix()
+    - pl.Expr.prefix()
+    - pl.Expr.max()
+    - pl.Expr.min()
+  tutorial_sections:
+    - "There are four main classes of tools for data manipulation in the polars API: query clauses (select, filter, sort, group_by, agg, etc), column expressions (anything that starts with pl.col()), collection functions (collect, head, shape), and miscellaneous (value_counts, transpose, concat, plot)."
+    - "Query clauses expanded: comparison of Polars syntax to SQL syntax."
+    - "Expression API expanded, the special sauce of Polars: a few examples of expressions inside select statements, including functions pl.col() (with both single column and list of columns), pl.Col.alias(), pl.Col.suffix(), pl.Col.ne()."
+    - With the Expression API, you can already begin to do basic aggregations, like max and min of columns. More on that in the next module.
+    - "If you want to explore the types of columns you can add, check out the Expression API docs; all expression functions are organized by namespace, a different namespace for each datatype."
+- module_name: "Data Manipulation II: Grouping and Aggregation"
+  module_learning_objective: "Learn to perform Polars queries that involve aggregations, such as group-by's and window functions."
+- module_name: "Data Manipulation III: Combining Data"
+  module_learning_objective: "Learn to perform Polars queries that involve combining data, such as joins and concatenations."
+- module_name: "Data Manipulation IV: Data Types"
+  module_learning_objective: "Understand all the different data types that exist in Polars, and how to work with them."
+- module_name: "Data Manipulation V: IO and Interoperation"
+  module_learning_objective: "Learn to switch data seamlessly between Pandas, Numpy, and Polars, and be able to read and write data both locally and to the cloud."
+- module_name: "Integrating Polars Into the Data Science Workflow"
+  module_learning_objective: "Become comfortable using Polars in a typical everyday data science workflow, integrating it with Matplotlib, Plotly, and Scikit Learn."
