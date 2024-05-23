@@ -1,3 +1,5 @@
-jupyter
 polars
 pandas
+notebook==6.5.7
+jupyter
+setuptools
