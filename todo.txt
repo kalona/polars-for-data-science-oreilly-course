@@ -1,0 +1,1 @@
+Add basic attributes and functions to Getting Started, such as .describe(), .columns, .shape, and .len
