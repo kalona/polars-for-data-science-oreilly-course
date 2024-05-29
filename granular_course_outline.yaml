@@ -109,3 +109,5 @@ conclusion_modules:
       - working with date/time (rolling, group_by_dynamic)
       - deep dive into nested dtypes
       - optimizations of joins and sort (e.g. with pl.Categorical)
+      - pl.Categorical, pl.Enum
+      - 
