@@ -1,1 +1,1 @@
-Add basic attributes and functions to Getting Started, such as .describe(), .columns, .shape, and .len. Also printing a dataframe. Also creating pl.DataFrame from scratch (dictionary)
+Add basic attributes and functions to Getting Started, such as .describe(), .columns, .shape, .len. Also printing a dataframe. Also creating pl.DataFrame from scratch (dictionary). And .null_count()
