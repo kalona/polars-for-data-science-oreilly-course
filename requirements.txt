@@ -3,3 +3,6 @@ jupyter
 polars
 pandas
 notebook==6.5.7
+pyarrow
+xlsxwriter
+xlsx2csv
