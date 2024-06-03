@@ -1,8 +1,10 @@
-setuptools
 jupyter
-polars
-pandas
+lightgbm
+matplotlib
 notebook==6.5.7
+pandas
+polars
 pyarrow
+setuptools
 xlsxwriter
 xlsx2csv

@@ -1,3 +1,5 @@
-Add basic attributes and functions to Getting Started, such as .describe(), .columns, .shape, .len. Also printing a dataframe. Also creating pl.DataFrame from scratch (dictionary). And .null_count()
+Add basic attributes and functions to Getting Started, such as .describe(), .columns, .shape, .len. Also printing a dataframe. Also creating pl.DataFrame from scratch (dictionary). And .null_count()!!
+
+to interop/io module, i should add a part about loading * file paterns.
 
 in conclusion slide, i should go through the docs and show "we've covered mostly an intro of the API, here. if you want to compute something on a column, it's easy to simply go check out the column expression docs" (video of scrolling through the namespaces).
