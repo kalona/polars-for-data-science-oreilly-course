@@ -1,9 +1,9 @@
 jupyter
 lightgbm
 matplotlib
-notebook==6.5.7
+notebook
 pandas
-polars
+polars-lts-cpu
 pyarrow
 setuptools
 xlsxwriter
