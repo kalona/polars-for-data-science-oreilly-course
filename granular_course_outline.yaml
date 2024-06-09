@@ -100,6 +100,8 @@ interactive_modules:
     module_learning_objective: "Become comfortable using Polars in a typical everyday data science workflow, integrating it with Matplotlib, Plotly, and Scikit Learn."
     tutorial_sections:
       - .plot
+      - .corr
+      - .sample
 conclusion_modules:
   - module_name: "Conclusion"
     module_learning_objective: "Where to go from here?"
