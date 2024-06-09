@@ -6,6 +6,7 @@ notebook
 pandas
 polars-lts-cpu
 pyarrow
+scikit-learn
 setuptools
 xlsxwriter
 xlsx2csv
