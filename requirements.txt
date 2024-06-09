@@ -1,3 +1,4 @@
+hvplot
 jupyter
 lightgbm
 matplotlib
