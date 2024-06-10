@@ -1,7 +1,11 @@
 title: Polars for Data Science
 subtitle: From zero to tackling real world data science problems with Polars.
-dataset: iris dataset
 intro_modules:
+  - module_name: "Course Overview"
+    module_learning_objective: "Intro"
+    sections:
+      - Describe overview of the course
+    duration_minutes: 4
   - module_name: "Introduction to Polars"
     module_learning_objective: "Learn to perform Polars queries that involve aggregations, such as group-by's and window functions."
     sections:
@@ -9,6 +13,7 @@ intro_modules:
       - Where does Polars fit in (data manipulation tools spectrum)
       - What makes Polars so powerful (Rust, Apache Arrow)
       - What's the Apache Arrow memory model, and why does it matter?
+    duration_minutes: 7.5
 interactive_modules:
   - module_name: "Getting Started"
     module_learning_objective: "Install Polars; become familiar with Polars's lazy-mode versus in-memory mode; understand how to leverage Polars's query optimization."
