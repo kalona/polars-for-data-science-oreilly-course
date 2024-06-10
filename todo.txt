@@ -5,3 +5,16 @@ to interop/io module, i should add a part about loading * file paterns.
 in conclusion slide, i should go through the docs and show "we've covered mostly an intro of the API, here. if you want to compute something on a column, it's easy to simply go check out the column expression docs" (video of scrolling through the namespaces).
 
 Create an install script for Getting Started that includes jupyter, polars (with the polars-lts-cpu library if necessary), lightgbm (and libomp if necessary),
+
+Timings:
+overview: 4
+intro: 7.5
+getting started: 17
+dm 1: 18
+dm 2: 15
+dm 3: 17
+dm 4: 17
+dm 5: 17
+dm 6: 17
+ds integration: 17
+conclusion: 6

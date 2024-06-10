@@ -38,6 +38,7 @@ interactive_modules:
       - Scan the csv dataset with pl.scan_csv(), select column X, and then collect(), and time it. Do the same, but without selecting a column. How many times faster is the first (roughly)?
       - Scan the csv dataset with pl.scan_parquet(), select column X, and then collect(), and time it. Do the same, but without selecting a column. How many times faster is the first (roughly)?
       - Why is the speed improvement offered by "scan" over "read" so much greater for parquet than csv?
+    duration_minutes: 17
   - module_name: "Data Manipulation I: Basics"
     module_learning_objective: "Become familiar with the Polars API, and be able to perform basic selecting and filtering queries."
     functions_to_learn:
@@ -57,7 +58,8 @@ interactive_modules:
       - "Expression API expanded, the special sauce of Polars: a few examples of expressions inside select statements, including functions pl.col() (with both single column and list of columns), pl.Col.alias(), pl.Col.suffix(), pl.Col.ne()."
       - With the Expression API, you can already begin to do basic aggregations, like max and min of columns. More on that in the next module.
       - "If you want to explore the types of columns you can add, check out the Expression API docs; all expression functions are organized by namespace, a different namespace for each datatype."
-  - module_name: "Data Manipulation Ii: Advanced Selecting"
+    duration_minutes: 18
+  - module_name: "Data Manipulation II: Advanced Selecting"
     module_learning_objective: "Become dexterous with the many ways of using pl.col()."
     functions_to_learn:
       - pl.col(String)
@@ -68,7 +70,8 @@ interactive_modules:
       - look at all the things you can do with pl.col().
       - look at all the things you can do with pl.selectors.
       - of course, you can still do drop to remove columns rather than selecting, and rename to globally change column names.
-  - module_name: "Data Manipulation II: Grouping and Aggregation"
+    duration_minutes: 15
+  - module_name: "Data Manipulation III: Grouping and Aggregation"
     module_learning_objective: "Learn to perform Polars queries that involve aggregations, such as group-by's and window functions."
     functions_to_learn:
       - pl.DataFrame.group_by()
@@ -78,13 +81,13 @@ interactive_modules:
       - "Grouping and aggregation in Polars allows you to perform efficient and powerful data summaries, similar to SQL's `GROUP BY` or Pandas's `groupby()`."
       - Any of the aggregation functions that we checked out in the previous section work with group_by, and more.
       - Polars also offers a powerful interface for window functions, or the equivalent of the `PARTITION BY` statement in SQL.
-  - module_name: "Data Manipulation III: Combining Data"
+  - module_name: "Data Manipulation IV: Combining Data"
     module_learning_objective: "Learn to perform Polars queries that involve combining data, such as joins and concatenations."
     functions_to_learn:
       - pl.DataFrame.join()
       - pl.DataFrame.concat()
     tutorial_sections:
-  - module_name: "Data Manipulation IV: Data Types"
+  - module_name: "Data Manipulation V: Data Types"
     module_learning_objective: "Understand all the different data types that exist in Polars, and how to work with them."
     tutorial_sections:
       - "Up until now, we've covered mostly basic operations on columns: `eq()`, `count()`, `max()` etc, which work across all datatypes. However, there are many data type specific operations that can be done as well (e.g. string_length)."
@@ -93,7 +96,7 @@ interactive_modules:
       - String tutorial.
       - Duration tutorial.
       - Categorical tutorial
-  - module_name: "Data Manipulation V: Interoperation"
+  - module_name: "Data Manipulation VI: Interoperation"
     module_learning_objective: "Learn to switch data seamlessly between Pandas, Numpy, and Polars, and be able to read and write data to numerous formats."
     tutorial_sections:
       - Series from DataFrame.
