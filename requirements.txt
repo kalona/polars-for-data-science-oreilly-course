@@ -1,7 +1,9 @@
 hvplot
 jupyter
+jupyter_contrib_nbextensions
 lightgbm
 matplotlib
+nbconvert
 notebook
 pandas
 polars-lts-cpu
