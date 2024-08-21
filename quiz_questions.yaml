@@ -1,69 +1,66 @@
-title: Polars for Data Science
-subtitle: From zero to tackling real world data science problems with Polars.
-modules:
-  - module_name: "Course Overview"
-    quiz_questions: []
-  - module_name: "Introduction to Polars"  # 5 questions
-    quiz_questions:
-      - question: "What language is Polars implemented in?"
-        answers:
-          - text: "Rust"
-            rationale: "Correct! Polars is implemented in Rust, and has bindings in other languages, all of which use the underlying Rust implementation."
-            is_correct: true
-          - text: "C"
-            rationale: "C is indeed a fast low-level language, but it's not the one that Polars is implemented in."
-            is_correct: false
-          - text: "Python"
-            rationale: "Though Polars has Python bindings, it is implemented in a different language!"
-            is_correct: false
-      - question: "Which is the most common use-case for Polars?"
-        answers:
-          - text: "Single node computing."
-            rationale: "Correct!"
-            is_correct: true
-          - text: "Distributed computing."
-            rationale: "Not really; tools like Spark or Modin are better suited to this use-case."
-            is_correct: false
-      - question: "What do you have to do to configure Polars such that its query optimization engine uses all cores available on the host machine?"
-        answers:
-          - text: "Specify a backend engine for distributing queries."
-            rationale: "This is what you have to do with Modin and Ray for Pandas, not Polars."
-            is_correct: false
-          - text: "Enter some information regarding your OS's specifics into a configuration file which Polars will then use to distribute resources."
-            rationale: "Nope!"
-            is_correct: false
-          - text: "Nothing, it works like that right out of the box."
-            rationale: "Correct!"
-            is_correct: true
-      - question: "What does Polars use as its underlying memory model?"
-        answers:
-          - text: "Rust"
-            rationale: "Polars is implemented in Rust, but that is not the underlying memory model."
-            is_correct: false
-          - text: "Python"
-            rationale: "Polars has bindings in Python, but that is not its underlying memory model."
-            is_correct: false
-          - text: "Apache Arrow"
-            rationale: "Correct!"
-            is_correct: true
-      - question: "How is the Apache Arrow memory model optimized for column-oriented OLAP use-cases?"
-        answers:
-          - text: "Data from the same column is placed close together in memory."
-            rationale: "Exactly! Modern analytics use-cases usually involve column-oriented actions, so having data from the same column close together helps Apache Arrow to optimize for those use-cases."
-            is_correct: true
-          - text: "Data from the same row is placed close together in memory."
-            rationale: "Incorrect! You might be thinking about OLTP, but Apache Arrow is optimized for OLAP."
-            is_correct: false
-          - text: "Data's storage location is close to the data's processing location."
-            rationale: "This is an interesting design consideration that differs across distributed computing tools like Hadoop and Spark, but it's not relevant here."
-            is_correct: true
-  - module_name: "Getting Started"  # 4 questions
-  - module_name: "Data Manipulation I: Basics"  # 10 questions
-  - module_name: "Data Manipulation II: Advanced Selecting"  # 8 questions
-  - module_name: "Data Manipulation III: Grouping and Aggregation"  # 10 questions
-  - module_name: "Data Manipulation IV: Combining Data"  # 5 questions
-  - module_name: "Data Manipulation V: Data Types"  # 10 questions
-  - module_name: "Data Manipulation VI: Interoperation"  # 8 questions
-  - module_name: "Integrating Polars Into the Data Science Workflow"  # 5 questions
-  - module_name: "Conclusion"
-    quiz_questions: []
+- module_name: "Course Overview"
+  quiz_questions: []
+- module_name: "Introduction to Polars"  # 5 questions
+  quiz_questions:
+    - question: "What language is Polars implemented in?"
+      answers:
+        - text: "Rust"
+          rationale: "Correct! Polars is implemented in Rust, and has bindings in other languages, all of which use the underlying Rust implementation."
+          is_correct: true
+        - text: "C"
+          rationale: "C is indeed a fast low-level language, but it's not the one that Polars is implemented in."
+          is_correct: false
+        - text: "Python"
+          rationale: "Though Polars has Python bindings, it is implemented in a different language!"
+          is_correct: false
+    - question: "Which is the most common use-case for Polars?"
+      answers:
+        - text: "Single node computing."
+          rationale: "Correct!"
+          is_correct: true
+        - text: "Distributed computing."
+          rationale: "Not really; tools like Spark or Modin are better suited to this use-case."
+          is_correct: false
+    - question: "What do you have to do to configure Polars such that its query optimization engine uses all cores available on the host machine?"
+      answers:
+        - text: "Specify a backend engine for distributing queries."
+          rationale: "This is what you have to do with Modin and Ray for Pandas, not Polars."
+          is_correct: false
+        - text: "Enter some information regarding your OS's specifics into a configuration file which Polars will then use to distribute resources."
+          rationale: "Nope!"
+          is_correct: false
+        - text: "Nothing, it works like that right out of the box."
+          rationale: "Correct!"
+          is_correct: true
+    - question: "What does Polars use as its underlying memory model?"
+      answers:
+        - text: "Rust"
+          rationale: "Polars is implemented in Rust, but that is not the underlying memory model."
+          is_correct: false
+        - text: "Python"
+          rationale: "Polars has bindings in Python, but that is not its underlying memory model."
+          is_correct: false
+        - text: "Apache Arrow"
+          rationale: "Correct!"
+          is_correct: true
+    - question: "How is the Apache Arrow memory model optimized for column-oriented OLAP use-cases?"
+      answers:
+        - text: "Data from the same column is placed close together in memory."
+          rationale: "Exactly! Modern analytics use-cases usually involve column-oriented actions, so having data from the same column close together helps Apache Arrow to optimize for those use-cases."
+          is_correct: true
+        - text: "Data from the same row is placed close together in memory."
+          rationale: "Incorrect! You might be thinking about OLTP, but Apache Arrow is optimized for OLAP."
+          is_correct: false
+        - text: "Data's storage location is close to the data's processing location."
+          rationale: "This is an interesting design consideration that differs across distributed computing tools like Hadoop and Spark, but it's not relevant here."
+          is_correct: true
+- module_name: "Getting Started"  # 4 questions
+- module_name: "Data Manipulation I: Basics"  # 10 questions
+- module_name: "Data Manipulation II: Advanced Selecting"  # 8 questions
+- module_name: "Data Manipulation III: Grouping and Aggregation"  # 10 questions
+- module_name: "Data Manipulation IV: Combining Data"  # 5 questions
+- module_name: "Data Manipulation V: Data Types"  # 10 questions
+- module_name: "Data Manipulation VI: Interoperation"  # 8 questions
+- module_name: "Integrating Polars Into the Data Science Workflow"  # 5 questions
+- module_name: "Conclusion"
+  quiz_questions: []
