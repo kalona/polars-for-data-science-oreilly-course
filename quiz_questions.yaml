@@ -67,6 +67,55 @@
           rationale: "Incorrect! Try again."
           is_correct: false
 - module_name: "Getting Started"  # 4 questions
+  quiz_questions:
+    - question: "Given the following data dictionary about school children, create a `pl.DataFrame` and display it. What are the datatypes of each column?"
+      answers:
+        - text: "(`str`, `str`, `f64`, `cat`)"
+          rationale: "Almost! If you want the last column to be a categorical variable, then you'd need to perform some additional type-casting on the column."
+          is_correct: false
+        - text: "(`str`, `str`, `f64`, `str`)"
+          rationale: "Correct! Columns 1, 2, and 4 are strings, but column 3, having at least one value with a decimal point, gets cast as a float."
+          is_correct: true
+        - text: "(`str`, `str`, `i64`, `cat`)"
+          rationale: "Not quite!"
+          is_correct: false
+        - text: "(`str`, `i64`, `cat`)"
+          rationale: "You're missing a column!"
+          is_correct: false
+    - question: "During the module, we saw that selecting columns from a `LazyFrame` was ~2-3x faster than selecting columns from a `DataFrame`. Now perform the same comparison, but for the `parquet` file. What is the speed increase from selecting on a `DataFrame` to selecting on a `LazyFrame` for the `parquet` file?"
+      answers:
+        - text: ".5-1x"
+          rationale: ""
+          is_correct: false
+        - text: "1-2x"
+          rationale: ""
+          is_correct: false
+        - text: "3-5x"
+          rationale: ""
+          is_correct: true
+        - text: "5-10x"
+          rationale: ""
+          is_correct: false
+    - question: "Which file type demonstrated a greater speedup from selecting on a `DataFrame` to selecting on a `LazyFrame`: `csv` or `parquet`?"
+      answers:
+        - text: "`csv`"
+          rationale: ""
+        - text: "`parquet`"
+          rationale: ""
+    - question: "Using what you know what you know about `parquet` files, why was selecting on a `LazyFrame` faster than selecting on a `DataFrame` for `parquet` than for `csv`?"
+      answers:
+        - text: "Because the `parquet` file is smaller than the `csv` file."
+          rationale: "Though the `parquet` file is indeed smaller than the `csv` file, this isn't the true reason why it leads to a bigger difference between in-memory selecting vs lazy selecting."
+          is_correct: false
+        - text: "Because Polars is built on the Apache Arrow memory model, the development team has spent more time developing the functionality associated with parquet, which is also built on the Apache Arrow memory model, thus making its IO operations faster."
+          rationale: "While this may be the case, it's not the answer."
+          is_correct: false
+        - text: "`parquet` files keep data from the same column in the same location in memory, so when the `select` gets pushed down to the read operation of `LazyFrame`, the input engine can skip the unnecessary columns' data faster than it can for `csv`."
+          rationale: "Correct! When Polars goes to select only a few columns from a `parquet` file, it only has to read through those few columns' data, while for `csv` it still has to read through every columns' data!"
+          is_correct: true
+        - text: "Because `parquet` is a newer, more advanced file type."
+          rationale: "Though this is indeed true, this isn't the reason why `parquet` has a bigger difference between in-memory selecting vs lazy selecting than `csv`."
+          is_correct: false
 - module_name: "Data Manipulation I: Basics"  # 10 questions
 - module_name: "Data Manipulation II: Advanced Selecting"  # 8 questions
 - module_name: "Data Manipulation III: Grouping and Aggregation"  # 10 questions
