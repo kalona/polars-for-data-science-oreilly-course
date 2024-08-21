@@ -13,6 +13,9 @@
         - text: "Python"
           rationale: "Though Polars has Python bindings, it is implemented in a different language!"
           is_correct: false
+        - text: "R"
+          rationale: "R is a great language for data science, but Polars is not implemented in R."
+          is_correct: false
     - question: "Which is the most common use-case for Polars?"
       answers:
         - text: "Single node computing."
@@ -32,6 +35,9 @@
         - text: "Nothing, it works like that right out of the box."
           rationale: "Correct!"
           is_correct: true
+        - text: "Specify the number of cores on the local machine when importing Polars."
+          rationale: "Nope!"
+          is_correct: false
     - question: "What does Polars use as its underlying memory model?"
       answers:
         - text: "Rust"
@@ -43,6 +49,9 @@
         - text: "Apache Arrow"
           rationale: "Correct!"
           is_correct: true
+        - text: "Online Analytical Processing"
+          rationale: "Polars uses a memory model which optimized for Online Analytical Processing use-cases, but that is not the memory model itself."
+          is_correct: true
     - question: "How is the Apache Arrow memory model optimized for column-oriented OLAP use-cases?"
       answers:
         - text: "Data from the same column is placed close together in memory."
@@ -53,7 +62,10 @@
           is_correct: false
         - text: "Data's storage location is close to the data's processing location."
           rationale: "This is an interesting design consideration that differs across distributed computing tools like Hadoop and Spark, but it's not relevant here."
-          is_correct: true
+          is_correct: false
+        - text: "Data gets sorted before processing."
+          rationale: "Incorrect! Try again."
+          is_correct: false
 - module_name: "Getting Started"  # 4 questions
 - module_name: "Data Manipulation I: Basics"  # 10 questions
 - module_name: "Data Manipulation II: Advanced Selecting"  # 8 questions
