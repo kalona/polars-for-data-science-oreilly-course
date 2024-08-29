@@ -121,7 +121,7 @@
 - module_name: "Data Manipulation III: Grouping and Aggregation"  # 10 questions
 - module_name: "Data Manipulation IV: Combining Data"  # 3 questions
 - module_name: "Data Manipulation V: Data Types"  # 10 questions
-- module_name: "Data Manipulation VI: Interoperation"  # 8 questions
+- module_name: "Data Manipulation VI: Interoperation"  # 5 questions
 - module_name: "Integrating Polars Into the Data Science Workflow"  # 5 questions
 - module_name: "Conclusion"
   quiz_questions: []
