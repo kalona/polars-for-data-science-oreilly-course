@@ -1,4 +1,4 @@
-hvplot
+hvplot>=0.9.1
 jupyter
 jupyter_contrib_nbextensions
 lightgbm
