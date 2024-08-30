@@ -6,7 +6,7 @@ matplotlib
 nbconvert
 notebook
 pandas
-polars-lts-cpu
+polars-lts-cpu>=1.6.0
 pyarrow
 scikit-learn
 setuptools
