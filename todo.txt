@@ -21,3 +21,4 @@ conclusion: 6
 
 
 as of 1.0.0, i think `drop` accepts column expressions, not just strings.
+the plotting engine has changed from hvplot!
