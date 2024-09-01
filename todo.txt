@@ -18,3 +18,6 @@ dm 5: 17
 dm 6: 17
 ds integration: 17
 conclusion: 6
+
+
+as of 1.0.0, i think `drop` accepts column expressions, not just strings.
