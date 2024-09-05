@@ -196,7 +196,7 @@
           rationale: "You might be sorting in ascending order rather than descending order..."
           is_correct: false
         - text: "3.8, 181.5"
-          rationale: ""
+          rationale: "Exactly! This is the result when you sort by `total_amount` descending."
           is_correct: true
         - text: "1021.99, 951.26"
           rationale: "These are the two highest values for `total_amount`, but we are looking for the values of `trip_distance` associated with two highest values of `total_amount`!"
@@ -238,7 +238,7 @@
     - question: "Of all the trips which had a `trip_distance` of exactly `5`, what was the latest `tpep_pickup_datetime`?"
       answers:
         - text: "2024-03-31 23:46:21"
-          rationale: ""
+          rationale: "Exactly! Only a few trips had a `trip_distance` of exactly 5, and this is the latest one."
           is_correct: true
         - text: "2024-03-31 23:57:07"
           rationale: "Remember--we're looking for maximum pickup datetime, not dropoff datetime!"
@@ -407,7 +407,7 @@
     - question: "What is the maximum trip distance for trips with `pu_location_id = 1`?"
       answers:
         - text: "35.75"
-          rationale: ""
+          rationale: "Exactly! The maximum trip distance for trips with `pu_location_id = 1` is 35.75."
           is_correct: true
         - text: "29.7"
           rationale: "are you sure you chose the right `pu_location_id`?"
@@ -430,8 +430,8 @@
         - text: "265"
           rationale: "are you sure you're using `mean` and not `max`?"
           is_correct: false
-        - text: "204"
-          rationale: ""
+        - text: "6"
+          rationale: "Exactly! `vendor_id = 6` has a much higher `mean_fare_amount` than the other vendors."
           is_correct: true
 
     - question: "Which date for `tpep_pickup_datetime` had the most rides?"
@@ -443,7 +443,7 @@
           rationale: "we're looking for the date with the most rides, not the datetime with the most rides."
           is_correct: false
         - text: "2024-03-09"
-          rationale: ""
+          rationale: "Exactly! There were 140383 rides on this day, more than on any other day."
           is_correct: true
         - text: "2024-04-01"
           rationale: "try again."
@@ -455,7 +455,7 @@
           rationale: "be sure to take the mean, not the max."
           is_correct: false
         - text: "18.390497"
-          rationale: ""
+          rationale: "Exactly! According to the pivot table, this answer is similar across most `payment_type`/`vendor_id` combinations."
           is_correct: true
         - text: "3.411724"
           rationale: "are you sure your choice of `values` is `fare_amount`?"
@@ -473,7 +473,7 @@
           rationale: "Make sure to check for `vendor_id = 1`, not `2`."
           is_correct: false
         - text: "12.570663"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "2.409085"
           rationale: "Make sure to check for rides that had an airport fee, not ones that didn't."
@@ -497,7 +497,7 @@
     - question: "Using `rank().over()`, what is the sum of each `vendor_id`s 10th largest `trip_distance`s, summed over all `vendor_id`s?"
       answers:
         - text: "113916.29"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "115599.84"
           rationale: "are you sure you taking the 10th largest trip distance, and not the 9th?"
@@ -518,7 +518,7 @@
           rationale: "you might be taking the three `pu_location_id`s with the lowest maximum `trip_distance`, not the highest maximum `trip_distance`."
           is_correct: false
         - text: "4.6460e6"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "2.3340e7"
           rationale: "remember, you want the sum `total_amount` of the three `pu_location_id`s with the highest `max_trip_distance`, not the highest sum `total_amount`."
@@ -530,7 +530,7 @@
           rationale: "there is no query optimization in in-memory mode."
           is_correct: false
         - text: "Filtering before the group-by is faster, because you reduce the amount of data handled by the group by operation."
-          rationale: ""
+          rationale: "Exactly! Since group-by is a relatively expensive operation, reducing the amount of data it needs to operate on speeds up performance!"
           is_correct: true
         - text: "Filtering after the group-by is faster, because the computer doesn't have to worry about the expensive filter operation until the end."
           rationale: "Filtering is actually not an expensive operation; grouping is far more expensive."
@@ -559,7 +559,7 @@
     - question: "Using the `zones_df` combined with the `march_yellow_rides_df`, which `pu_zone` `do_zone` pair had the most rides?"
       answers:
         - text: "(Upper East Side South, Upper East Side North)"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "(Erasmus, Astoria)"
           rationale: "make sure to get the `pu_zone` `do_zone` pair with the most rides, not the least."
@@ -580,7 +580,7 @@
           rationale: "you might be measuring average `trip_distance` instead of average `passenger_count`..."
           is_correct: false
         - text: "1.277752"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "21.211721"
           rationale: "you might be measuring average `total_amount` instead of average `passenger_count`..."
@@ -592,7 +592,7 @@
           rationale: "make sure you're not concatenating toy_1_df to itself!"
           is_correct: false
         - text: "(7, 3)"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "(8, 3)"
           rationale: "make sure you're not concatenating toy_2_df to itself!"
@@ -609,7 +609,7 @@
           rationale: "you might be sorting ascending rather than descending."
           is_correct: false
         - text: "day=3, hour=4"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "day=7, hour=23"
           rationale: "you might be taking the average `total_amount` rather than the average `fare_amount`."
@@ -621,7 +621,7 @@
     - question: "Which is the `do_zone` with the highest trip duration (where \"trip duration\" is measured as the `.total_seconds()` between `tpep_pickup_datetime` and `tpep_dropoff_datetime`)?"
       answers:
         - text: "Saint Michaels Cemetery/Woodside"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "Midtown Center"
           rationale: "you might be taking the `do_zone` with the lowest trip duration."
@@ -636,7 +636,7 @@
     - question: "With a group-by in `polars`, instead of finding some aggregate summary statistic for each group, you can also collect all the elements for each group into a list by simply passing in the column you'd like to aggregate to a list as a name (see below). With this, for each `pu_location_id`, make a column that aggregates all the `do_zones` associated with that `pu_location_id`; what is the `pu_location_id` with the longest list of associated `do_zone`s (hint: use the `.list` namespace)?"
       answers:
         - text: "161"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "5"
           rationale: "are you sure you didn't find the `pu_location_id` with the shortest list of associated `do_zone`s?"
@@ -648,28 +648,10 @@
           rationale: "it looks like you chose the wrong sort order, and looked for `pu_zone` rather than `pu_location_id`!"
           is_correct: false
 
-    - question: "You could have also answered Question 3 by finding the `pl.len()` of all the `do_zone`s for each group, rather than first putting them all into a list. Answer the same question now, but using a simple `.group_by().agg()`. Do you get the same answer as in Question 3?"
-      answers:
-        - text: "Yes"
-          rationale: ""
-          is_correct: true
-        - text: "No"
-          rationale: ""
-          is_correct: false
-
-    - question: "Questions 3 and 4 create a list of the `do_zones` associated with all rides for every given `pu_location_id`. The result of this is that all the duplicates get counted! To handle this, there is a function `.list.unique()` to remove duplicates from a list column. Answer Question 3 again, but this time removing duplicate values of `do_zone` with `.list.unique()`. Is the answer the same as Question 3?"
-      answers:
-        - text: "Yes"
-          rationale: ""
-          is_correct: false
-        - text: "No"
-          rationale: ""
-          is_correct: true
-
     - question: "Using just `zones_df`, split `zone` into a list on ` ` as seen during the module, and take the 2nd element of every list using `.list.get()`. Then, using `group_by`, answer the question--what is the most commonly occurring second word in `zones_df` (excluding `null`)?"
       answers:
         - text: "Park"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "`null`"
           rationale: "The question specifies \"excluding null\"... take another look!"
@@ -690,7 +672,7 @@
           rationale: "make sure to use \"greater than\", not \"greater than or equal to\"."
           is_correct: false
         - text: "27538"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "1"
           rationale: "check again, you might have got the order of the pickup-dropoff subtraction incorrect!"
@@ -702,7 +684,7 @@
           rationale: "are you sure you're not accidentally using `.total_minutes()`?"
           is_correct: false
         - text: "20"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "3581500"
           rationale: "are you sure you're not accidentally using `.total_seconds()`?"
@@ -714,7 +696,7 @@
     - question: "How many zones in `zones_df` contain the word \"North\"?"
       answers:
         - text: "15"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "0"
           rationale: "note that string containment checks are case-sensitive in polars, so checking for \"north\" won't work!"
@@ -738,7 +720,7 @@
           rationale: "You might be taking the 1st element of the list rather than the 0th!"
           is_correct: false
         - text: "tsaE"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
 
 - module_name: "08. Data Manipulation VI - Interoperation and IO"
@@ -749,13 +731,13 @@
           rationale: "are you sure you're using the \"col\" orientation?"
           is_correct: false
         - text: "(5, 3)"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
 
     - question: "Given the following data in the form of a list of lists, create a dataframe using `pl.from_records()` with a rows orientation. What is the shape of that dataframe?"
       answers:
         - text: "(3, 5)"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "(5, 3)"
           rationale: "are you sure you're using the \"row\" orientation?"
@@ -764,28 +746,28 @@
     - question: "Save out the following dataframe to a csv with `.write_csv()` to a file called `\"./temp_file.csv\"`. Then, read it back in with `.read_csv()`. Have the datatypes changed?"
       answers:
         - text: "Yes"
-          rationale: ""
+          rationale: "Exactly! Csv's don't store data types, so polars has to do type-inference upon loading data. It does so liberally, usually inferring any integer as an `i64`."
           is_correct: true
         - text: "No"
-          rationale: ""
+          rationale: "Are you sure? Make sure you're using any extra input arguments to `.read_csv()`, and let polars infer the datatypes."
           is_correct: false
 
     - question: "Save out the following dataframe to a ndjson file with `.write_ndjson()` to a file called `\"./temp_file.njson\"`. Then, read it back in with `.read_ndjson()`. Have the datatypes changed?"
       answers:
         - text: "Yes"
-          rationale: ""
+          rationale: "Exactly! ndjson files don't store data types, so polars has to do type-inference upon loading data. It does so liberally, usually inferring any integer as an `i64`."
           is_correct: true
         - text: "No"
-          rationale: ""
+          rationale: "Are you sure? Make sure you're using any extra input arguments to `.read_ndjson()`, and let polars infer the datatypes."
           is_correct: false
 
     - question: "Save out the following dataframe to a parquet file with `.write_parquet()` to a file called `\"./temp_file.parquet\"`. Then, read it back in with `.read_parquet()`. Have the datatypes changed?"
       answers:
         - text: "Yes"
-          rationale: ""
+          rationale: "Are you sure? Make sure you're not transforming the dataframe in any way before saving it with `.write_parquet()`."
           is_correct: false
         - text: "No"
-          rationale: ""
+          rationale: "Exactly! One of the nice things about `parquet` is that it stores schema along with the data, so the data gets loaded back in the way it was before it was saved, without any extra work!"
           is_correct: true
 
 - module_name: "09. Integrating Polars Into the Data Science Workflow"
@@ -799,7 +781,7 @@
           rationale: "we are looking for the lowest absolute correlation, so don't forget to take the absolute value!"
           is_correct: false
         - text: "`trip_distance`"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
         - text: "`vendor_id`"
           rationale: "we are looking for the least correlated, not the most correlated!"
@@ -823,19 +805,19 @@
     - question: "Plot an ECDF of 'fare_amount'. Is the resultant distribution unimodal or multimodal (i.e. is there one peak to the distribution or multiple)? (Hint: exclude any noisy spikes!)"
       answers:
         - text: "Unimodal"
-          rationale: ""
+          rationale: "Exactly! The distribution looks like a unimodal log normal distribution!"
           is_correct: true
         - text: "Multimodal"
-          rationale: ""
+          rationale: "Are you sure? Make sure to exclude any spikes of noise in your reasoning."
           is_correct: false
 
     - question: "Given the following toy dataframe of `y_predicted` and `y_truth`, measure the `mean_absolute_error`. True or False: the result is greater than `.5`. (Hint: use the `sklearn` implementation of `mean_absolute_error`.)"
       answers:
         - text: "True"
-          rationale: ""
+          rationale: "Exactly! The data can be passed directly into `mean_absolute_error` as Polars series."
           is_correct: true
         - text: "False"
-          rationale: ""
+          rationale: "Are you sure? Make sure you're using the correct function from scikit-learn!"
           is_correct: false
 
     - question: "In the module, we reviewed the function `.sample()`, and used it to reduce our data to a fixed number of rows; to this end, we passed in simply the number of rows that we wanted in the result with e.g. `.sample(10000)`. However, `.sample()` also provides the option to pass in a fraction of rows, with `.sample(fraction=X)`, where `X` must be between 0 and 1. Use this new way of using the function to reduce the data to 2% of its original size. What is the shape of the result?"
@@ -850,7 +832,7 @@
           rationale: "Make sure to convert `2%` to a fraction, and use the \"fraction\" keyword argument!"
           is_correct: false
         - text: "71652"
-          rationale: ""
+          rationale: "Exactly!"
           is_correct: true
 
 - module_name: "10. Summative"
@@ -1083,10 +1065,10 @@
     - question: "True or False: weekend taxi trips (trips that have a `tpep_pickup_datetime` on Saturday or Sunday) have on average higher tip amounts than non-weekend taxi trips."
       answers:
         - text: "False"
-          rationale: ""
+          rationale: "Exactly! Weekend pickups have an average `tip_amount` of 2.97, while non-weekend pickups have an average `tip_amount` of 3.29."
           is_correct: true
         - text: "True"
-          rationale: ""
+          rationale: "Are you sure you created correctly the column for grouping? Try again!"
           is_correct: false
 
     - question: "Convert the following numpy array to a polars dataframe. What are the datatypes of the resultant dataframe?"
