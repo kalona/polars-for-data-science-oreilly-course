@@ -16,6 +16,7 @@
         - text: "R"
           rationale: "R is a great language for data science, but Polars is not implemented in R."
           is_correct: false
+      reference_video: "1.1 Introduction to Polars"
     - question: "Which is the most common use-case for Polars?"
       answers:
         - text: "Single node computing."
@@ -24,6 +25,7 @@
         - text: "Distributed computing."
           rationale: "Not really; tools like Spark or Modin are better suited to this use-case."
           is_correct: false
+      reference_video: "1.1 Introduction to Polars"
     - question: "What do you have to do to configure Polars such that its query optimization engine uses all cores available on the host machine?"
       answers:
         - text: "Specify a backend engine for distributing queries."
@@ -38,6 +40,7 @@
         - text: "Specify the number of cores on the local machine when importing Polars."
           rationale: "Nope!"
           is_correct: false
+      reference_video: "1.1 Introduction to Polars"
     - question: "What does Polars use as its underlying memory model?"
       answers:
         - text: "Rust"
@@ -52,6 +55,7 @@
         - text: "Online Analytical Processing"
           rationale: "Polars uses a memory model which optimized for Online Analytical Processing use-cases, but that is not the memory model itself."
           is_correct: true
+      reference_video: "1.1 Introduction to Polars"
     - question: "How is the Apache Arrow memory model optimized for column-oriented OLAP use-cases?"
       answers:
         - text: "Data from the same column is placed close together in memory."
@@ -66,6 +70,7 @@
         - text: "Data gets sorted before processing."
           rationale: "Incorrect! Try again."
           is_correct: false
+      reference_video: "1.2 Apache Arrow - A Brief Intro"
 - module_name: "02. Getting Started"
   quiz_questions:
     - question: "Given the following data dictionary about school children, create a `pl.DataFrame` and display it. What are the datatypes of each column?"
@@ -82,6 +87,7 @@
         - text: "(`str`, `i64`, `cat`)"
           rationale: "You're missing a column!"
           is_correct: false
+      reference_video: "2.1 Creating a Polars DataFrame"
 
     - question: "In the module, we loaded data from the csv file, overriding the schema of the columns `tpep_pickup_datetime` and `tpep_dropoff_datetime`, loading them as a `pl.Datetime` data type. Now, override the schema to load them as a `pl.Date` data type. What happens?"
       answers:
@@ -97,6 +103,7 @@
         - text: "All the data is loaded, and the columns `tpep_pickup_datetime` and `tpep_dropoff_datetime` are loaded as `date` datatype."
           rationale: "It would be nice if this happened, but unfortunately there are some complications... try to run the code again!"
           is_correct: false
+      reference_video: "2.2 Reading Data From CSV with In-Memory Mode"
 
     - question: "During the module, we saw that selecting columns from a `LazyFrame` was ~2-3x faster than selecting columns from a `DataFrame`, when data is loaded from a `csv`. However, we only did this for csv, not for parquet. Which file type do you think would have a greater speedup from selecting on a `DataFrame` to selecting on a `LazyFrame`: `csv` or `parquet`? Why?"
       answers:
@@ -112,6 +119,7 @@
         - text: "`parquet`, because `parquet` files keep data from the same column in the same location in memory, so when the `select` gets pushed down to the read operation of `LazyFrame`, the input engine can skip the unnecessary columns' data faster than it can for `csv`."
           rationale: "Exactly! This is what Apache Arrow is all about!"
           is_correct: true
+      reference_video: "2.4 Selecting Data - In-Memory vs Lazy Mode Comparison"
 
     - question: "Inspect the dataset with `df.describe()`. What is the highest `null_count` that any column has?"
       answers:
@@ -127,6 +135,7 @@
         - text: "176836"
           rationale: "Are you sure you're looking at the right place in the table?"
           is_correct: false
+      reference_video: "2.2 Reading Data From CSV with In-Memory Mode"
 
 - module_name: "03. Data Manipulation I - Basics"
   quiz_questions:
@@ -144,6 +153,7 @@
         - text: "`bool`"
           rationale: "Indeed, the function `.gt()` will return a boolean--true if greater than, false if not."
           is_correct: true
+      reference_video: "3.2 Getting Started with Column Expressions"
 
     - question: "What was the longest trip that had `0` tolls paid (hint: use `.filter()` to get only the trips with `tolls_amount` equal to `0`, and `.select()` with `.max()` to find the longest trip)?"
       answers:
@@ -159,6 +169,7 @@
         - text: "176329.23"
           rationale: "Are you sure you're using the `tolls_amount` column and not accidentally the `tip_amount` column?"
           is_correct: false
+      reference_video: "3.2 Getting Started with Column Expressions"
 
     - question: "What is the mean tip amount for trips where the fare amount was greater than $20?"
       answers:
@@ -174,6 +185,7 @@
         - text: "5.872741"
           rationale: "Exactly!"
           is_correct: true
+      reference_video: "3.2 Getting Started with Column Expressions"
 
     - question: "Find the maximum trip distance for trips with a passenger count of 1 or 2."
       answers:
@@ -189,6 +201,7 @@
         - text: "1021.99"
           rationale: "That's the maximum `total_amount` for trips with a passenger count of 1 or 2, but we're looking for the maximum `trip_distance`!"
           is_correct: false
+      reference_video: "3.3 The .filter() Query Statement"
 
     - question: "Sort the dataframe by `total_amount` in descending order; then, select and display only the top 5 rows and the columns `trip_distance` and `total_amount`. What are the two values of `trip_distance` associated with the two trips with the highest `total_amount`?"
       answers:
@@ -204,6 +217,7 @@
         - text: "5.1, 8.3"
           rationale: "Are you sure you're looking at the right columns?"
           is_correct: false
+      reference_video: "3.4 The .sort() Query Statement"
 
     - question: "Calculate the maximum fare amount for trips that had a `tip_amount` greater than `$10` and a `trip_distance` greater than `10` miles."
       answers:
@@ -219,6 +233,7 @@
         - text: "633.3"
           rationale: "Are you sure you're looking at the right column?"
           is_correct: false
+      reference_video: "3.3 The .filter() Query Statement"
 
     - question: "Find the maximum `price_per_mile` (by dividing the `total_amount` by the `trip_distance`) for trips with a distance greater than `30`."
       answers:
@@ -234,6 +249,7 @@
         - text: "9.384736"
           rationale: "Are you sure you're looking at the right columns?"
           is_correct: false
+      reference_video: "3.3 The .filter() Query Statement"
 
     - question: "Of all the trips which had a `trip_distance` of exactly `5`, what was the latest `tpep_pickup_datetime`?"
       answers:
@@ -249,6 +265,7 @@
         - text: "2024-04-01 00:34:55"
           rationale: "Are you sure your filtering for only trips that had a `trip_distance` of exactly 5?"
           is_correct: false
+      reference_video: "3.3 The .filter() Query Statement"
 
     - question: "Filtering only for trips that had a `fare_amount` and a `tip_amount` greater than 0, what was the lowest tip percentage (expressed as a fraction) that somebody paid? (Hint: divide `tip_amount` by `fare_amount`)."
       answers:
@@ -264,6 +281,7 @@
         - text: "0.00003"
           rationale: "Exactly!"
           is_correct: true
+      reference_video: "3.3 The .filter() Query Statement"
 
     - question: "How many trips had a `tip_amount` greater than the `Airport_fee`?"
       answers:
@@ -279,6 +297,7 @@
         - text: "982746"
           rationale: "Are you sure you're using the correct columns?"
           is_correct: false
+      reference_video: "3.2 Getting Started with Column Expressions"
 
 - module_name: "04. Data Manipulation II - Advanced Selecting"
   quiz_questions:
@@ -296,6 +315,7 @@
         - text: "0"
           rationale: "There is at least one column with the `pl.String` data type... check again!"
           is_correct: false
+      reference_video: "4.1 Operating on Multiple Columns at the Same Time"
 
     - question: "Select all columns from the dataframe that have the datatype `pl.Int64`. How many columns are there in the result?"
       answers:
@@ -311,6 +331,7 @@
         - text: "3582628"
           rationale: "This is the number of rows, not the number of columns!"
           is_correct: false
+      reference_video: "4.1 Operating on Multiple Columns at the Same Time"
 
     - question: "What fraction of rows have at least one of their `pl.Float64` columns equal to exactly `0`? (Hint: use `pl.any_horizontal()`.)"
       answers:
@@ -326,6 +347,7 @@
         - text: "1.0"
           rationale: "This is all the rows! Check your code again, maybe you have the aggregation incorrect..."
           is_correct: false
+      reference_video: "4.1 Operating on Multiple Columns at the Same Time"
 
     - question: "Create a new column called `tip_amount_plus_fare_amount`; sort the dataframe by this new column descending order. What is the `tip_amount` and `fare_amount` for the highest `tip_amount_plus_fare_amount`?"
       answers:
@@ -341,6 +363,7 @@
         - text: "`tip_amount = 999.99`, `fare_amount = 999.99`"
           rationale: "Are you sure you're computing the column `tip_amount_plus_fare_amount` correctly?"
           is_correct: false
+      reference_video: "4.1 Adding New Columns with .with_columns()"
 
     - question: "What fraction of rides had the same pickup and dropoff location?"
       answers:
@@ -356,6 +379,7 @@
         - text: "0.0"
           rationale: "This would mean that none of the rides had the same pickup and dropoff location; try again!"
           is_correct: false
+      reference_video: "4.1 Adding New Columns with .with_columns()"
 
     - question: "Using `.with_columns()`, `pl.all()`, and `.name.suffix()`, add to the dataframe a copy of all the columns, just with the name `_new` added on to the end of each column name. How many columns are there in the resultant dataframe?"
       answers:
@@ -371,6 +395,7 @@
         - text: "22"
           rationale: "Are you sure you selected all the columns in your `.with_columns()` call?"
           is_correct: false
+      reference_video: "4.1 Adding New Columns with .with_columns()"
 
     - question: "Add a new column to the dataframe for every `pl.String` column that checks if that column has an empty string (i.e. equal to `\"\"`). How many columns are in the resultant dataframe?"
       answers:
@@ -386,6 +411,7 @@
         - text: "38"
           rationale: "You may have tried something with `pl.all()`. Try again!"
           is_correct: false
+      reference_video: "4.1 Adding New Columns with .with_columns()"
 
     - question: "We'd like a dataframe of only rides that took place in one location (i.e. where `DOLocationID` equals `PULocationID`). This also means that we no longer need both of the columns `DOLocationID` and `PULocationID` (since they are equal). So, filter for same-pickup-dropoff trips, and remove either one of the pickup/dropoff location columns, and rename the other one to just be `LocationID`. What is the shape of the resultant dataframe?"
       answers:
@@ -401,6 +427,7 @@
         - text: "(3401337, 18)"
           rationale: "are you sure you didn't accidentally take only trips where the dropoff location and pickup location are not equal?"
           is_correct: false
+      reference_video: "4.4 Renaming Columns with .rename()"
 
 - module_name: "05. Data Manipulation III - Grouping and Aggregation"
   quiz_questions:
@@ -418,6 +445,7 @@
         - text: "0.0"
           rationale: "are you taking the minimum or the maximum?"
           is_correct: false
+      reference_video: "4.4 Renaming Columns with .rename()"
 
     - question: "Group the data by `vendor_id` and calculate the average `fare_amount` and average `trip_distance` for each. Sort descending by both `mean_fare_amount` and `mean_trip_distance`. What is the top `vendor_id`?"
       answers:
@@ -433,6 +461,7 @@
         - text: "6"
           rationale: "Exactly! `vendor_id = 6` has a much higher `mean_fare_amount` than the other vendors."
           is_correct: true
+      reference_video: "5.1 Grouping DataFrames with .group_by()"
 
     - question: "Which date for `tpep_pickup_datetime` had the most rides?"
       answers:
@@ -448,6 +477,7 @@
         - text: "2024-04-01"
           rationale: "try again."
           is_correct: false
+      reference_video: "5.1 Grouping DataFrames with .group_by()"
 
     - question: "Create a pivot table that shows the average fare amount for each combination of `VendorID` and `payment_type`. What is the average fare amount associated with `vendor_id` 2 and `payment_type` 2?"
       answers:
@@ -463,6 +493,7 @@
         - text: "18.582571"
           rationale: "close! but the question is about precisely `vendor_id` 2 and `payment_type` 2."
           is_correct: false
+      reference_video: "5.3 Pivot Tables with .pivot()"
 
     - question: "Create a pivot table that shows the average trip distance for every combination of `vendor_id` and whether or not the ride has an airport fee. What is the average trip distance for rides with `vendor_id = 1` that have an airport fee?"
       answers:
@@ -478,6 +509,7 @@
         - text: "2.409085"
           rationale: "Make sure to check for rides that had an airport fee, not ones that didn't."
           is_correct: false
+      reference_video: "5.3 Pivot Tables with .pivot()"
 
     - question: "What is the average trip distance for rides with `vendor_id = 1` that have an airport fee? Use `filter` to include only data that's `vendor_id = 1` and `airport_fee > 0`, and then `select` to measure the average `trip_distance`."
       answers:
@@ -493,6 +525,7 @@
         - text: "2.409085"
           rationale: "Make sure to check for rides that had an airport fee, not ones that didn't."
           is_correct: false
+      reference_video: "5.1 Grouping DataFrames with .group_by()"
 
     - question: "Using `rank().over()`, what is the sum of each `vendor_id`s 10th largest `trip_distance`s, summed over all `vendor_id`s?"
       answers:
@@ -508,6 +541,7 @@
         - text: "1178.31"
           rationale: "are you sure you're using `trip_distance` and not `total_amount`?"
           is_correct: false
+      reference_video: "5.2 Window Functions in Polars"
 
     - question: "What is the sum of the `total_amount`s for all rides taken with one of the three `pu_location_id`s with the highest maximum `trip_distance`?"
       answers:
@@ -523,6 +557,7 @@
         - text: "2.3340e7"
           rationale: "remember, you want the sum `total_amount` of the three `pu_location_id`s with the highest `max_trip_distance`, not the highest sum `total_amount`."
           is_correct: false
+      reference_video: "5.1 Grouping DataFrames with .group_by()"
 
     - question: "Sometimes we want to both filter and group data; for example, in this question we want to both group by `pu_location_id` and view the results for just one `pu_location_id`. In these cases, we can filter first or group by first and get the same result. So which is faster, and why--grouping then filtering, or filtering and grouping? Perform the following timing tests to get the answer, and choose the best explanation. (Note: we are in in-memory mode here.)"
       answers:
@@ -538,6 +573,7 @@
         - text: "Filtering after the group-by is faster, since the filter occurs on grouped data, thus it has less total rows to filter out."
           rationale: "Though it might be true that there are less rows to filter out, the true bottleneck of the operation is the grouping itself!"
           is_correct: false
+      reference_video: "5.1 Grouping DataFrames with .group_by()"
 
     - question: "Sometimes we want to both filter and group data; for example, in this question we want to both group by `pu_location_id` and view the results for just one `pu_location_id`. In these cases, we can filter first or group by first and get the same result. So which is faster, and why--grouping then filtering, or filtering and grouping? Perform the following timing tests to get the answer, and choose the best explanation. (Note: we are in lazy mode here.)"
       answers:
@@ -553,6 +589,7 @@
         - text: "Filtering after the group-by is faster, since the filter occurs on grouped data, thus it has less total rows to filter out."
           rationale: "Though it might be true that there are less rows to filter out, the true bottleneck of the operation is the grouping itself. Regardless, the query optimization engine makes this irrelevant in lazy mode!"
           is_correct: false
+      reference_video: "5.1 Grouping DataFrames with .group_by()"
 
 - module_name: "06. Data Manipulation IV - Combining Data"
   quiz_questions:
@@ -570,6 +607,7 @@
         - text: "(Midtown Center, Upper East Side North)"
           rationale: "make sure to aggregate by the right column."
           is_correct: false
+      reference_video: "6.1 Joining DataFrames with .join()"
 
     - question: "Find the ride with the highest `passenger_count` that started in the zone \"Midtown Center\" and ended in the zone \"Upper East Side North\". What was the `passenger_count` for that ride?"
       answers:
@@ -585,6 +623,7 @@
         - text: "21.211721"
           rationale: "you might be measuring average `total_amount` instead of average `passenger_count`..."
           is_correct: false
+      reference_video: "6.1 Joining DataFrames with .join()"
 
     - question: "Take the two toy dataframes below and concatenate them diagonally. What is the shape of the result?"
       answers:
@@ -600,6 +639,7 @@
         - text: "(7, 2)"
           rationale: "this would be correct if toy_2_df didn't have the extra column \"c\"..."
           is_correct: false
+      reference_video: "6.1 Concatenating DataFrames with .concat()"
 
 - module_name: "07. Data Manipulation V - Working With Data Types"
   quiz_questions:
@@ -617,6 +657,7 @@
         - text: "day=1, hour=0"
           rationale: "you might be taking the weekday and hour from `tpep_dropoff_datetime` instead of `tpep_pickup_datetime`."
           is_correct: false
+      reference_video: "7.4 Working with Temporal Columns - the .dt Namespace"
 
     - question: "Which is the `do_zone` with the highest trip duration (where \"trip duration\" is measured as the `.total_seconds()` between `tpep_pickup_datetime` and `tpep_dropoff_datetime`)?"
       answers:
@@ -632,6 +673,7 @@
         - text: "Woodside"
           rationale: "not quite!"
           is_correct: false
+      reference_video: "7.4 Working with Temporal Columns - the .dt Namespace"
 
     - question: "With a group-by in `polars`, instead of finding some aggregate summary statistic for each group, you can also collect all the elements for each group into a list by simply passing in the column you'd like to aggregate to a list as a name (see below). With this, for each `pu_location_id`, make a column that aggregates all the `do_zones` associated with that `pu_location_id`; what is the `pu_location_id` with the longest list of associated `do_zone`s (hint: use the `.list` namespace)?"
       answers:
@@ -647,8 +689,9 @@
         - text: "Arden Heights"
           rationale: "it looks like you chose the wrong sort order, and looked for `pu_zone` rather than `pu_location_id`!"
           is_correct: false
+      reference_video: "7.3 Working with List Columns - the .list Namespace"
 
-    - question: "Using just `zones_df`, split `zone` into a list on ` ` as seen during the module, and take the 2nd element of every list using `.list.get()`. Then, using `group_by`, answer the question--what is the most commonly occurring second word in `zones_df` (excluding `null`)?"
+    - question: "Using just `zones_df`, split `zone` into a list on `\" \"` as seen during the module, and take the 2nd element of every list using `.list.get()`. Then, using `group_by`, answer the question--what is the most commonly occurring second word in `zones_df` (excluding `null`)?"
       answers:
         - text: "Park"
           rationale: "Exactly!"
@@ -662,6 +705,7 @@
         - text: "North"
           rationale: "Make sure to take the 2nd element, not the 3rd!"
           is_correct: false
+      reference_video: "7.3 Working with List Columns - the .list Namespace"
 
     - question: "How many rides had a duration of more than 60 seconds and less than 120 seconds?"
       answers:
@@ -677,6 +721,7 @@
         - text: "1"
           rationale: "check again, you might have got the order of the pickup-dropoff subtraction incorrect!"
           is_correct: false
+      reference_video: "7.4 Working with Temporal Columns - the .dt Namespace"
 
     - question: "How many rides had a duration of more than 1 day (hint: instead of using `.dt.total_seconds()`, you can use `.dt.total_days()`)?"
       answers:
@@ -692,6 +737,7 @@
         - text: "6"
           rationale: "make sure to use \"greater than\" and not \"great than or equal to\"."
           is_correct: false
+      reference_video: "7.4 Working with Temporal Columns - the .dt Namespace"
 
     - question: "How many zones in `zones_df` contain the word \"North\"?"
       answers:
@@ -707,6 +753,7 @@
         - text: "19"
           rationale: "make sure to not accidentally check for \"South\"!"
           is_correct: false
+      reference_video: "7.2 Working with String Columns - the .str Namespace"
 
     - question: "For `zones_df`, what is the most common `0th` word in the `zone` column, spelled in reverse? (Hint: split the `zone` column by ` ` into a list of strings; then, take the `0th` element of each list in that column, and apply `.str.reverse()` to it.)"
       answers:
@@ -722,6 +769,7 @@
         - text: "tsaE"
           rationale: "Exactly!"
           is_correct: true
+      reference_video: "7.2 Working with String Columns - the .str Namespace"
 
 - module_name: "08. Data Manipulation VI - Interoperation and IO"
   quiz_questions:
@@ -733,6 +781,7 @@
         - text: "(5, 3)"
           rationale: "Exactly!"
           is_correct: true
+      reference_video: "8.1 Interoperating DataFrames with Native Python Objects"
 
     - question: "Given the following data in the form of a list of lists, create a dataframe using `pl.from_records()` with a rows orientation. What is the shape of that dataframe?"
       answers:
@@ -742,6 +791,7 @@
         - text: "(5, 3)"
           rationale: "are you sure you're using the \"row\" orientation?"
           is_correct: false
+      reference_video: "8.1 Interoperating DataFrames with Native Python Objects"
 
     - question: "Save out the following dataframe to a csv with `.write_csv()` to a file called `\"./temp_file.csv\"`. Then, read it back in with `.read_csv()`. Have the datatypes changed?"
       answers:
@@ -751,6 +801,7 @@
         - text: "No"
           rationale: "Are you sure? Make sure you're using any extra input arguments to `.read_csv()`, and let polars infer the datatypes."
           is_correct: false
+      reference_video: "8.5 DataFrame IO"
 
     - question: "Save out the following dataframe to a ndjson file with `.write_ndjson()` to a file called `\"./temp_file.njson\"`. Then, read it back in with `.read_ndjson()`. Have the datatypes changed?"
       answers:
@@ -760,6 +811,7 @@
         - text: "No"
           rationale: "Are you sure? Make sure you're using any extra input arguments to `.read_ndjson()`, and let polars infer the datatypes."
           is_correct: false
+      reference_video: "8.5 DataFrame IO"
 
     - question: "Save out the following dataframe to a parquet file with `.write_parquet()` to a file called `\"./temp_file.parquet\"`. Then, read it back in with `.read_parquet()`. Have the datatypes changed?"
       answers:
@@ -769,6 +821,7 @@
         - text: "No"
           rationale: "Exactly! One of the nice things about `parquet` is that it stores schema along with the data, so the data gets loaded back in the way it was before it was saved, without any extra work!"
           is_correct: true
+      reference_video: "8.5 DataFrame IO"
 
 - module_name: "09. Integrating Polars Into the Data Science Workflow"
   quiz_questions:
@@ -786,6 +839,7 @@
         - text: "`vendor_id`"
           rationale: "we are looking for the least correlated, not the most correlated!"
           is_correct: false
+      reference_video: "9.2 Brief Data Exploration - Plots, Correlations, and Summary Statistics with Polars"
 
     - question: "Plot `total_amount` as a function of `trip_distance`. Which of the following statements about the resultant plot is false?"
       answers:
@@ -801,6 +855,7 @@
         - text: "A non-negligible minority of the data appears to have a trip distance of exactly 0."
           rationale: "This statement is true, in fact there is a spike of data along the y-axis, where trip distance equals 0."
           is_correct: false
+      reference_video: "9.2 Brief Data Exploration - Plots, Correlations, and Summary Statistics with Polars"
 
     - question: "Plot an ECDF of 'fare_amount'. Is the resultant distribution unimodal or multimodal (i.e. is there one peak to the distribution or multiple)? (Hint: exclude any noisy spikes!)"
       answers:
@@ -810,6 +865,7 @@
         - text: "Multimodal"
           rationale: "Are you sure? Make sure to exclude any spikes of noise in your reasoning."
           is_correct: false
+      reference_video: "9.2 Brief Data Exploration - Plots, Correlations, and Summary Statistics with Polars"
 
     - question: "Given the following toy dataframe of `y_predicted` and `y_truth`, measure the `mean_absolute_error`. True or False: the result is greater than `.5`. (Hint: use the `sklearn` implementation of `mean_absolute_error`.)"
       answers:
@@ -819,6 +875,7 @@
         - text: "False"
           rationale: "Are you sure? Make sure you're using the correct function from scikit-learn!"
           is_correct: false
+      reference_video: "9.5 Machine Learning Model Building, Evaluation, and Discussion"
 
     - question: "In the module, we reviewed the function `.sample()`, and used it to reduce our data to a fixed number of rows; to this end, we passed in simply the number of rows that we wanted in the result with e.g. `.sample(10000)`. However, `.sample()` also provides the option to pass in a fraction of rows, with `.sample(fraction=X)`, where `X` must be between 0 and 1. Use this new way of using the function to reduce the data to 2% of its original size. What is the shape of the result?"
       answers:
@@ -834,6 +891,7 @@
         - text: "71652"
           rationale: "Exactly!"
           is_correct: true
+      reference_video: "9.2 Brief Data Exploration - Plots, Correlations, and Summary Statistics with Polars"
 
 - module_name: "10. Summative"
   quiz_questions:
