@@ -158,7 +158,7 @@
     - question: "What was the longest trip that had `0` tolls paid (hint: use `.filter()` to get only the trips with `tolls_amount` equal to `0`, and `.select()` with `.max()` to find the longest trip)?"
       answers:
         - text: "176836.3"
-          rationale: "Exactly!"
+          rationale: "This is precisely the result you get when you filter then take the max. And it’s quite a long trip indeed!"
           is_correct: true
         - text: "0"
           rationale: "You might be using `.min()` instead of `.max()` by accident..."
@@ -183,7 +183,7 @@
           rationale: "Make sure you're using the `.gt` function (\"greater than\") and not the `.ge` function (\"greater than or equal to\")!"
           is_correct: false
         - text: "5.872741"
-          rationale: "Exactly!"
+          rationale: "This is indeed the number of trips with a fare amount greater than $20--you correctly used `gt` and not `ge`."
           is_correct: true
       reference_video: "3.2 Getting Started with Column Expressions"
 
@@ -193,7 +193,7 @@
           rationale: "That's the maximum `trip_distance` for trips that had a `passenger_count` of exactly 2... Check your code again!"
           is_correct: false
         - text: "66907.9"
-          rationale: "Exactly!"
+          rationale: "Precisely, and it’s a long trip indeed! There are certainly some outliers in this dataset."
           is_correct: true
         - text: "3.530788"
           rationale: "That's the mean `trip_distance` for trips with a passenger count of 1 or 2, but we're looking for the maximum!"
@@ -222,7 +222,7 @@
     - question: "Calculate the maximum fare amount for trips that had a `tip_amount` greater than `$10` and a `trip_distance` greater than `10` miles."
       answers:
         - text: "472.0"
-          rationale: "Exactly!"
+          rationale: "This problem is solved with `.filter()` then `.select(...max())`, and it is a high fare amount indeed!"
           is_correct: true
         - text: "900.0"
           rationale: "We're looking for the maximum fare amount for trips that had a `tip_amount` greater than `$10` and a `trip_distance` greater than `10` miles, not either or!"
@@ -244,7 +244,7 @@
           rationale: "This is the average `price_per_mile`, not the maximum!"
           is_correct: false
         - text: "14.067142"
-          rationale: "Exactly!"
+          rationale: "You correctly used `.filter()`, column arithmetic to compute `price_per_mile`, and finally `.max` to get the answer!"
           is_correct: true
         - text: "9.384736"
           rationale: "Are you sure you're looking at the right columns?"
@@ -279,7 +279,7 @@
           rationale: "Don't forget to filter the data!"
           is_correct: false
         - text: "0.00003"
-          rationale: "Exactly!"
+          rationale: "You correctly used `.filter()`, column arithmetic to compute tip percentage, and finally `.min` to get the answer!"
           is_correct: true
       reference_video: "3.3 The .filter() Query Statement"
 
@@ -292,7 +292,7 @@
           rationale: "That's the total amount of rides in the dataset! Don't forget to filter."
           is_correct: false
         - text: "2461463"
-          rationale: "Exactly!"
+          rationale: "You correctly used `.filter()`, and then any number of ways to check the dataframe shape--`.shape`, `display()`, `print()`..."
           is_correct: true
         - text: "982746"
           rationale: "Are you sure you're using the correct columns?"
@@ -304,7 +304,7 @@
     - question: "Select all columns from the dataframe that have the datatype `pl.String`. How many columns are there in the result?"
       answers:
         - text: "1"
-          rationale: "Exactly!"
+          rationale: "This is like what we saw in the module! Only one column in our dataframe is a string data type."
           is_correct: true
         - text: "19"
           rationale: "These are all the columns in the original dataframe! Are you sure you have your `.select()` statement correct?"
@@ -326,7 +326,7 @@
           rationale: "Are you sure you're not checking for a datatype other than `pl.Int64`?"
           is_correct: false
         - text: "3"
-          rationale: "Exactly!"
+          rationale: "This is like what we saw in the module! Three columns in our dataframe have a pl.Int64 data type."
           is_correct: true
         - text: "3582628"
           rationale: "This is the number of rows, not the number of columns!"
@@ -339,7 +339,7 @@
           rationale: "Make sure you're using `pl.Float64` and not another datatype."
           is_correct: false
         - text: "0.000076"
-          rationale: "Exactly!"
+          rationale: "There are a few ways you could have gotten to this answer; most straightforward was to construct a column expression like 'has at least one null float64 value' and take the `.mean()`."
           is_correct: true
         - text: ".50"
           rationale: "Are you sure you're using the correct datatype?"
@@ -358,7 +358,7 @@
           rationale: "Make sure to take sort in descending order, not ascending!"
           is_correct: false
         - text: "`tip_amount = 999.99`, `fare_amount = 17.0`"
-          rationale: "Exactly!"
+          rationale: "This is quite a high tip amount! It's likely some noise, there is a lot of that in the dataset."
           is_correct: true
         - text: "`tip_amount = 999.99`, `fare_amount = 999.99`"
           rationale: "Are you sure you're computing the column `tip_amount_plus_fare_amount` correctly?"
@@ -371,7 +371,7 @@
           rationale: "Close... the answer is actually 1 minus this number! Check your code again."
           is_correct: false
         - text: "0.050603"
-          rationale: "Exactly!"
+          rationale: "There are a few ways you could answer this; most straightforward was to construct a column expression of 'same-pickup-dropoff' and take the `.mean()`."
           is_correct: true
         - text: "1.0"
           rationale: "This would mean that all the rides had the same pickup and dropoff location; try again!"
@@ -387,7 +387,7 @@
           rationale: "This is the number of rows, not columns; try again!"
           is_correct: false
         - text: "38"
-          rationale: "Exactly!"
+          rationale: "There are 19 columns in the dataframe originally, so by adding again each column with just a new name, it doubles to 38!"
           is_correct: true
         - text: "19"
           rationale: "This is the the number of columns in the original dataframe; the answer should actually be two times this number!"
@@ -475,7 +475,7 @@
           rationale: "Exactly! There were 140383 rides on this day, more than on any other day."
           is_correct: true
         - text: "2024-04-01"
-          rationale: "try again."
+          rationale: "Are you sure you're taking the maximum of the correct column?"
           is_correct: false
       reference_video: "5.1 Grouping DataFrames with .group_by()"
 
@@ -504,7 +504,7 @@
           rationale: "Make sure to check for `vendor_id = 1`, not `2`."
           is_correct: false
         - text: "12.570663"
-          rationale: "Exactly!"
+          rationale: "Exactly right! Hint: you could have also solved his by using `.filter()` then `.mean()`."
           is_correct: true
         - text: "2.409085"
           rationale: "Make sure to check for rides that had an airport fee, not ones that didn't."
@@ -520,7 +520,7 @@
           rationale: "Make sure to check for `vendor_id = 1`, not `2`."
           is_correct: false
         - text: "12.570663"
-          rationale: "Exactly!"
+          rationale: "Exactly right! Hint: you could have also used a pivot_table to solve this."
           is_correct: true
         - text: "2.409085"
           rationale: "Make sure to check for rides that had an airport fee, not ones that didn't."
@@ -530,10 +530,10 @@
     - question: "Using `rank().over()`, what is the sum of each `vendor_id`s 10th largest `trip_distance`s, summed over all `vendor_id`s?"
       answers:
         - text: "113916.29"
-          rationale: "Exactly!"
+          rationale: "Exactly! Using `.rank().over()` we can create a column that represents the `trip_distance` rank within each `vendor_id`, filter for the 10th largest `trip_distance`s, and then sum."
           is_correct: true
         - text: "115599.84"
-          rationale: "are you sure you taking the 10th largest trip distance, and not the 9th?"
+          rationale: "are you sure you're taking the 10th largest trip distance, and not the 9th?"
           is_correct: false
         - text: "0.76"
           rationale: "make sure to correctly set the `descending` argument in the `rank` function."
@@ -552,7 +552,7 @@
           rationale: "you might be taking the three `pu_location_id`s with the lowest maximum `trip_distance`, not the highest maximum `trip_distance`."
           is_correct: false
         - text: "4.6460e6"
-          rationale: "Exactly!"
+          rationale: "Nice! There are two aggregations involved here--the first is to group by `pu_location_id`, then take only the top three `pu_location_id`s by `trip_distance`, and then again add the `total_amount`s across those three `pu_location_id`s."
           is_correct: true
         - text: "2.3340e7"
           rationale: "remember, you want the sum `total_amount` of the three `pu_location_id`s with the highest `max_trip_distance`, not the highest sum `total_amount`."
@@ -596,7 +596,7 @@
     - question: "Using the `zones_df` combined with the `march_yellow_rides_df`, which `pu_zone` `do_zone` pair had the most rides?"
       answers:
         - text: "(Upper East Side South, Upper East Side North)"
-          rationale: "Exactly!"
+          rationale: "We get this by joining the `zones_df` into the `rides_df` as in the module, and grouping by the combination of `pu_zone` and `do_zone`."
           is_correct: true
         - text: "(Erasmus, Astoria)"
           rationale: "make sure to get the `pu_zone` `do_zone` pair with the most rides, not the least."
@@ -609,7 +609,7 @@
           is_correct: false
       reference_video: "6.1 Joining DataFrames with .join()"
 
-    - question: "Find the ride with the highest `passenger_count` that started in the zone \"Midtown Center\" and ended in the zone \"Upper East Side North\". What was the `passenger_count` for that ride?"
+    - question: "What is the average `passenger_count` for rides that started in the zone \"Midtown Center\" and ended in the zone \"Upper East Side North\"?"
       answers:
         - text: "13.526644"
           rationale: "you might be measuring average `fare_amount` instead of average `passenger_count`..."
@@ -618,7 +618,7 @@
           rationale: "you might be measuring average `trip_distance` instead of average `passenger_count`..."
           is_correct: false
         - text: "1.277752"
-          rationale: "Exactly!"
+          rationale: "Exactly! Simply join `zones_df` into `rides_df` twice (once for pickup and once for dropoff), filter for the right pickup and dropoff zone, and then take the `.mean()` `passenger_count`!"
           is_correct: true
         - text: "21.211721"
           rationale: "you might be measuring average `total_amount` instead of average `passenger_count`..."
@@ -631,7 +631,7 @@
           rationale: "make sure you're not concatenating toy_1_df to itself!"
           is_correct: false
         - text: "(7, 3)"
-          rationale: "Exactly!"
+          rationale: "Since `toy_2_df` has a column that `toy_1_df` doesn't, an extra column is added."
           is_correct: true
         - text: "(8, 3)"
           rationale: "make sure you're not concatenating toy_2_df to itself!"
@@ -649,7 +649,7 @@
           rationale: "you might be sorting ascending rather than descending."
           is_correct: false
         - text: "day=3, hour=4"
-          rationale: "Exactly!"
+          rationale: "When sorting with `descending=True`, this is indeed the top result!"
           is_correct: true
         - text: "day=7, hour=23"
           rationale: "you might be taking the average `total_amount` rather than the average `fare_amount`."
@@ -662,7 +662,7 @@
     - question: "Which is the `do_zone` with the highest trip duration (where \"trip duration\" is measured as the `.total_seconds()` between `tpep_pickup_datetime` and `tpep_dropoff_datetime`)?"
       answers:
         - text: "Saint Michaels Cemetery/Woodside"
-          rationale: "Exactly!"
+          rationale: "Nice! You could solve this in a few ways; a most straightforward way is to simply create the `trip_duration` column and sort descending."
           is_correct: true
         - text: "Midtown Center"
           rationale: "you might be taking the `do_zone` with the lowest trip duration."
@@ -671,14 +671,14 @@
           rationale: "almost right! But the answer should be a `do_zone`, not a `do_location_id`."
           is_correct: false
         - text: "Woodside"
-          rationale: "not quite!"
+          rationale: "Make sure to use `.total_seconds()`!"
           is_correct: false
       reference_video: "7.4 Working with Temporal Columns - the .dt Namespace"
 
     - question: "With a group-by in `polars`, instead of finding some aggregate summary statistic for each group, you can also collect all the elements for each group into a list by simply passing in the column you'd like to aggregate to a list as a name (see below). With this, for each `pu_location_id`, make a column that aggregates all the `do_zones` associated with that `pu_location_id`; what is the `pu_location_id` with the longest list of associated `do_zone`s (hint: use the `.list` namespace)?"
       answers:
         - text: "161"
-          rationale: "Exactly!"
+          rationale: "Exactly! Note that aggregating all elements of the group like this into a list simply takes _all_ values (i.e. it's not as if it takes unique values). As such, we could have even computed the same result by simply doing `.agg(pl.len())`!"
           is_correct: true
         - text: "5"
           rationale: "are you sure you didn't find the `pu_location_id` with the shortest list of associated `do_zone`s?"
@@ -694,7 +694,7 @@
     - question: "Using just `zones_df`, split `zone` into a list on `\" \"` as seen during the module, and take the 2nd element of every list using `.list.get()`. Then, using `group_by`, answer the question--what is the most commonly occurring second word in `zones_df` (excluding `null`)?"
       answers:
         - text: "Park"
-          rationale: "Exactly!"
+          rationale: "Correct! This is indeed a common word used across many neighborhoods of New York City."
           is_correct: true
         - text: "`null`"
           rationale: "The question specifies \"excluding null\"... take another look!"
@@ -716,7 +716,7 @@
           rationale: "make sure to use \"greater than\", not \"greater than or equal to\"."
           is_correct: false
         - text: "27538"
-          rationale: "Exactly!"
+          rationale: "Perfect! With what we've learned so far, you could solve this with an `.and()` combination of `.gt()` and `.lt()`; however, for a more advanced technique for answering this question, on your own time you can check out the function `.is_between()`."
           is_correct: true
         - text: "1"
           rationale: "check again, you might have got the order of the pickup-dropoff subtraction incorrect!"
@@ -729,7 +729,7 @@
           rationale: "are you sure you're not accidentally using `.total_minutes()`?"
           is_correct: false
         - text: "20"
-          rationale: "Exactly!"
+          rationale: "Exactly! You could have of course still used `.dt.total_seconds()` if you'd really wanted to, but then you'd have to divide by the number of seconds in a day."
           is_correct: true
         - text: "3581500"
           rationale: "are you sure you're not accidentally using `.total_seconds()`?"
@@ -742,7 +742,7 @@
     - question: "How many zones in `zones_df` contain the word \"North\"?"
       answers:
         - text: "15"
-          rationale: "Exactly!"
+          rationale: "Exactly! Indeed many neighborhoods in New York City have the word 'North' in the name."
           is_correct: true
         - text: "0"
           rationale: "note that string containment checks are case-sensitive in polars, so checking for \"north\" won't work!"
@@ -767,7 +767,7 @@
           rationale: "You might be taking the 1st element of the list rather than the 0th!"
           is_correct: false
         - text: "tsaE"
-          rationale: "Exactly!"
+          rationale: "Exactly! `East` is a very common word in New York City neighborhood names, and `tsaE` is `East` spelled in reverse!"
           is_correct: true
       reference_video: "7.2 Working with String Columns - the .str Namespace"
 
@@ -779,14 +779,14 @@
           rationale: "are you sure you're using the \"col\" orientation?"
           is_correct: false
         - text: "(5, 3)"
-          rationale: "Exactly!"
+          rationale: "Exactly! With column orientation, each list in the list of lists gets loaded as a column of the dataframe."
           is_correct: true
       reference_video: "8.1 Interoperating DataFrames with Native Python Objects"
 
     - question: "Given the following data in the form of a list of lists, create a dataframe using `pl.from_records()` with a rows orientation. What is the shape of that dataframe?"
       answers:
         - text: "(3, 5)"
-          rationale: "Exactly!"
+          rationale: "Exactly! With row orientation, each list in the list of lists gets loaded as a row of the dataframe."
           is_correct: true
         - text: "(5, 3)"
           rationale: "are you sure you're using the \"row\" orientation?"
@@ -834,27 +834,27 @@
           rationale: "we are looking for the lowest absolute correlation, so don't forget to take the absolute value!"
           is_correct: false
         - text: "`trip_distance`"
-          rationale: "Exactly!"
+          rationale: "Exactly! By using `.corr()`, we can compute correlations, and `passenger_count`'s most highly correlated feature is `trip_distance`!"
           is_correct: true
         - text: "`vendor_id`"
           rationale: "we are looking for the least correlated, not the most correlated!"
           is_correct: false
       reference_video: "9.2 Brief Data Exploration - Plots, Correlations, and Summary Statistics with Polars"
 
-    - question: "Plot `total_amount` as a function of `trip_distance`. Which of the following statements about the resultant plot is false?"
+    - question: "Plot `total_amount` as a function of `trip_distance`. Which of the following statements about the resultant plot are true (hint: there are three correct answers)?"
       answers:
         - text: "There is a second sub-majority of the data which adheres to a correlation line which has a slope of approximately `$20/mile - $22/mile`."
           rationale: "there is no such correlation line."
-          is_correct: true
+          is_correct: false
         - text: "The majority of the data adheres to a correlation line which has a slope of approximately `$5/mile - $7/mile`."
           rationale: "this statement is true; there is some data which deviates from this trend, but it is the majority."
-          is_correct: false
+          is_correct: true
         - text: "Some rides appear to have a negative trip distance."
           rationale: "this statement is true, in fact there is a highly non-neglible amount of rides with a negative trip distance."
-          is_correct: false
+          is_correct: true
         - text: "A non-negligible minority of the data appears to have a trip distance of exactly 0."
           rationale: "This statement is true, in fact there is a spike of data along the y-axis, where trip distance equals 0."
-          is_correct: false
+          is_correct: true
       reference_video: "9.2 Brief Data Exploration - Plots, Correlations, and Summary Statistics with Polars"
 
     - question: "Plot an ECDF of 'fare_amount'. Is the resultant distribution unimodal or multimodal (i.e. is there one peak to the distribution or multiple)? (Hint: exclude any noisy spikes!)"
@@ -889,7 +889,7 @@
           rationale: "Make sure to convert `2%` to a fraction, and use the \"fraction\" keyword argument!"
           is_correct: false
         - text: "71652"
-          rationale: "Exactly!"
+          rationale: "Exactly! There are 3582628 rows in the original dataframe, and 2% of 3582628 is 71652."
           is_correct: true
       reference_video: "9.2 Brief Data Exploration - Plots, Correlations, and Summary Statistics with Polars"
 
