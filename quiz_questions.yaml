@@ -1168,17 +1168,17 @@
           rationale: "Are you sure you're filtering out nulls before checking correlation?"
           is_correct: false
 
-    - question: "With `rides_df_raw`, make a plot of \"hour of day of taxi ride\" vs \"average total_amount\". Which of the following statements is False?"
+    - question: "With `rides_df_raw`, make a plot of 'hour of day of taxi ride' vs 'average total_amount'. Which of the following statements is True (hint: there are multiple options)?"
       answers:
         - text: "There appears to be a peak in average total amount around 2:00."
-          rationale: "This is the only option that is not true! 2:00 is not a peak; in fact it is the hour with the smallest `average_total_amount`."
-          is_correct: true
+          rationale: "2:00 is not a peak; in fact it is the hour with the smallest `average_total_amount`."
+          is_correct: false
         - text: "There appears to be a peak in average total amount around 5:00."
           rationale: "There is indeed a peak at this time! Check again your x-axis."
-          is_correct: false
+          is_correct: true
         - text: "There appears to be a peak in average total amount around 16:00."
           rationale: "There is indeed a peak at this time! Check again your x-axis."
-          is_correct: false
+          is_correct: true
         - text: "There appears to be a peak in average total amount around 23:00."
           rationale: "There is indeed a peak at this time! Check again your x-axis."
-          is_correct: false
+          is_correct: true
