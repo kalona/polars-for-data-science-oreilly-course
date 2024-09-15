@@ -53,4 +53,3 @@ updates to make, my notes:
 - 6.1: `.join()` has changed; added thing for `.join_where()`.
 - 9.2: Plotting has changed.
 - 9.5: Plotting has changed.
-- 
