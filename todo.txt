@@ -22,3 +22,35 @@ conclusion: 6
 
 as of 1.0.0, i think `drop` accepts column expressions, not just strings.
 the plotting engine has changed from hvplot!
+
+
+
+
+
+2024-09-15 RERECORDING!!
+
+Segment 1.2: You mentioned citations that need to be added. Please update the slides with citations and I can add them in. No need to re-record the video for that one.
+
+Segment 2.1: Please re-record this section to show the latest version of Polars. You could also just record up until 1:36 and I can splice it with rest of the file once you finish discussing Importing Polars. 
+
+Segment 3.2: Video is frozen in the source file "03_data_manipulation_i_basics.mov" from 5:20-5:37 will need to re-record that section of video to fix. 
+
+Segment 6.1: Will need to re-record to fix the older version that is mentioned. 
+
+Segment 8.5: Re-record short section to fix the mention of the "experimental stage"
+
+as of 1.0.0, i think `drop` accepts column expressions, not just strings.
+
+the plotting engine has changed from hvplot!
+
+
+updates to make, my notes:
+- Segment 1.2: You mentioned citations that need to be added. Please update the slides with citations and I can add them in. No need to re-record the video for that one.
+- 2.1: don't mention about polars verion, and "experimental" stuff.
+- 3.2: Video is frozen in the source file "03_data_manipulation_i_basics.mov" from 5:20-5:37 will need to re-record that section of video to fix. 
+- 4.3: `.drop()` behavior has changed in 1.x.x, it now accepts column expressions.
+- 5.3: `.pivot()` has changed, "columns" keyword argument is now "on".
+- 6.1: `.join()` has changed; added thing for `.join_where()`.
+- 9.2: Plotting has changed.
+- 9.5: Plotting has changed.
+- 
