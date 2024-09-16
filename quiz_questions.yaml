@@ -4,20 +4,16 @@
   quiz_questions:
   - answers:
     - is_correct: true
-      rationale: Correct! Polars is implemented in Rust, and has bindings in other
-        languages, all of which use the underlying Rust implementation.
+      rationale: Polars is implemented in Rust, and has bindings in other languages, all of which use the underlying Rust implementation.
       text: Rust
     - is_correct: false
-      rationale: C is indeed a fast low-level language, but it's not the one that
-        Polars is implemented in.
+      rationale: C is indeed a fast low-level language, but it's not the one that Polars is implemented in.
       text: C
     - is_correct: false
-      rationale: Though Polars has Python bindings, it is implemented in a different
-        language!
+      rationale: Though Polars has Python bindings, it is implemented in a different language!
       text: Python
     - is_correct: false
-      rationale: R is a great language for data science, but Polars is not implemented
-        in R.
+      rationale: R is a great language for data science, but Polars is not implemented in R.
       text: R
     question: What language is Polars implemented in?
     question_name: Polars Implementation Language
@@ -26,13 +22,13 @@
     reference_video: 1.1 Introduction to Polars
   - answers:
     - is_correct: true
-      rationale: Correct!
+      rationale: Polars is best for single node computing, while tools like Spark or Modin are best for distributed computing.
       text: Single node computing.
     - is_correct: false
       rationale: Not really; tools like Spark or Modin are better suited to this use-case.
       text: Distributed computing.
     question: Which is the most common use-case for Polars?
-    question_name: Common Polars Use-case
+    question_name: Most Common Polars Use-case
     question_reference_note: To answer this question, see the question "Common Polars Use-case"
       in the notebook "01. Introduction to Polars - Quiz.ipynb".
     reference_video: 1.1 Introduction to Polars
@@ -41,14 +37,14 @@
       rationale: This is what you have to do with Modin and Ray for Pandas, not Polars.
       text: Specify a backend engine for distributing queries.
     - is_correct: false
-      rationale: Nope!
+      rationale: You don’t need to enter information regarding your OS's specifics into a configuration file for Polars to distribute resources.
       text: Enter some information regarding your OS's specifics into a configuration
         file which Polars will then use to distribute resources.
     - is_correct: true
-      rationale: Correct!
+      rationale: Polars is automatically configured such that its query optimization engine uses all cores available on the host machine.
       text: Nothing, it works like that right out of the box.
     - is_correct: false
-      rationale: Nope!
+      rationale: There is no need to specify the number of cores on the local machine when importing Polars.
       text: Specify the number of cores on the local machine when importing Polars.
     question: What do you have to do to configure Polars such that its query optimization
       engine uses all cores available on the host machine?
@@ -66,7 +62,7 @@
         model.
       text: Python
     - is_correct: true
-      rationale: Correct!
+      rationale: Polars uses Apache Arrow for its underlying memory model
       text: Apache Arrow
     - is_correct: true
       rationale: Polars uses a memory model which optimized for Online Analytical
@@ -84,7 +80,7 @@
         to optimize for those use-cases.
       text: Data from the same column is placed close together in memory.
     - is_correct: false
-      rationale: Incorrect! You might be thinking about OLTP, but Apache Arrow is
+      rationale: You might be thinking about OLTP, but Apache Arrow is
         optimized for OLAP.
       text: Data from the same row is placed close together in memory.
     - is_correct: false
@@ -92,7 +88,7 @@
         computing tools like Hadoop and Spark, but it's not relevant here.
       text: Data's storage location is close to the data's processing location.
     - is_correct: false
-      rationale: Incorrect! Try again.
+      rationale: This isn’t relevant to how the Apache Arrow memory model is optimized for column-oriented OLAP use-cases.
       text: Data gets sorted before processing.
     question: How is the Apache Arrow memory model optimized for column-oriented OLAP
       use-cases?
@@ -104,18 +100,18 @@
   quiz_questions:
   - answers:
     - is_correct: false
-      rationale: Almost! If you want the last column to be a categorical variable,
+      rationale: If you want the last column to be a categorical variable,
         then you'd need to perform some additional type-casting on the column.
       text: (`str`, `str`, `f64`, `cat`)
     - is_correct: true
-      rationale: Correct! Columns 1, 2, and 4 are strings, but column 3, having at
+      rationale: Columns 1, 2, and 4 are strings, but column 3, having at
         least one value with a decimal point, gets cast as a float.
       text: (`str`, `str`, `f64`, `str`)
     - is_correct: false
-      rationale: Not quite!
+      rationale: If you want the last column to be a categorical variable, then you'd need to perform some additional type-casting on the column; also, are you sure there’s i64 data?
       text: (`str`, `str`, `i64`, `cat`)
     - is_correct: false
-      rationale: You're missing a column!
+      rationale: This option is missing a column.
       text: (`str`, `i64`, `cat`)
     question: Given the following data dictionary about school children, create a
       `pl.DataFrame` and display it. What are the datatypes of each column?
@@ -135,8 +131,7 @@
       text: All the data is loaded, and the columns `tpep_pickup_datetime` and `tpep_dropoff_datetime`
         are loaded as `datetime` datatype.
     - is_correct: true
-      rationale: Correct--Polars crashes if you try to force a schema that it cannot
-        conform the data to!
+      rationale: Polars crashes if you try to force a schema that it cannot conform the data to!
       text: The data doesn't load.
     - is_correct: false
       rationale: It would be nice if this happened, but unfortunately there are some
@@ -220,8 +215,7 @@
       rationale: Are you sure you are performing the operation on the correct column?
       text: '`str`'
     - is_correct: true
-      rationale: Indeed, the function `.gt()` will return a boolean--true if greater
-        than, false if not.
+      rationale: The function `.gt()` will return a boolean--true if greater than, false if not.
       text: '`bool`'
     question: 'Using `.select()`, fetch a column from `df` which represents whether
       or not a toll was paid as part of the trip. What is the datatype of that new
@@ -604,7 +598,7 @@
         column from the dataframe?
       text: (181291, 19)
     - is_correct: false
-      rationale: are you sure you didn't accidentally take only trips where the dropoff
+      rationale: Are you sure you didn't accidentally take only trips where the dropoff
         location and pickup location are not equal?
       text: (3401337, 18)
     question: We'd like a dataframe of only rides that took place in one location
@@ -626,13 +620,13 @@
         = 1` is 35.75.
       text: '35.75'
     - is_correct: false
-      rationale: are you sure you chose the right `pu_location_id`?
+      rationale: Are you sure you chose the right `pu_location_id`?
       text: '29.7'
     - is_correct: false
-      rationale: make sure to use `pu_location_id`, not `do_location_id`!
+      rationale: Make sure to use `pu_location_id`, not `do_location_id`!
       text: '176744.79'
     - is_correct: false
-      rationale: are you taking the minimum or the maximum?
+      rationale: Are you taking the minimum or the maximum?
       text: '0.0'
     question: What is the maximum trip distance for trips with `pu_location_id = 1`?
     question_name: Maximum Trip Distance for Specific Location
@@ -642,14 +636,14 @@
     reference_video: 4.4 Renaming Columns with .rename()
   - answers:
     - is_correct: false
-      rationale: are you sure you sorted in the right direction?
+      rationale: Are you sure you sorted in the right direction?
       text: '207'
     - is_correct: false
-      rationale: be sure to sort by mean_fare_amount then mean_trip_distance, and
+      rationale: Be sure to sort by mean_fare_amount then mean_trip_distance, and
         not the other way around!
       text: '205'
     - is_correct: false
-      rationale: are you sure you're using `mean` and not `max`?
+      rationale: Are you sure you're using `mean` and not `max`?
       text: '265'
     - is_correct: true
       rationale: Exactly! `vendor_id = 6` has a much higher `mean_fare_amount` than
@@ -665,10 +659,10 @@
     reference_video: 5.1 Grouping DataFrames with .group_by()
   - answers:
     - is_correct: false
-      rationale: make sure to get the date with the most rides, not the least.
+      rationale: Make sure to get the date with the most rides, not the least.
       text: '2002-12-31'
     - is_correct: false
-      rationale: we're looking for the date with the most rides, not the datetime
+      rationale: We're looking for the date with the most rides, not the datetime
         with the most rides.
       text: '2024-03-14 22:04:00'
     - is_correct: true
@@ -685,18 +679,17 @@
     reference_video: 5.1 Grouping DataFrames with .group_by()
   - answers:
     - is_correct: false
-      rationale: be sure to take the mean, not the max.
+      rationale: Be sure to take the mean, not the max.
       text: '850.0'
     - is_correct: true
       rationale: Exactly! According to the pivot table, this answer is similar across
         most `payment_type`/`vendor_id` combinations.
       text: '18.390497'
     - is_correct: false
-      rationale: are you sure your choice of `values` is `fare_amount`?
+      rationale: Are you sure your choice of `values` is `fare_amount`?
       text: '3.411724'
     - is_correct: false
-      rationale: close! but the question is about precisely `vendor_id` 2 and `payment_type`
-        2.
+      rationale: Close! but the question is about precisely `vendor_id` 2 and `payment_type` 2.
       text: '18.582571'
     question: Create a pivot table that shows the average fare amount for each combination
       of `VendorID` and `payment_type`. What is the average fare amount associated
@@ -708,7 +701,7 @@
     reference_video: 5.3 Pivot Tables with .pivot()
   - answers:
     - is_correct: false
-      rationale: are you sure you're taking the average trip_distance and not the
+      rationale: Are you sure you're taking the average trip_distance and not the
         maximum?
       text: '115.3'
     - is_correct: false
@@ -733,7 +726,7 @@
     reference_video: 5.3 Pivot Tables with .pivot()
   - answers:
     - is_correct: false
-      rationale: are you sure you're taking the average trip_distance and not the
+      rationale: Are you sure you're taking the average trip_distance and not the
         maximum?
       text: '115.3'
     - is_correct: false
@@ -762,15 +755,15 @@
         `trip_distance`s, and then sum.
       text: '113916.29'
     - is_correct: false
-      rationale: are you sure you're taking the 10th largest trip distance, and not
+      rationale: Are you sure you're taking the 10th largest trip distance, and not
         the 9th?
       text: '115599.84'
     - is_correct: false
-      rationale: make sure to correctly set the `descending` argument in the `rank`
+      rationale: Make sure to correctly set the `descending` argument in the `rank`
         function.
       text: '0.76'
     - is_correct: false
-      rationale: are you sure you're using `trip_distance` and not `total_amount`?
+      rationale: Are you sure you're using `trip_distance` and not `total_amount`?
       text: '1178.31'
     question: Using `rank().over()`, what is the sum of each `vendor_id`s 10th largest
       `trip_distance`s, summed over all `vendor_id`s?
@@ -781,10 +774,10 @@
     reference_video: 5.2 Window Functions in Polars
   - answers:
     - is_correct: false
-      rationale: make sure to take only the top three `pu_location_id`s.
+      rationale: Make sure to take only the top three `pu_location_id`s.
       text: 6.0735e6
     - is_correct: false
-      rationale: you might be taking the three `pu_location_id`s with the lowest maximum
+      rationale: You might be taking the three `pu_location_id`s with the lowest maximum
         `trip_distance`, not the highest maximum `trip_distance`.
       text: '891.48'
     - is_correct: true
@@ -793,7 +786,7 @@
         and then again add the `total_amount`s across those three `pu_location_id`s.
       text: 4.6460e6
     - is_correct: false
-      rationale: remember, you want the sum `total_amount` of the three `pu_location_id`s
+      rationale: Remember, you want the sum `total_amount` of the three `pu_location_id`s
         with the highest `max_trip_distance`, not the highest sum `total_amount`.
       text: 2.3340e7
     question: What is the sum of the `total_amount`s for all rides taken with one
@@ -805,11 +798,11 @@
     reference_video: 5.1 Grouping DataFrames with .group_by()
   - answers:
     - is_correct: false
-      rationale: there is no query optimization in in-memory mode.
+      rationale: There is no query optimization in in-memory mode.
       text: They are the same, because the query optimization engine doesn't care
         about the order of operations.
     - is_correct: true
-      rationale: Exactly! Since group-by is a relatively expensive operation, reducing
+      rationale: Since group-by is a relatively expensive operation, reducing
         the amount of data it needs to operate on speeds up performance!
       text: Filtering before the group-by is faster, because you reduce the amount
         of data handled by the group by operation.
@@ -836,12 +829,12 @@
     reference_video: 5.1 Grouping DataFrames with .group_by()
   - answers:
     - is_correct: true
-      rationale: after the query hits the query optimization engine, they become the
+      rationale: After the query hits the query optimization engine, they become the
         same query.
       text: They are the same, because the query optimization engine doesn't care
         about the order of operations.
     - is_correct: false
-      rationale: this might be the case in in-memory mode, but not in lazy mode!
+      rationale: This might be the case in in-memory mode, but not in lazy mode!
       text: Filtering before the group-by is faster, because you reduce the amount
         of data handled by the group by operation.
     - is_correct: false
@@ -874,15 +867,15 @@
         module, and grouping by the combination of `pu_zone` and `do_zone`.
       text: (Upper East Side South, Upper East Side North)
     - is_correct: false
-      rationale: make sure to get the `pu_zone` `do_zone` pair with the most rides,
+      rationale: Make sure to get the `pu_zone` `do_zone` pair with the most rides,
         not the least.
       text: (Erasmus, Astoria)
     - is_correct: false
-      rationale: make sure to get the combination with the most rides, not the second
+      rationale: Make sure to get the combination with the most rides, not the second
         most rides.
       text: (Upper East Side North, Upper East Side South)
     - is_correct: false
-      rationale: make sure to aggregate by the right column.
+      rationale: Make sure to aggregate by the right column.
       text: (Midtown Center, Upper East Side North)
     question: Using the `zones_df` combined with the `march_yellow_rides_df`, which
       `pu_zone` `do_zone` pair had the most rides?
@@ -892,10 +885,10 @@
     reference_video: 6.1 Joining DataFrames with .join()
   - answers:
     - is_correct: false
-      rationale: you might be measuring average `fare_amount` instead of average `passenger_count`...
+      rationale: You might be measuring average `fare_amount` instead of average `passenger_count`...
       text: '13.526644'
     - is_correct: false
-      rationale: you might be measuring average `trip_distance` instead of average
+      rationale: You might be measuring average `trip_distance` instead of average
         `passenger_count`...
       text: '1.932876'
     - is_correct: true
@@ -904,7 +897,7 @@
         take the `.mean()` `passenger_count`!
       text: '1.277752'
     - is_correct: false
-      rationale: you might be measuring average `total_amount` instead of average
+      rationale: You might be measuring average `total_amount` instead of average
         `passenger_count`...
       text: '21.211721'
     question: What is the average `passenger_count` for rides that started in the
@@ -916,17 +909,17 @@
     reference_video: 6.1 Joining DataFrames with .join()
   - answers:
     - is_correct: false
-      rationale: make sure you're not concatenating toy_1_df to itself!
+      rationale: Make sure you're not concatenating toy_1_df to itself!
       text: (6, 2)
     - is_correct: true
       rationale: Since `toy_2_df` has a column that `toy_1_df` doesn't, an extra column
         is added.
       text: (7, 3)
     - is_correct: false
-      rationale: make sure you're not concatenating toy_2_df to itself!
+      rationale: Make sure you're not concatenating toy_2_df to itself!
       text: (8, 3)
     - is_correct: false
-      rationale: this would be correct if toy_2_df didn't have the extra column "c"...
+      rationale: This would be correct if toy_2_df didn't have the extra column "c"...
       text: (7, 2)
     question: Take the two toy dataframes below and concatenate them diagonally. What
       is the shape of the result?
@@ -938,17 +931,17 @@
   quiz_questions:
   - answers:
     - is_correct: false
-      rationale: you might be sorting ascending rather than descending.
+      rationale: You might be sorting ascending rather than descending.
       text: day=6, hour=2
     - is_correct: true
       rationale: When sorting with `descending=True`, this is indeed the top result!
       text: day=3, hour=4
     - is_correct: false
-      rationale: you might be taking the average `total_amount` rather than the average
+      rationale: You might be taking the average `total_amount` rather than the average
         `fare_amount`.
       text: day=7, hour=23
     - is_correct: false
-      rationale: you might be taking the weekday and hour from `tpep_dropoff_datetime`
+      rationale: You might be taking the weekday and hour from `tpep_dropoff_datetime`
         instead of `tpep_pickup_datetime`.
       text: day=1, hour=0
     question: Extract the day of the week (as a string) and the hour from the 'tpep_pickup_datetime'
@@ -966,10 +959,10 @@
         way is to simply create the `trip_duration` column and sort descending.
       text: Saint Michaels Cemetery/Woodside
     - is_correct: false
-      rationale: you might be taking the `do_zone` with the lowest trip duration.
+      rationale: You might be taking the `do_zone` with the lowest trip duration.
       text: Midtown Center
     - is_correct: false
-      rationale: almost right! But the answer should be a `do_zone`, not a `do_location_id`.
+      rationale: Almost right! But the answer should be a `do_zone`, not a `do_location_id`.
       text: '207'
     - is_correct: false
       rationale: Make sure to use `.total_seconds()`!
@@ -989,15 +982,15 @@
         `.agg(pl.len())`!
       text: '161'
     - is_correct: false
-      rationale: are you sure you didn't find the `pu_location_id` with the shortest
+      rationale: Are you sure you didn't find the `pu_location_id` with the shortest
         list of associated `do_zone`s?
       text: '5'
     - is_correct: false
-      rationale: we are looking for the `pu_location_id` with the longest list of
+      rationale: We are looking for the `pu_location_id` with the longest list of
         associated `do_zone`s, not the `pu_zone`!
       text: Midtown Center
     - is_correct: false
-      rationale: it looks like you chose the wrong sort order, and looked for `pu_zone`
+      rationale: It looks like you chose the wrong sort order, and looked for `pu_zone`
         rather than `pu_location_id`!
       text: Arden Heights
     question: 'With a group-by in `polars`, instead of finding some aggregate summary
@@ -1037,10 +1030,10 @@
     reference_video: 7.3 Working with List Columns - the .list Namespace
   - answers:
     - is_correct: false
-      rationale: make sure to use "less than", not "less than or equal to".
+      rationale: Make sure to use "less than", not "less than or equal to".
       text: '28426'
     - is_correct: false
-      rationale: make sure to use "greater than", not "greater than or equal to".
+      rationale: Make sure to use "greater than", not "greater than or equal to".
       text: '27994'
     - is_correct: true
       rationale: Perfect! With what we've learned so far, you could solve this with
@@ -1049,7 +1042,7 @@
         the function `.is_between()`.
       text: '27538'
     - is_correct: false
-      rationale: check again, you might have got the order of the pickup-dropoff subtraction
+      rationale: Check again, you might have got the order of the pickup-dropoff subtraction
         incorrect!
       text: '1'
     question: How many rides had a duration of more than 60 seconds and less than
@@ -1061,7 +1054,7 @@
     reference_video: 7.4 Working with Temporal Columns - the .dt Namespace
   - answers:
     - is_correct: false
-      rationale: are you sure you're not accidentally using `.total_minutes()`?
+      rationale: Are you sure you're not accidentally using `.total_minutes()`?
       text: '3541969'
     - is_correct: true
       rationale: Exactly! You could have of course still used `.dt.total_seconds()`
@@ -1069,10 +1062,10 @@
         seconds in a day.
       text: '20'
     - is_correct: false
-      rationale: are you sure you're not accidentally using `.total_seconds()`?
+      rationale: Are you sure you're not accidentally using `.total_seconds()`?
       text: '3581500'
     - is_correct: false
-      rationale: make sure to use "greater than" and not "great than or equal to".
+      rationale: Make sure to use "greater than" and not "great than or equal to".
       text: '6'
     question: 'How many rides had a duration of more than 1 day (hint: instead of
       using `.dt.total_seconds()`, you can use `.dt.total_days()`)?'
@@ -1087,15 +1080,15 @@
         'North' in the name.
       text: '15'
     - is_correct: false
-      rationale: note that string containment checks are case-sensitive in polars,
+      rationale: Note that string containment checks are case-sensitive in polars,
         so checking for "north" won't work!
       text: '0'
     - is_correct: false
-      rationale: looks like you accidentally got the total number of rows! Perhaps
+      rationale: Looks like you accidentally got the total number of rows! Perhaps
         you accidentally used `count()` or `len()`...
       text: '265'
     - is_correct: false
-      rationale: make sure to not accidentally check for "South"!
+      rationale: Make sure to not accidentally check for "South"!
       text: '19'
     question: How many zones in `zones_df` contain the word "North"?
     question_name: Zones Containing 'North'
@@ -1130,7 +1123,7 @@
   quiz_questions:
   - answers:
     - is_correct: false
-      rationale: are you sure you're using the "col" orientation?
+      rationale: Are you sure you're using the "col" orientation?
       text: (3, 5)
     - is_correct: true
       rationale: Exactly! With column orientation, each list in the list of lists
@@ -1150,7 +1143,7 @@
         loaded as a row of the dataframe.
       text: (3, 5)
     - is_correct: false
-      rationale: are you sure you're using the "row" orientation?
+      rationale: Are you sure you're using the "row" orientation?
       text: (5, 3)
     question: Given the following data in the form of a list of lists, create a dataframe
       using `pl.from_records()` with a rows orientation. What is the shape of that
@@ -1218,10 +1211,10 @@
   quiz_questions:
   - answers:
     - is_correct: false
-      rationale: we are not including self-correlation, here.
+      rationale: We are not including self-correlation, here.
       text: '`passenger_count`'
     - is_correct: false
-      rationale: we are looking for the lowest absolute correlation, so don't forget
+      rationale: We are looking for the lowest absolute correlation, so don't forget
         to take the absolute value!
       text: '`extra`'
     - is_correct: true
@@ -1229,7 +1222,7 @@
         most highly correlated feature is `trip_distance`!
       text: '`trip_distance`'
     - is_correct: false
-      rationale: we are looking for the least correlated, not the most correlated!
+      rationale: We are looking for the least correlated, not the most correlated!
       text: '`vendor_id`'
     question: 'Using `rides_df_raw`, which feature is least correlated with `passenger_count`
       (either negatively or positively)? (Hint: you might need the polars function
@@ -1243,16 +1236,16 @@
       Statistics with Polars
   - answers:
     - is_correct: false
-      rationale: there is no such correlation line.
+      rationale: There is no such correlation line.
       text: There is a second sub-majority of the data which adheres to a correlation
         line which has a slope of approximately `$20/mile - $22/mile`.
     - is_correct: true
-      rationale: this statement is true; there is some data which deviates from this
+      rationale: This statement is true; there is some data which deviates from this
         trend, but it is the majority.
       text: The majority of the data adheres to a correlation line which has a slope
         of approximately `$5/mile - $7/mile`.
     - is_correct: true
-      rationale: this statement is true, in fact there is a highly non-neglible amount
+      rationale: This statement is true, in fact there is a highly non-neglible amount
         of rides with a negative trip distance.
       text: Some rides appear to have a negative trip distance.
     - is_correct: true
@@ -1303,11 +1296,11 @@
     reference_video: 9.5 Machine Learning Model Building, Evaluation, and Discussion
   - answers:
     - is_correct: false
-      rationale: looks like the `.sample()` didn't work--`3582628` is just the size
+      rationale: Looks like the `.sample()` didn't work--`3582628` is just the size
         of the entire dataframe!
       text: '3582628'
     - is_correct: false
-      rationale: if you're going to pass in a fraction as an argument, you have to
+      rationale: If you're going to pass in a fraction as an argument, you have to
         pass it to the keyword argument "fraction"!
       text: '2'
     - is_correct: false
@@ -1388,7 +1381,7 @@
         column!
       text: '900.0'
     - is_correct: true
-      rationale: Exactly!
+      rationale: Exactly! You take this by using the `.max()` function.
       text: '2.5'
     - is_correct: false
       rationale: Are you sure you're using the correct column?
@@ -1409,7 +1402,7 @@
       rationale: Are you sure you're selecting the correct column?
       text: '166.1'
     - is_correct: true
-      rationale: Exactly!
+      rationale: Exactly! This is the top row after sorting by all the requisite columns.
       text: '28.9'
     question: 'Sort `rides_df_raw` descending in the following order: `congestion_surcharge`,
       `tip_amount`, `trip_distance`. What is the `trip_distance` of the top trip?'
@@ -1418,7 +1411,7 @@
       After Sorting" in the notebook "10. Summative - Quiz.ipynb".
   - answers:
     - is_correct: true
-      rationale: Exactly!
+      rationale: Indeed, we arrive to this answer by using `.gt()` and `.lt()`, after converting to kilometers!
       text: '838278'
     - is_correct: false
       rationale: Don't forget to convert miles to kilometers!
@@ -1514,7 +1507,7 @@
       rationale: Are you sure you're using the correct column?
       text: '134.51'
     - is_correct: true
-      rationale: Exactly!
+      rationale: Exactly! We can group by `congestion_surcharge`, aggregate for `.len()`, and sort.
       text: '2.5'
     question: Using `.group_by()`, what is the most common value for `congestion_surcharge`
       in the dataset?
@@ -1523,7 +1516,7 @@
       Surcharge" in the notebook "10. Summative - Quiz.ipynb".
   - answers:
     - is_correct: true
-      rationale: Exactly!
+      rationale: Exactly right, we find this by viewing the appropriate cell in the pivot table.
       text: '104748'
     - is_correct: false
       rationale: Close! This is the number of rides with 2 passengers that did have
@@ -1616,7 +1609,7 @@
       Vertical Concatenation" in the notebook "10. Summative - Quiz.ipynb".
   - answers:
     - is_correct: false
-      rationale: make sure to check rides before `2024-03-15`... you might be checking
+      rationale: Make sure to check rides before `2024-03-15`... you might be checking
         rides with `.le()` rather than `.lt()`.
       text: '0.455174'
     - is_correct: true
