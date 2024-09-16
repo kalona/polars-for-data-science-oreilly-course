@@ -1,0 +1,1227 @@
+## Module 1: Introduction to Polars
+
+1. What language is Polars implemented in?
+
+[Correct Answer] A. Rust
+B. C
+C. Python
+D. R
+
+[Rationales]
+A. Polars is implemented in Rust, and has bindings in other languages, all of which use the underlying Rust implementation.
+B. C is indeed a fast low-level language, but it's not the one that Polars is implemented in.
+C. Though Polars has Python bindings, it is implemented in a different language!
+D. R is a great language for data science, but Polars is not implemented in R.
+
+[reference video] 1.1 Introduction to Polars
+[question reference notebook] To answer this question, see the question "Polars Implementation Language" in the notebook "01. Introduction to Polars - Quiz.ipynb".
+
+
+2. Which is the most common use-case for Polars?
+
+[Correct Answer] A. Single node computing.
+B. Distributed computing.
+
+[Rationales]
+A. Polars is best for single node computing, while tools like Spark or Modin are best for distributed computing. 
+B. Not really; tools like Spark or Modin are better suited to this use-case.
+
+[reference video] 1.1 Introduction to Polars
+[question reference notebook] To answer this question, see the question "Common Polars Use-case" in the notebook "01. Introduction to Polars - Quiz.ipynb".
+
+
+3. What do you have to do to configure Polars such that its query optimization engine uses all cores available on the host machine?
+
+A. Specify a backend engine for distributing queries.
+B. Enter some information regarding your OS's specifics into a configuration file which Polars will then use to distribute resources.
+[Correct Answer] C. Nothing, it works like that right out of the box.
+D. Specify the number of cores on the local machine when importing Polars.
+
+[Rationales]
+A. This is what you have to do with Modin and Ray for Pandas, not Polars.
+B. You don't need to enter information regarding your OS's specifics into a configuration file for Polars to distribute resources.
+C. Polars is automatically configured such that its query optimization engine uses all cores available on the host machine.
+D. There is no need to specify the number of cores on the local machine when importing Polars.
+
+[reference video] 1.1 Introduction to Polars
+[question reference notebook] To answer this question, see the question "Polars Multi-core Configuration" in the notebook "01. Introduction to Polars - Quiz.ipynb".
+
+4. What does Polars use as its underlying memory model?
+
+[Correct Answer] A. Apache Arrow
+B. Rust
+C. Python
+D. Online Analytical Processing
+
+[Rationales]
+A. Polars uses Apache Arrow for its underlying memory model
+B. Polars is implemented in Rust, but that is not the underlying memory model.
+C. Polars has bindings in Python, but that is not its underlying memory model.
+D. Polars uses a memory model which optimized for Online Analytical Processing use-cases, but that is not the memory model itself.
+
+[reference video] 1.1 Introduction to Polars
+[question reference notebook] To answer this question, see the question "Polars Underlying Memory Model" in the notebook "01. Introduction to Polars - Quiz.ipynb".
+
+5. How is the Apache Arrow memory model optimized for column-oriented OLAP use-cases?
+
+[Correct Answer] A. Data from the same column is placed close together in memory.
+B. Data from the same row is placed close together in memory.
+C. Data's storage location is close to the data's processing location.
+D. Data gets sorted before processing.
+
+[Rationales]
+A. Exactly! Modern analytics use-cases usually involve column-oriented actions, so having data from the same column close together helps Apache Arrow to optimize for those use-cases.
+B. You might be thinking about OLTP, but Apache Arrow is optimized for OLAP.
+C. This is an interesting design consideration that differs across distributed computing tools like Hadoop and Spark, but it's not relevant here.
+D. This isn't relevant to how the Apache Arrow memory model is optimized for column-oriented OLAP use-cases.
+
+[reference video] 1.2 Apache Arrow - A Brief Intro
+[question reference notebook] To answer this question, see the question "Apache Arrow Memory Model Optimization" in the notebook "01. Introduction to Polars - Quiz.ipynb".
+
+
+
+## Module 2: Getting Started
+
+1. Given the following data dictionary about school children, create a `pl.DataFrame` and display it. What are the datatypes of each column?
+
+[Correct Answer] A. (`str`, `str`, `f64`, `str`)
+B. (`str`, `str`, `f64`, `cat`)
+C. (`str`, `str`, `i64`, `cat`)
+D. (`str`, `i64`, `cat`)
+
+[Rationales]
+A. Columns 1, 2, and 4 are strings, but column 3, having at least one value with a decimal point, gets cast as a float.
+B. If you want the last column to be a categorical variable, then you'd need to perform some additional type-casting on the column.
+C. If you want the last column to be a categorical variable, then you'd need to perform some additional type-casting on the column; also, are you sure there's i64 data?
+D. This option is missing a column.
+
+[reference video] 2.1 Creating a Polars DataFrame
+[question reference notebook] To answer this question, see the question "Creating DataFrame from Dictionary" in the notebook "02. Getting Started - Quiz.ipynb".
+
+2. In the module, we loaded data from the csv file, overriding the schema of the columns `tpep_pickup_datetime` and `tpep_dropoff_datetime`, loading them as a `pl.Datetime` data type. Now, override the schema to load them as a `pl.Date` data type. What happens?
+
+A. All the data is loaded, and the columns `tpep_pickup_datetime` and `tpep_dropoff_datetime` are loaded as `str` datatype.
+B. All the data is loaded, and the columns `tpep_pickup_datetime` and `tpep_dropoff_datetime` are loaded as `datetime` datatype.
+[Correct Answer] C. The data doesn't load.
+D. All the data is loaded, and the columns `tpep_pickup_datetime` and `tpep_dropoff_datetime` are loaded as `date` datatype.
+
+[Rationales]
+A. This would only happen if you don't pass a `schema_overrides` argument to the function call. Try again, perhaps you didn't enter the code correctly.
+B. This would only happen if you passed `pl.Datetime` as the schema override; we're trying to override with `pl.Date`!.
+C. Polars crashes if you try to force a schema that it cannot conform the data to!
+D. It would be nice if this happened, but unfortunately there are some complications... try to run the code again!
+
+[reference video] 2.2 Reading Data From CSV with In-Memory Mode
+[question reference notebook] To answer this question, see the question "Loading CSV with Schema Override" in the notebook "02. Getting Started - Quiz.ipynb".
+
+3. During the module, we saw that selecting columns from a `LazyFrame` was ~2-3x faster than selecting columns from a `DataFrame`, when data is loaded from a `csv`. However, we only did this for csv, not for parquet. Which file type do you think would have a greater speedup from selecting on a `DataFrame` to selecting on a `LazyFrame`: `csv` or `parquet`? Why?
+
+A. `csv`, because it's a simpler file type.
+B. `csv`, because it's an older file format, so the Polars code for interacting with it is better developed.
+C. `parquet`, because, since Polars is built on the Apache Arrow memory model, the development team has spent more time developing the functionality associated with parquet, which is also built on the Apache Arrow memory model, thus making its IO operations faster.
+[Correct Answer] D. `parquet`, because `parquet` files keep data from the same column in the same location in memory, so when the `select` gets pushed down to the read operation of `LazyFrame`, the input engine can skip the unnecessary columns' data faster than it can for `csv`.
+
+[Rationales]
+A. Though csv is a simpler file type, it's not optimized for column operations!
+B. Though csv is indeed an older file format, parquet still offers a greater speedup here!
+C. This may or may not be true, but either way it's not the real reason why parquet offers a greater speedup on in-memory vs lazy selection.
+D. Exactly! This is what Apache Arrow is all about!
+
+[reference video] 2.4 Selecting Data - In-Memory vs Lazy Mode Comparison
+[question reference notebook] To answer this question, see the question "LazyFrame vs DataFrame Selection Speed" in the notebook "02. Getting Started - Quiz.ipynb".
+
+4. Inspect the dataset with `df.describe()`. What is the highest `null_count` that any column has?
+
+A. 3582628
+[Correct Answer] B. 426190
+C. 0
+D. 176836
+
+[Rationales]
+A. That is the number of rows in the dataset, are you sure you're reading the correct row in the `describe` table?
+B. Exactly! There are a few columns with exactly this amount of nulls. We'll get more into this later...
+C. We're looking for the highest `null_count` that any column has, not the lowest!
+D. Are you sure you're looking at the right place in the table?
+
+[reference video] 2.2 Reading Data From CSV with In-Memory Mode
+[question reference notebook] To answer this question, see the question "Highest Null Count in Dataset" in the notebook "02. Getting Started - Quiz.ipynb".
+
+
+
+## Module 3: Data Manipulation I - Basics
+
+1. Using `.select()`, fetch a column from `df` which represents whether or not a toll was paid as part of the trip. What is the datatype of that new column? (Hint: you can check if a toll was paid by seeing if `tolls_amount` is greater than 0.)
+
+A. `int64`
+B. `float64`
+C. `str`
+[Correct Answer] D. `bool`
+
+[Rationales]
+A. Are you sure you're checking for "greater than 0" with the right function? Try using `.gt()`!
+B. This is the original datatype of the `tolls_amount` column... are you sure your function worked correctly?
+C. Are you sure you are performing the operation on the correct column?
+D. The function `.gt()` will return a boolean--true if greater than, false if not.
+
+[reference video] 3.2 Getting Started with Column Expressions
+[question reference notebook] To answer this question, see the question "Toll Payment Column Datatype" in the notebook "03. Data Manipulation I - Basics - Quiz.ipynb".
+
+2. What was the longest trip that had `0` tolls paid (hint: use `.filter()` to get only the trips with `tolls_amount` equal to `0`, and `.select()` with `.max()` to find the longest trip)?
+
+[Correct Answer] A. 176836.3
+B. 0
+C. 176744.79
+D. 176329.23
+
+[Rationales]
+A. This is precisely the result you get when you filter then take the max. And it's quite a long trip indeed!
+B. You might be using `.min()` instead of `.max()` by accident...
+C. Make sure to check for rides for which `tolls_amount` was equal to 0, not rides where `tolls_amount` is greater than 0!
+D. Are you sure you're using the `tolls_amount` column and not accidentally the `tip_amount` column?
+
+[reference video] 3.2 Getting Started with Column Expressions
+[question reference notebook] To answer this question, see the question "Longest Trip with Zero Tolls" in the notebook "03. Data Manipulation I - Basics - Quiz.ipynb".
+
+3. What is the mean tip amount for trips where the fare amount was greater than $20?
+
+A. 39.32003
+B. 598.58
+C. 5.870243
+[Correct Answer] D. 5.872741
+
+[Rationales]
+A. We're looking for the mean `tip_amount` for trips where the `fare_amount` was greater than `$20`, not the mean `fare_amount` for trips where the `fare_amount` was greater than `$20`!
+B. That's a big tip amount! You might accidentally be taking the maximum tip amount rather than the mean tip amount...
+C. Make sure you're using the `.gt` function ("greater than") and not the `.ge` function ("greater than or equal to")!
+D. This is indeed the number of trips with a fare amount greater than $20--you correctly used `gt` and not `ge`.
+
+[reference video] 3.2 Getting Started with Column Expressions
+[question reference notebook] To answer this question, see the question "Mean Tip for High Fare Trips" in the notebook "03. Data Manipulation I - Basics - Quiz.ipynb".
+
+4. Find the maximum trip distance for trips with a passenger count of 1 or 2.
+
+A. 159.74
+[Correct Answer] B. 66907.9
+C. 3.530788
+D. 1021.99
+
+[Rationales]
+A. That's the maximum `trip_distance` for trips that had a `passenger_count` of exactly 2... Check your code again!
+B. Precisely, and it's a long trip indeed! There are certainly some outliers in this dataset.
+C. That's the mean `trip_distance` for trips with a passenger count of 1 or 2, but we're looking for the maximum!
+D. That's the maximum `total_amount` for trips with a passenger count of 1 or 2, but we're looking for the maximum `trip_distance`!
+
+[reference video] 3.3 The .filter() Query Statement
+[question reference notebook] To answer this question, see the question "Max Trip Distance for 1-2 Passengers" in the notebook "03. Data Manipulation I - Basics - Quiz.ipynb".
+
+5. Sort the dataframe by `total_amount` in descending order; then, select and display only the top 5 rows and the columns `trip_distance` and `total_amount`. What are the two values of `trip_distance` associated with the two trips with the highest `total_amount`?
+
+A. 0.0, 159.74
+[Correct Answer] B. 3.8, 181.5
+C. 1021.99, 951.26
+D. 5.1, 8.3
+
+[Rationales]
+A. You might be sorting in ascending order rather than descending order...
+B. Exactly! This is the result when you sort by `total_amount` descending.
+C. These are the two highest values for `total_amount`, but we are looking for the values of `trip_distance` associated with two highest values of `total_amount`!
+D. Are you sure you're looking at the right columns?
+
+[reference video] 3.4 The .sort() Query Statement
+[question reference notebook] To answer this question, see the question "Top 5 Trips by Total Amount" in the notebook "03. Data Manipulation I - Basics - Quiz.ipynb".
+
+6. Calculate the maximum fare amount for trips that had a `tip_amount` greater than `$10` and a `trip_distance` greater than `10` miles.
+
+[Correct Answer] A. 472.0
+B. 900.0
+C. 66.124137
+D. 633.3
+
+[Rationales]
+A. This problem is solved with `.filter()` then `.select(...max())`, and it is a high fare amount indeed!
+B. We're looking for the maximum fare amount for trips that had a `tip_amount` greater than `$10` and a `trip_distance` greater than `10` miles, not either or!
+C. We're looking for the maximum fare amount, not the average!
+D. Are you sure you're looking at the right column?
+
+[reference video] 3.3 The .filter() Query Statement
+[question reference notebook] To answer this question, see the question "Maximum Fare for Long Trips with High Tips" in the notebook "03. Data Manipulation I - Basics - Quiz.ipynb".
+
+7. Find the maximum `price_per_mile` (by dividing the `total_amount` by the `trip_distance`) for trips with a distance greater than `30`.
+
+A. 0.034265
+B. 4.868929
+[Correct Answer] C. 14.067142
+D. 9.384736
+
+[Rationales]
+A. Are you sure you're filtering for just trips with a distance greater than 30, and not filtering for trips with a distance greater than 300?
+B. This is the average `price_per_mile`, not the maximum!
+C. You correctly used `.filter()`, column arithmetic to compute `price_per_mile`, and finally `.max` to get the answer!
+D. Are you sure you're looking at the right columns?
+
+[reference video] 3.3 The .filter() Query Statement
+[question reference notebook] To answer this question, see the question "Maximum Price per Mile for Long Trips" in the notebook "03. Data Manipulation I - Basics - Quiz.ipynb".
+
+8. Of all the trips which had a `trip_distance` of exactly `5`, what was the latest `tpep_pickup_datetime`?
+
+[Correct Answer] A. 2024-03-31 23:46:21
+B. 2024-03-31 23:57:07
+C. 2024-03-01 00:05:00
+D. 2024-04-01 00:34:55
+
+[Rationales]
+A. Exactly! Only a few trips had a `trip_distance` of exactly 5, and this is the latest one.
+B. Remember--we're looking for maximum pickup datetime, not dropoff datetime!
+C. Remember--we're looking for maximum pickup datetime, not minimum!
+D. Are you sure your filtering for only trips that had a `trip_distance` of exactly 5?
+
+[reference video] 3.3 The .filter() Query Statement
+[question reference notebook] To answer this question, see the question "Latest Pickup for 5-Mile Trips" in the notebook "03. Data Manipulation I - Basics - Quiz.ipynb".
+
+9. Filtering only for trips that had a `fare_amount` and a `tip_amount` greater than 0, what was the lowest tip percentage (expressed as a fraction) that somebody paid? (Hint: divide `tip_amount` by `fare_amount`).
+
+A. 0.01
+B. 0.276066
+C. -40.0
+[Correct Answer] D. 0.00003
+
+[Rationales]
+A. Are you sure you're using the right columns for calculating the tip percentage of each ride?
+B. We're looking for the minimum tip, not the average tip!
+C. Don't forget to filter the data!
+D. You correctly used `.filter()`, column arithmetic to compute tip percentage, and finally `.min` to get the answer!
+
+[reference video] 3.3 The .filter() Query Statement
+[question reference notebook] To answer this question, see the question "Lowest Tip Percentage" in the notebook "03. Data Manipulation I - Basics - Quiz.ipynb".
+
+10. How many trips had a `tip_amount` greater than the `Airport_fee`?
+
+A. 3582628
+B. 2
+C. 0
+[Correct Answer] D. 2461463
+
+[Rationales]
+A. That's the total amount of rides in the dataset! Don't forget to filter.
+B. If you're going to pass in a fraction as an argument, you have to pass it to the keyword argument "fraction"!
+C. Make sure to convert `2%` to a fraction, and use the "fraction" keyword argument!
+D. You correctly used `.filter()`, and then any number of ways to check the dataframe shape--`.shape`, `display()`, `print()`...
+
+[reference video] 3.2 Getting Started with Column Expressions
+[question reference notebook] To answer this question, see the question "Trips with Tips Exceeding Airport Fee" in the notebook "03. Data Manipulation I - Basics - Quiz.ipynb".
+
+
+
+## Module 4: Data Manipulation II - Advanced Selecting
+
+1. Select all columns from the dataframe that have the datatype `pl.String`. How many columns are there in the result?
+
+[Correct Answer] A. 1
+B. 19
+C. 3
+D. 0
+
+[Rationales]
+A. This is like what we saw in the module! Only one column in our dataframe is a string data type.
+B. These are all the columns in the original dataframe! Are you sure you have your `.select()` statement correct?
+C. Are you sure you're not checking for a datatype other than `pl.String`?
+D. There is at least one column with the `pl.String` data type... check again!
+
+[reference video] 4.1 Operating on Multiple Columns at the Same Time
+[question reference notebook] To answer this question, see the question "String Columns Count" in the notebook "04. Data Manipulation II - Advanced Selecting - Quiz.ipynb".
+
+2. Select all columns from the dataframe that have the datatype `pl.Int64`. How many columns are there in the result?
+
+A. 19
+B. 1
+[Correct Answer] C. 3
+D. 3582628
+
+[Rationales]
+A. These are all the columns in the original dataframe! Are you sure you have your `.select()` statement correct?
+B. Are you sure you're not checking for a datatype other than `pl.Int64`?
+C. This is like what we saw in the module! Three columns in our dataframe have a pl.Int64 data type.
+D. This is the number of rows, not the number of columns!
+
+[reference video] 4.1 Operating on Multiple Columns at the Same Time
+[question reference notebook] To answer this question, see the question "Int64 Columns Count" in the notebook "04. Data Manipulation II - Advanced Selecting - Quiz.ipynb".
+
+3. What fraction of rows have at least one of their `pl.Float64` columns equal to exactly `0`? (Hint: use `pl.any_horizontal()`.)
+
+A. 0
+[Correct Answer] B. 0.000076
+C. .50
+D. 1.0
+
+[Rationales]
+A. Make sure you're using `pl.Float64` and not another datatype.
+B. There are a few ways you could have gotten to this answer; most straightforward was to construct a column expression like 'has at least one null float64 value' and take the `.mean()`.
+C. Are you sure you're using the correct datatype?
+D. This is all the rows! Check your code again, maybe you have the aggregation incorrect...
+
+[reference video] 4.1 Operating on Multiple Columns at the Same Time
+[question reference notebook] To answer this question, see the question "Rows with Zero Float64 Values" in the notebook "04. Data Manipulation II - Advanced Selecting - Quiz.ipynb".
+
+4. Create a new column called `tip_amount_plus_fare_amount`; sort the dataframe by this new column descending order. What is the `tip_amount` and `fare_amount` for the highest `tip_amount_plus_fare_amount`?
+
+A. `tip_amount = 17.0`, `fare_amount = 999.99`
+B. `tip_amount = 0.01`, `fare_amount = -800.0`
+[Correct Answer] C. `tip_amount = 999.99`, `fare_amount = 17.0`
+D. `tip_amount = 999.99`, `fare_amount = 999.99`
+
+[Rationales]
+A. You might have the two columns mixed up!
+B. Make sure to take sort in descending order, not ascending!
+C. This is quite a high tip amount! It's likely some noise, there is a lot of that in the dataset.
+D. Are you sure you're computing the column `tip_amount_plus_fare_amount` correctly?
+
+[reference video] 4.1 Adding New Columns with .with_columns()
+[question reference notebook] To answer this question, see the question "Highest Tip and Fare for New Column" in the notebook "04. Data Manipulation II - Advanced Selecting - Quiz.ipynb".
+
+5. What fraction of rides had the same pickup and dropoff location?
+
+A. 0.949397
+[Correct Answer] B. 0.050603
+C. 1.0
+D. 0.0
+
+[Rationales]
+A. Close... the answer is actually 1 minus this number! Check your code again.
+B. There are a few ways you could answer this; most straightforward was to construct a column expression of 'same-pickup-dropoff' and take the `.mean()`.
+C. This would mean that all the rides had the same pickup and dropoff location; try again!
+D. This would mean that none of the rides had the same pickup and dropoff location; try again!
+
+[reference video] 4.1 Adding New Columns with .with_columns()
+[question reference notebook] To answer this question, see the question "Same Pickup-Dropoff Fraction" in the notebook "04. Data Manipulation II - Advanced Selecting - Quiz.ipynb".
+
+6. Using `.with_columns()`, `pl.all()`, and `.name.suffix()`, add to the dataframe a copy of all the columns, just with the name `_new` added on to the end of each column name. How many columns are there in the resultant dataframe?
+
+A. 3582628
+[Correct Answer] B. 38
+C. 19
+D. 22
+
+[Rationales]
+A. This is the number of rows, not columns; try again!
+B. There are 19 columns in the dataframe originally, so by adding again each column with just a new name, it doubles to 38!
+C. This is the the number of columns in the original dataframe; the answer should actually be two times this number!
+D. Are you sure you selected all the columns in your `.with_columns()` call?
+
+[reference video] 4.1 Adding New Columns with .with_columns()
+[question reference notebook] To answer this question, see the question "Duplicate Columns with Suffix" in the notebook "04. Data Manipulation II - Advanced Selecting - Quiz.ipynb".
+
+7. Add a new column to the dataframe for every `pl.String` column that checks if that column has an empty string (i.e. equal to `""`). How many columns are in the resultant dataframe?
+
+A. 1
+[Correct Answer] B. 20
+C. 22
+D. 38
+
+[Rationales]
+A. Are you using `.select()`? Be sure to use `.with_columns()` since we are adding columns.
+B. Exactly! There's only one column with the datatype `pl.String`.
+C. Are you sure you're performing the operations on `pl.String` columns?
+D. You may have tried something with `pl.all()`. Try again!
+
+[reference video] 4.1 Adding New Columns with .with_columns()
+[question reference notebook] To answer this question, see the question "Empty String Check Columns" in the notebook "04. Data Manipulation II - Advanced Selecting - Quiz.ipynb".
+
+8. We'd like a dataframe of only rides that took place in one location (i.e. where `DOLocationID` equals `PULocationID`). This also means that we no longer need both of the columns `DOLocationID` and `PULocationID` (since they are equal). So, filter for same-pickup-dropoff trips, and remove either one of the pickup/dropoff location columns, and rename the other one to just be `LocationID`. What is the shape of the resultant dataframe?
+
+[Correct Answer] A. (181291, 18)
+B. (3582628, 18)
+C. (181291, 19)
+D. (3401337, 18)
+
+[Rationales]
+A. Exactly! A small fraction of the rides had the same pickup and dropoff location.
+B. This is the number of rows in the original dataframe; are you making sure to filter appropriately?
+C. Did you make sure to remove either the pickup or dropoff location column from the dataframe?
+D. Are you sure you didn't accidentally take only trips where the dropoff location and pickup location are not equal?
+
+[reference video] 4.4 Renaming Columns with .rename()
+[question reference notebook] To answer this question, see the question "Same Location Trips Dataframe" in the notebook "04. Data Manipulation II - Advanced Selecting - Quiz.ipynb".
+
+
+
+## Module 5: Data Manipulation III - Grouping and Aggregation
+
+1. What is the maximum trip distance for trips with `pu_location_id = 1`?
+
+[Correct Answer] A. 35.75
+B. 29.7
+C. 176744.79
+D. 0.0
+
+[Rationales]
+A. Exactly! The maximum trip distance for trips with `pu_location_id = 1` is 35.75.
+B. Are you sure you chose the right `pu_location_id`?
+C. Make sure to use `pu_location_id`, not `do_location_id`!
+D. Are you taking the minimum or the maximum?
+
+[reference video] 4.4 Renaming Columns with .rename()
+[question reference notebook] To answer this question, see the question "Maximum Trip Distance for Specific Location" in the notebook "05. Data Manipulation III - Grouping and Aggregation - Quiz.ipynb".
+
+2. Group the data by `vendor_id` and calculate the average `fare_amount` and average `trip_distance` for each. Sort descending by both `mean_fare_amount` and `mean_trip_distance`. What is the top `vendor_id`?
+
+A. 207
+B. 205
+C. 265
+[Correct Answer] D. 6
+
+[Rationales]
+A. Are you sure you sorted in the right direction?
+B. Be sure to sort by mean_fare_amount then mean_trip_distance, and not the other way around!
+C. Are you sure you're using `mean` and not `max`?
+D. Exactly! `vendor_id = 6` has a much higher `mean_fare_amount` than the other vendors.
+
+[reference video] 5.1 Grouping DataFrames with .group_by()
+[question reference notebook] To answer this question, see the question "Top Vendor by Average Fare and Trip Distance" in the notebook "05. Data Manipulation III - Grouping and Aggregation - Quiz.ipynb".
+
+3. Which date for `tpep_pickup_datetime` had the most rides?
+
+A. 2002-12-31
+B. 2024-03-14 22:04:00
+[Correct Answer] C. 2024-03-09
+D. 2024-04-01
+
+[Rationales]
+A. Make sure to get the date with the most rides, not the least.
+B. We're looking for the date with the most rides, not the datetime with the most rides.
+C. Exactly! There were 140383 rides on this day, more than on any other day.
+D. Are you sure you're taking the maximum of the correct column?
+
+[reference video] 5.1 Grouping DataFrames with .group_by()
+[question reference notebook] To answer this question, see the question "Date with Most Rides" in the notebook "05. Data Manipulation III - Grouping and Aggregation - Quiz.ipynb".
+
+4. Create a pivot table that shows the average fare amount for each combination of `VendorID` and `payment_type`. What is the average fare amount associated with `vendor_id` 2 and `payment_type` 2?
+
+A. 850.0
+[Correct Answer] B. 18.390497
+C. 3.411724
+D. 18.582571
+
+[Rationales]
+A. Be sure to take the mean, not the max.
+B. Exactly! According to the pivot table, this answer is similar across most `payment_type`/`vendor_id` combinations.
+C. Are you sure your choice of `values` is `fare_amount`?
+D. Close! but the question is about precisely `vendor_id` 2 and `payment_type` 2.
+
+[reference video] 5.3 Pivot Tables with .pivot()
+[question reference notebook] To answer this question, see the question "Average Fare by Vendor and Payment Type" in the notebook "05. Data Manipulation III - Grouping and Aggregation - Quiz.ipynb".
+
+5. Create a pivot table that shows the average trip distance for every combination of `vendor_id` and whether or not the ride has an airport fee. What is the average trip distance for rides with `vendor_id = 1` that have an airport fee?
+
+A. 115.3
+B. 13.309613
+[Correct Answer] C. 12.570663
+D. 2.409085
+
+[Rationales]
+A. Are you sure you're taking the average trip_distance and not the maximum?
+B. Make sure to check for `vendor_id = 1`, not `2`.
+C. Exactly right! Hint: you could have also solved his by using `.filter()` then `.mean()`.
+D. Make sure to check for rides that had an airport fee, not ones that didn't.
+
+[reference video] 5.3 Pivot Tables with .pivot()
+[question reference notebook] To answer this question, see the question "Average Trip Distance for Airport Fee Rides" in the notebook "05. Data Manipulation III - Grouping and Aggregation - Quiz.ipynb".
+
+6. What is the average trip distance for rides with `vendor_id = 1` that have an airport fee? Use `filter` to include only data that's `vendor_id = 1` and `airport_fee > 0`, and then `select` to measure the average `trip_distance`.
+
+A. 115.3
+B. 13.309613
+[Correct Answer] C. 12.570663
+D. 2.409085
+
+[Rationales]
+A. Are you sure you're taking the average trip_distance and not the maximum?
+B. Make sure to check for `vendor_id = 1`, not `2`.
+C. Exactly right! Hint: you could have also used a pivot_table to solve this.
+D. Make sure to check for rides that had an airport fee, not ones that didn't.
+
+[reference video] 5.1 Grouping DataFrames with .group_by()
+[question reference notebook] To answer this question, see the question "Average Trip Distance for Airport Fee Rides (Alternative Method)" in the notebook "05. Data Manipulation III - Grouping and Aggregation - Quiz.ipynb".
+
+7. Using `rank().over()`, what is the sum of each `vendor_id`s 10th largest `trip_distance`s, summed over all `vendor_id`s?
+
+[Correct Answer] A. 113916.29
+B. 115599.84
+C. 0.76
+D. 1178.31
+
+[Rationales]
+A. Exactly! Using `.rank().over()` we can create a column that represents the `trip_distance` rank within each `vendor_id`, filter for the 10th largest `trip_distance`s, and then sum.
+B. Are you sure you're taking the 10th largest trip distance, and not the 9th?
+C. Make sure to correctly set the `descending` argument in the `rank` function.
+D. Are you sure you're using `trip_distance` and not `total_amount`?
+
+[reference video] 5.2 Window Functions in Polars
+[question reference notebook] To answer this question, see the question "Sum of 10th Largest Trip Distances by Vendor" in the notebook "05. Data Manipulation III - Grouping and Aggregation - Quiz.ipynb".
+
+8. What is the sum of the `total_amount`s for all rides taken with one of the three `pu_location_id`s with the highest maximum `trip_distance`?
+
+A. 6.0735e6
+B. 891.48
+[Correct Answer] C. 4.6460e6
+D. 2.3340e7
+
+[Rationales]
+A. Make sure to take only the top three `pu_location_id`s.
+B. You might be taking the three `pu_location_id`s with the lowest maximum `trip_distance`, not the highest maximum `trip_distance`.
+C. Nice! There are two aggregations involved here--the first is to group by `pu_location_id`, then take only the top three `pu_location_id`s by `trip_distance`, and then again add the `total_amount`s across those three `pu_location_id`s.
+D. Remember, you want the sum `total_amount` of the three `pu_location_id`s with the highest `max_trip_distance`, not the highest sum `total_amount`.
+
+[reference video] 5.1 Grouping DataFrames with .group_by()
+[question reference notebook] To answer this question, see the question "Total Amount for Top 3 Pickup Locations" in the notebook "05. Data Manipulation III - Grouping and Aggregation - Quiz.ipynb".
+
+9. Sometimes we want to both filter and group data; for example, in this question we want to both group by `pu_location_id` and view the results for just one `pu_location_id`. In these cases, we can filter first or group by first and get the same result. So which is faster, and why--grouping then filtering, or filtering and grouping? Perform the following timing tests to get the answer, and choose the best explanation. (Note: we are in in-memory mode here.)
+
+A. They are the same, because the query optimization engine doesn't care about the order of operations.
+[Correct Answer] B. Filtering before the group-by is faster, because you reduce the amount of data handled by the group by operation.
+C. Filtering after the group-by is faster, because the computer doesn't have to worry about the expensive filter operation until the end.
+D. Filtering after the group-by is faster, since the filter occurs on grouped data, thus it has less total rows to filter out.
+
+[Rationales]
+A. There is no query optimization in in-memory mode.
+B. Since group-by is a relatively expensive operation, reducing the amount of data it needs to operate on speeds up performance!
+C. Filtering is actually not an expensive operation; grouping is far more expensive.
+D. Though it might be true that there are less rows to filter out, the true bottleneck of the operation is the grouping itself!
+
+[reference video] 5.1 Grouping DataFrames with .group_by()
+[question reference notebook] To answer this question, see the question "Performance Comparison: Filtering vs Grouping (In-Memory)" in the notebook "05. Data Manipulation III - Grouping and Aggregation - Quiz.ipynb".
+
+10. Sometimes we want to both filter and group data; for example, in this question we want to both group by `pu_location_id` and view the results for just one `pu_location_id`. In these cases, we can filter first or group by first and get the same result. So which is faster, and why--grouping then filtering, or filtering and grouping? Perform the following timing tests to get the answer, and choose the best explanation. (Note: we are in lazy mode here.)
+
+[Correct Answer] A. They are the same, because the query optimization engine doesn't care about the order of operations.
+B. Filtering before the group-by is faster, because you reduce the amount of data handled by the group by operation.
+C. Filtering after the group-by is faster, because the computer doesn't have to worry about the expensive filter operation until the end.
+D. Filtering after the group-by is faster, since the filter occurs on grouped data, thus it has less total rows to filter out.
+
+[Rationales]
+A. After the query hits the query optimization engine, they become the same query.
+B. This might be the case in in-memory mode, but not in lazy mode!
+C. Filtering is actually not an expensive operation; grouping is far more expensive. Either way, it doesn't apply in lazy mode!
+D. Though it might be true that there are less rows to filter out, the true bottleneck of the operation is the grouping itself. Regardless, the query optimization engine makes this irrelevant in lazy mode!
+
+[reference video] 5.1 Grouping DataFrames with .group_by()
+[question reference notebook] To answer this question, see the question "Performance Comparison: Filtering vs Grouping (Lazy Mode)" in the notebook "05. Data Manipulation III - Grouping and Aggregation - Quiz.ipynb".
+
+
+
+## Module 6: Data Manipulation IV - Combining Data
+
+1. Using the `zones_df` combined with the `march_yellow_rides_df`, which `pu_zone` `do_zone` pair had the most rides?
+
+[Correct Answer] A. (Upper East Side South, Upper East Side North)
+B. (Erasmus, Astoria)
+C. (Upper East Side North, Upper East Side South)
+D. (Midtown Center, Upper East Side North)
+
+[Rationales]
+A. We get this by joining the `zones_df` into the `rides_df` as in the module, and grouping by the combination of `pu_zone` and `do_zone`.
+B. Make sure to get the `pu_zone` `do_zone` pair with the most rides, not the least.
+C. Make sure to get the combination with the most rides, not the second most rides.
+D. Make sure to aggregate by the right column.
+
+[reference video] 6.1 Joining DataFrames with .join()
+[question reference notebook] To answer this question, see the question "Most Common Pickup-Dropoff Zone Pair" in the notebook "06. Data Manipulation IV - Combining Data - Quiz.ipynb".
+
+2. What is the average `passenger_count` for rides that started in the zone "Midtown Center" and ended in the zone "Upper East Side North"?
+
+A. 13.526644
+B. 1.932876
+[Correct Answer] C. 1.277752
+D. 21.211721
+
+[Rationales]
+A. You might be measuring average `fare_amount` instead of average `passenger_count`...
+B. You might be measuring average `trip_distance` instead of average `passenger_count`...
+C. Exactly! Simply join `zones_df` into `rides_df` twice (once for pickup and once for dropoff), filter for the right pickup and dropoff zone, and then take the `.mean()` `passenger_count`!
+D. You might be measuring average `total_amount` instead of average `passenger_count`...
+
+[reference video] 6.1 Joining DataFrames with .join()
+[question reference notebook] To answer this question, see the question "Average Passenger Count for Specific Route" in the notebook "06. Data Manipulation IV - Combining Data - Quiz.ipynb".
+
+3. Take the two toy dataframes below and concatenate them diagonally. What is the shape of the result?
+
+A. (6, 2)
+[Correct Answer] B. (7, 3)
+C. (8, 3)
+D. (7, 2)
+
+[Rationales]
+A. Make sure you're not concatenating toy_1_df to itself!
+B. Since `toy_2_df` has a column that `toy_1_df` doesn't, an extra column is added.
+C. Make sure you're not concatenating toy_2_df to itself!
+D. This would be correct if toy_2_df didn't have the extra column "c"...
+
+[reference video] 6.1 Concatenating DataFrames with .concat()
+[question reference notebook] To answer this question, see the question "Diagonal Concatenation Result Shape" in the notebook "06. Data Manipulation IV - Combining Data - Quiz.ipynb".
+
+
+
+## Module 7: Data Manipulation V - Working With Data Types
+
+1. Extract the day of the week (as a string) and the hour from the 'tpep_pickup_datetime' column. Then, calculate the average fare amount for each day-hour combination, and sort the results by average fare amount. Which day-hour combination had the highest average fare amount?
+
+A. day=6, hour=2
+[Correct Answer] B. day=3, hour=4
+C. day=7, hour=23
+D. day=1, hour=0
+
+[Rationales]
+A. You might be sorting ascending rather than descending.
+B. When sorting with `descending=True`, this is indeed the top result!
+C. You might be taking the average `total_amount` rather than the average `fare_amount`.
+D. You might be taking the weekday and hour from `tpep_dropoff_datetime` instead of `tpep_pickup_datetime`.
+
+[reference video] 7.4 Working with Temporal Columns - the .dt Namespace
+[question reference notebook] To answer this question, see the question "Highest Average Fare by Day and Hour" in the notebook "07. Data Manipulation V - Working With Data Types - Quiz.ipynb".
+
+2. Which is the `do_zone` with the highest trip duration (where "trip duration" is measured as the `.total_seconds()` between `tpep_pickup_datetime` and `tpep_dropoff_datetime`)?
+
+[Correct Answer] A. Saint Michaels Cemetery/Woodside
+B. Midtown Center
+C. 207
+D. Woodside
+
+[Rationales]
+A. Nice! You could solve this in a few ways; a most straightforward way is to simply create the `trip_duration` column and sort descending.
+B. You might be taking the `do_zone` with the lowest trip duration.
+C. Almost right! But the answer should be a `do_zone`, not a `do_location_id`.
+D. Make sure to use `.total_seconds()`!
+
+[reference video] 7.4 Working with Temporal Columns - the .dt Namespace
+[question reference notebook] To answer this question, see the question "Dropoff Zone with Longest Trip Duration" in the notebook "07. Data Manipulation V - Working With Data Types - Quiz.ipynb".
+
+3. With a group-by in `polars`, instead of finding some aggregate summary statistic for each group, you can also collect all the elements for each group into a list by simply passing in the column you'd like to aggregate to a list as a name (see below). With this, for each `pu_location_id`, make a column that aggregates all the `do_zones` associated with that `pu_location_id`; what is the `pu_location_id` with the longest list of associated `do_zone`s (hint: use the `.list` namespace)?
+
+[Correct Answer] A. 161
+B. 5
+C. Midtown Center
+D. Arden Heights
+
+[Rationales]
+A. Exactly! Note that aggregating all elements of the group like this into a list simply takes _all_ values (i.e. it's not as if it takes unique values). As such, we could have even computed the same result by simply doing `.agg(pl.len())`!
+B. Are you sure you didn't find the `pu_location_id` with the shortest list of associated `do_zone`s?
+C. We are looking for the `pu_location_id` with the longest list of associated `do_zone`s, not the `pu_zone`!
+D. It looks like you chose the wrong sort order, and looked for `pu_zone` rather than `pu_location_id`!
+
+[reference video] 7.3 Working with List Columns - the .list Namespace
+[question reference notebook] To answer this question, see the question "Pickup Location with Most Diverse Dropoff Zones" in the notebook "07. Data Manipulation V - Working With Data Types - Quiz.ipynb".
+
+4. Using just `zones_df`, split `zone` into a list on `" "` as seen during the module, and take the 2nd element of every list using `.list.get()`. Then, using `group_by`, answer the question--what is the most commonly occurring second word in `zones_df` (excluding `null`)?
+
+[Correct Answer] A. Park
+B. `null`
+C. East
+D. North
+
+[Rationales]
+A. Correct! This is indeed a common word used across many neighborhoods of New York City.
+B. The question specifies "excluding null"... take another look!
+C. Make sure to take the 2nd element, not the 0th!
+D. Make sure to take the 2nd element, not the 3rd!
+
+[reference video] 7.3 Working with List Columns - the .list Namespace
+[question reference notebook] To answer this question, see the question "Most Common Second Word in Zone Names" in the notebook "07. Data Manipulation V - Working With Data Types - Quiz.ipynb".
+
+5. How many rides had a duration of more than 60 seconds and less than 120 seconds?
+
+A. 28426
+B. 27994
+[Correct Answer] C. 27538
+D. 1
+
+[Rationales]
+A. Make sure to use "less than", not "less than or equal to".
+B. Make sure to use "greater than", not "greater than or equal to".
+C. Perfect! With what we've learned so far, you could solve this with an `.and()` combination of `.gt()` and `.lt()`; however, for a more advanced technique for answering this question, on your own time you can check out the function `.is_between()`.
+D. Check again, you might have got the order of the pickup-dropoff subtraction incorrect!
+
+[reference video] 7.4 Working with Temporal Columns - the .dt Namespace
+[question reference notebook] To answer this question, see the question "Rides with Duration Between 60-120 Seconds" in the notebook "07. Data Manipulation V - Working With Data Types - Quiz.ipynb".
+
+6. How many rides had a duration of more than 1 day (hint: instead of using `.dt.total_seconds()`, you can use `.dt.total_days()`)?
+
+A. 3541969
+[Correct Answer] B. 20
+C. 3581500
+D. 6
+
+[Rationales]
+A. Are you sure you're not accidentally using `.total_minutes()`?
+B. Exactly! You could have of course still used `.dt.total_seconds()` if you'd really wanted to, but then you'd have to divide by the number of seconds in a day.
+C. Are you sure you're not accidentally using `.total_seconds()`?
+D. Make sure to use "greater than" and not "great than or equal to".
+
+[reference video] 7.4 Working with Temporal Columns - the .dt Namespace
+[question reference notebook] To answer this question, see the question "Rides Longer Than One Day" in the notebook "07. Data Manipulation V - Working With Data Types - Quiz.ipynb".
+
+7. How many zones in `zones_df` contain the word "North"?
+
+[Correct Answer] A. 15
+B. 0
+C. 265
+D. 19
+
+[Rationales]
+A. Exactly! Indeed many neighborhoods in New York City have the word 'North' in the name.
+B. Note that string containment checks are case-sensitive in polars, so checking for "north" won't work!
+C. Looks like you accidentally got the total number of rows! Perhaps you accidentally used `count()` or `len()`...
+D. Make sure to not accidentally check for "South"!
+
+[reference video] 7.2 Working with String Columns - the .str Namespace
+[question reference notebook] To answer this question, see the question "Zones Containing 'North'" in the notebook "07. Data Manipulation V - Working With Data Types - Quiz.ipynb".
+
+8. For `zones_df`, what is the most common `0th` word in the `zone` column, spelled in reverse? (Hint: split the `zone` column by ` ` into a list of strings; then, take the `0th` element of each list in that column, and apply `.str.reverse()` to it.)
+
+A. East
+B. tseW
+C. kraP
+[Correct Answer] D. tsaE
+
+[Rationales]
+A. Don't forget to reverse the string!
+B. Not quite, this is the second most common 0th word!
+C. You might be taking the 1st element of the list rather than the 0th!
+D. Exactly! `East` is a very common word in New York City neighborhood names, and `tsaE` is `East` spelled in reverse!
+
+[reference video] 7.2 Working with String Columns - the .str Namespace
+[question reference notebook] To answer this question, see the question "Most Common First Word in Zone Names (Reversed)" in the notebook "07. Data Manipulation V - Working With Data Types - Quiz.ipynb".
+
+
+
+## Module 8: Data Manipulation VI - Interoperation and IO
+
+1. Given the following data in the form of a list of lists, create a dataframe using `pl.from_records()` with a column orientation. What is the shape of that dataframe?
+
+A. (3, 5)
+[Correct Answer] B. (5, 3)
+
+[Rationales]
+A. Are you sure you're using the "col" orientation?
+B. Exactly! With column orientation, each list in the list of lists gets loaded as a column of the dataframe.
+
+[reference video] 8.1 Interoperating DataFrames with Native Python Objects
+[question reference notebook] To answer this question, see the question "DataFrame Shape from List of Lists (Column Orientation)" in the notebook "08. Data Manipulation VI - Interoperation and IO - Quiz.ipynb".
+
+2. Given the following data in the form of a list of lists, create a dataframe using `pl.from_records()` with a rows orientation. What is the shape of that dataframe?
+
+[Correct Answer] A. (3, 5)
+B. (5, 3)
+
+[Rationales]
+A. Exactly! With row orientation, each list in the list of lists gets loaded as a row of the dataframe.
+B. Are you sure you're using the "row" orientation?
+
+[reference video] 8.1 Interoperating DataFrames with Native Python Objects
+[question reference notebook] To answer this question, see the question "DataFrame Shape from List of Lists (Row Orientation)" in the notebook "08. Data Manipulation VI - Interoperation and IO - Quiz.ipynb".
+
+3. Save out the following dataframe to a csv with `.write_csv()` to a file called `"./temp_file.csv"`. Then, read it back in with `.read_csv()`. Have the datatypes changed?
+
+[Correct Answer] A. Yes
+B. No
+
+[Rationales]
+A. Exactly! Csv's don't store data types, so polars has to do type-inference upon loading data. It does so liberally, usually inferring any integer as an `i64`.
+B. Are you sure? Make sure you're using any extra input arguments to `.read_csv()`, and let polars infer the datatypes.
+
+[reference video] 8.5 DataFrame IO
+[question reference notebook] To answer this question, see the question "Datatype Changes After CSV Write and Read" in the notebook "08. Data Manipulation VI - Interoperation and IO - Quiz.ipynb".
+
+4. Save out the following dataframe to a ndjson file with `.write_ndjson()` to a file called `"./temp_file.njson"`. Then, read it back in with `.read_ndjson()`. Have the datatypes changed?
+
+[Correct Answer] A. Yes
+B. No
+
+[Rationales]
+A. Exactly! ndjson files don't store data types, so polars has to do type-inference upon loading data. It does so liberally, usually inferring any integer as an `i64`.
+B. Are you sure? Make sure you're using any extra input arguments to `.read_ndjson()`, and let polars infer the datatypes.
+
+[reference video] 8.5 DataFrame IO
+[question reference notebook] To answer this question, see the question "Datatype Changes After NDJSON Write and Read" in the notebook "08. Data Manipulation VI - Interoperation and IO - Quiz.ipynb".
+
+5. Save out the following dataframe to a parquet file with `.write_parquet()` to a file called `"./temp_file.parquet"`. Then, read it back in with `.read_parquet()`. Have the datatypes changed?
+
+A. Yes
+[Correct Answer] B. No
+
+[Rationales]
+A. Are you sure? Make sure you're not transforming the dataframe in any way before saving it with `.write_parquet()`.
+B. Exactly! One of the nice things about `parquet` is that it stores schema along with the data, so the data gets loaded back in the way it was before it was saved, without any extra work!
+
+[reference video] 8.5 DataFrame IO
+[question reference notebook] To answer this question, see the question "Datatype Changes After Parquet Write and Read" in the notebook "08. Data Manipulation VI - Interoperation and IO - Quiz.ipynb".
+
+
+
+## Module 9: Integrating Polars Into the Data Science Workflow
+
+1. Using `rides_df_raw`, which feature is least correlated with `passenger_count` (either negatively or positively)? (Hint: you might need the polars function for absolute value, `.abs()`. Also, please filter out `null` values as done in the module!)
+
+A. `passenger_count`
+B. `extra`
+[Correct Answer] C. `trip_distance`
+D. `vendor_id`
+
+[Rationales]
+A. We are not including self-correlation, here.
+B. We are looking for the lowest absolute correlation, so don't forget to take the absolute value!
+C. Exactly! By using `.corr()`, we can compute correlations, and `passenger_count`'s most highly correlated feature is `trip_distance`!
+D. We are looking for the least correlated, not the most correlated!
+
+[reference video] 9.2 Brief Data Exploration - Plots, Correlations, and Summary Statistics with Polars
+[question reference notebook] To answer this question, see the question "Feature Least Correlated with Passenger Count" in the notebook "09. Integrating Polars Into the Data Science Workflow - Quiz.ipynb".
+
+2. Plot `total_amount` as a function of `trip_distance`. Which of the following statements about the resultant plot are true (hint: there are three correct answers)?
+
+A. There is a second sub-majority of the data which adheres to a correlation line which has a slope of approximately `$20/mile - $22/mile`.
+[Correct Answer] B. The majority of the data adheres to a correlation line which has a slope of approximately `$5/mile - $7/mile`.
+[Correct Answer] C. Some rides appear to have a negative trip distance.
+[Correct Answer] D. A non-negligible minority of the data appears to have a trip distance of exactly 0.
+
+[Rationales]
+A. There is no such correlation line.
+B. This statement is true; there is some data which deviates from this trend, but it is the majority.
+C. This statement is true, in fact there is a highly non-neglible amount of rides with a negative trip distance.
+D. This statement is true, in fact there is a spike of data along the y-axis, where trip distance equals 0.
+
+[reference video] 9.2 Brief Data Exploration - Plots, Correlations, and Summary Statistics with Polars
+[question reference notebook] To answer this question, see the question "Total Amount vs Trip Distance Plot Analysis" in the notebook "09. Integrating Polars Into the Data Science Workflow - Quiz.ipynb".
+
+3. Plot an ECDF of 'fare_amount'. Is the resultant distribution unimodal or multimodal (i.e. is there one peak to the distribution or multiple)? (Hint: exclude any noisy spikes!)
+
+[Correct Answer] A. Unimodal
+B. Multimodal
+
+[Rationales]
+A. Exactly! The distribution looks like a unimodal log normal distribution!
+B. Are you sure? Make sure to exclude any spikes of noise in your reasoning.
+
+[reference video] 9.2 Brief Data Exploration - Plots, Correlations, and Summary Statistics with Polars
+[question reference notebook] To answer this question, see the question "Fare Amount Distribution Analysis" in the notebook "09. Integrating Polars Into the Data Science Workflow - Quiz.ipynb".
+
+4. Given the following toy dataframe of `y_predicted` and `y_truth`, measure the `mean_absolute_error`. True or False: the result is greater than `.5`. (Hint: use the `sklearn` implementation of `mean_absolute_error`.)
+
+[Correct Answer] A. True
+B. False
+
+[Rationales]
+A. Exactly! The data can be passed directly into `mean_absolute_error` as Polars series.
+B. Are you sure? Make sure you're using the correct function from scikit-learn!
+
+[reference video] 9.5 Machine Learning Model Building, Evaluation, and Discussion
+[question reference notebook] To answer this question, see the question "Mean Absolute Error Calculation" in the notebook "09. Integrating Polars Into the Data Science Workflow - Quiz.ipynb".
+
+5. In the module, we reviewed the function `.sample()`, and used it to reduce our data to a fixed number of rows; to this end, we passed in simply the number of rows that we wanted in the result with e.g. `.sample(10000)`. However, `.sample()` also provides the option to pass in a fraction of rows, with `.sample(fraction=X)`, where `X` must be between 0 and 1. Use this new way of using the function to reduce the data to 2% of its original size. What is the shape of the result?
+
+A. 3582628
+B. 2
+C. 0
+[Correct Answer] D. 71652
+
+[Rationales]
+A. Looks like the `.sample()` didn't work--`3582628` is just the size of the entire dataframe!
+B. If you're going to pass in a fraction as an argument, you have to pass it to the keyword argument "fraction"!
+C. Make sure to convert `2%` to a fraction, and use the "fraction" keyword argument!
+D. Exactly! There are 3582628 rows in the original dataframe, and 2% of 3582628 is 71652.
+
+[reference video] 9.2 Brief Data Exploration - Plots, Correlations, and Summary Statistics with Polars
+[question reference notebook] To answer this question, see the question "Sampling DataFrame with Fraction" in the notebook "09. Integrating Polars Into the Data Science Workflow - Quiz.ipynb".
+
+
+
+## Module 10: Summative
+
+1. Create a dataframe from the following data. Which of the following data types can be found in the resultant dataframe?
+
+[Correct Answer] A. `i64`
+B. `u64`
+C. `i8`
+[Correct Answer] D. `str`
+
+[Rationales]
+A. Both `id` and `street_number` get loaded as `i64`.
+B. Though both `street_number` and `id` appear to be strictly positive, Polars's default behavior is to load integers as `i64`.
+C. Though both `street_number` and `id` appear to fit in the range of 8-bit values, Polars's default behavior is to load integers as `i64`.
+D. `street` gets loaded as a `str`.
+
+[question reference notebook] To answer this question, see the question "Identifying Data Types in New DataFrame" in the notebook "10. Summative - Quiz.ipynb".
+
+2. Load the rides data from csv, using `schema_overrides` to force `trip_distance` to be `pl.Int64`. What happens?
+
+A. An error is thrown, stating that "`schema_overrides` only works on `str` columns".
+B. The code runs successfully, casting the would-be `float` column to `pl.Int64` upon instantiation of the dataframe.
+[Correct Answer] C. An error is thrown, stating that data from the column can't be parsed to `pl.Int64`.
+D. The code runs successfully, ignoring the schema override and simply loading the data as `pl.Float64`
+
+[Rationales]
+A. An error is indeed thrown, but it's something besides this.
+B. The code isn't able to run successfully, take another look at your code!
+C. `float` data cannot be cast to `pl.Int64` upon reading data--it can certainly happen later though, once the data has been read!
+D. The code isn't able to run successfully, take another look at your code!
+
+[question reference notebook] To answer this question, see the question "Schema Override for Trip Distance" in the notebook "10. Summative - Quiz.ipynb".
+
+3. What is the maximum `congestion_surcharge` in `rides_df_raw`?
+
+A. -2.5
+B. 900.0
+[Correct Answer] C. 2.5
+D. 3.4
+
+[Rationales]
+A. This is the minimum `congestion_surcharge`; make sure you're checking for maximum!
+B. This is the maximum `fare_amount`; make sure you're taking the right column!
+C. Exactly! You take this by using the `.max()` function.
+D. Are you sure you're using the correct column?
+
+[question reference notebook] To answer this question, see the question "Maximum Congestion Surcharge" in the notebook "10. Summative - Quiz.ipynb".
+
+4. Sort `rides_df_raw` descending in the following order: `congestion_surcharge`, `tip_amount`, `trip_distance`. What is the `trip_distance` of the top trip?
+
+A. 176836.3
+B. 0.0
+C. 166.1
+[Correct Answer] D. 28.9
+
+[Rationales]
+A. Make sure you're sorting by the columns in precisely the correct order: congestion_surcharge, tip_amount, then trip_distance!
+B. Make sure to sort descending, not ascending!
+C. Are you sure you're selecting the correct column?
+D. Exactly! This is the top row after sorting by all the requisite columns.
+
+[question reference notebook] To answer this question, see the question "Top Trip Distance After Sorting" in the notebook "10. Summative - Quiz.ipynb".
+
+5. How many trips had a trip_distance greater than 1km and less than 2km?
+
+[Correct Answer] A. 838278
+B. 1112153
+C. 1
+D. 99283
+
+[Rationales]
+A. Indeed, we arrive to this answer by using `.gt()` and `.lt()`, after converting to kilometers!
+B. Don't forget to convert miles to kilometers!
+C. Make sure to take the number of rows for your answer, not the number of rows!
+D. Are you sure you're using the right column?
+
+[question reference notebook] To answer this question, see the question "Trips Within Distance Range" in the notebook "10. Summative - Quiz.ipynb".
+
+6. Try to add a column code which checks if `do_zone` is greater than 0. What happens, and why?
+
+[Correct Answer] A. The code crashes because a string cannot be compared with an integer.
+B. The code crashes a boolean column cannot be added to a dataframe with `.with_columns()`.
+C. The code runs successfully, adding a column that checks if the `do_zone` is alphabetically greater than the string "0".
+D. The code runs successfully; however, since strings and integers can't be compared in Polars, the resultant column is null everywhere.
+
+[Rationales]
+A. To compare these two data types, something must be done to make them comparable, either casting the integer to a string or casting the string to an integer somehow.
+B. There's no problem with doing this, and in fact we did it in the module!
+C. Polars does not do type cating like this--you must request it explicitly.
+D. Polars does not do this kind of handling, though you could likely write some behavior using column expressions to do something similar!
+
+[question reference notebook] To answer this question, see the question "Comparison of Different Data Types" in the notebook "10. Summative - Quiz.ipynb".
+
+7. See the following renaming which uses `.select` and `.rename()`. What is the expression using `.select` and name transformations from the `.name` namespace that accomplishes the same function?
+
+A. `.select(pl.col(pl.Int32).name.suffix("_renamed"))`
+[Correct Answer] B. `.select(pl.col(["do_location_id", "pu_location_id"]).name.suffix("_renamed"))`
+C. `.select(pl.col(["do_location_id", "pu_location_id"]).alias("_renamed"))`
+D. `.select(pl.String).name.suffix("_renamed"))`
+
+[Rationales]
+A. This almost works, but it accidentally includes `vendor_id` in the renaming!
+B. Using the `.name.suffix()` function, we can accomplish the same as what's being done by `.rename()`.
+C. Using alias will simply replace the column name altogether, not add a suffix! Furthermore, this code will rename both columns to the same thing, which will give an error.
+D. This will select the wrong columns!
+
+[question reference notebook] To answer this question, see the question "Equivalent Renaming Expression" in the notebook "10. Summative - Quiz.ipynb".
+
+8. Add a few new columns to the dataframe that copy all `pl.Int8` columns, simply giving them the suffix `_new`. What is the size of the resultant dataframe?
+
+A. (3582628, 28)
+B. (0, 0)
+[Correct Answer] C. (3582628, 25)
+D. (3582628, 35)
+
+[Rationales]
+A. Make sure you're checking for `pl.Int8` columns, not `pl.Int32` columns.
+B. Make sure to use `.with_columns()`, not `.select()`.
+C. Exactly! There are no columns with this datatype, so the shape remains the same.
+D. Make sure you're checking for `pl.Int8` columns, not `pl.Float64` columns.
+
+[question reference notebook] To answer this question, see the question "Adding Suffixed Columns for Int8 Type" in the notebook "10. Summative - Quiz.ipynb".
+
+9. Using `.group_by()`, what is the most common value for `congestion_surcharge` in the dataset?
+
+A. -0.75
+B. 202.18
+C. 134.51
+[Correct Answer] D. 2.5
+
+[Rationales]
+A. This is the value of `congestion_surcharge` with the least occurrences in the dataset, try again!
+B. Are you sure you're using the correct column?
+C. Are you sure you're using the correct column?
+D. Exactly! We can group by `congestion_surcharge`, aggregate for `.len()`, and sort.
+
+[question reference notebook] To answer this question, see the question "Most Common Congestion Surcharge" in the notebook "10. Summative - Quiz.ipynb".
+
+10. Create a `.pivot_table()`, where the rows are if the `tip_amount` was 0 and the columns are `passenger_count`; for each combination of "`tip_amount` is 0" and `passenger_count`, compute the number of instances by using `aggregate_function` `"len"`. How many rides had a `tip_amount` of 0 and a `passenger_count` of 2?
+
+[Correct Answer] A. 104748
+B. 349149
+C. 1.7435e6
+D. 1358
+
+[Rationales]
+A. Exactly right, we find this by viewing the appropriate cell in the pivot table.
+B. Close! This is the number of rides with 2 passengers that did have a tip; make sure to choose the correct cell from the pivot table!
+C. Your answer might look like this if you used "sum" instead of "len" as an aggregate_function. Try again!
+D. The `pivot_table` is easier to read when you first create a boolean colummn for "tip_amount is 0", as instructed in the question! Check again ;)
+
+[question reference notebook] To answer this question, see the question "Zero-Tip Two-Passenger Rides Count" in the notebook "10. Summative - Quiz.ipynb".
+
+11. Join the following two dataframes using a left-join (`restaurant_df` into `name_df`, on the name of the restaurant). What is the shape of the resultant dataframe?
+
+A. (5, 3)
+B. The code doesn't run, throwing a "ColumnNotFoundError".
+[Correct Answer] C. (4, 3)
+D. (0, 2)
+
+[Rationales]
+A. This is the result you'd get if you joined `name_df` into `restaurant_df`... make sure to get the order correct!
+B. This would happen if you tried to join using the `on` input argument. Be sure to use `left_on` and `right_on` since the `restaurant_name` column has a different name in both dataframes!
+C. Exactly! The join columns combine into one for a total of 3 columns.
+D. This is the result you'd get if you were doing an anti-join... make sure to do a left-join!
+
+[question reference notebook] To answer this question, see the question "Left-Join Result Shape" in the notebook "10. Summative - Quiz.ipynb".
+
+12. Join the following two dataframes using an anti-join (`restaurant_df` into `name_df`, on the name of the restaurant). What is the shape of the resultant dataframe?
+
+A. (1, 2)
+B. The code doesn't run, throwing a "ColumnNotFoundError".
+C. (4, 3)
+[Correct Answer] D. (0, 2)
+
+[Rationales]
+A. This is the result you'd get if you anti-joined `name_df` into `restaurant_df`... make sure to get the order correct!
+B. This would happen if you tried to join using the `on` input argument. Be sure to use `left_on` and `right_on` since the `restaurant_name` column has a different name in both dataframes!
+C. This is the result you'd get if you were doing a left-join... try again!
+D. Exactly! There is nothing in `names_df` that is missing a row to join with in `restaurant_df`.
+
+[question reference notebook] To answer this question, see the question "Anti-Join Result Shape" in the notebook "10. Summative - Quiz.ipynb".
+
+13. Vertically concatenate the following dataframes. How many null values are there in the entire resultant dataframe?
+
+[Correct Answer] A. 20
+B. 6
+C. The code doesn't run due to a `ShapeError`
+D. 0
+
+[Rationales]
+A. Exactly, there are a few nulls in the dataframe to begin with, and there are even more after a diagonal concatenation!
+B. This is how many there are across the dataframes to begin with! Make sure to do the concatenation before counting nulls, as the concatenation process might add some more...
+C. Some dataframes here have non-overlapping columns, so make sure to set "how" as "diagonal"!
+D. Are you replacing the null values with something else somehow?
+
+[question reference notebook] To answer this question, see the question "Null Count After Vertical Concatenation" in the notebook "10. Summative - Quiz.ipynb".
+
+14. What fraction of rides in the dataframe started before `2024-03-15` (i.e. had a `tpep_pickup_datetime` before `2024-03-15`?
+
+A. 0.455174
+[Correct Answer] B. 0.455173
+C. 1.0
+D. 1630716
+
+[Rationales]
+A. Make sure to check rides before `2024-03-15`... you might be checking rides with `.le()` rather than `.lt()`.
+B. `2024-3-15` is halfway through the month, so it makes sense that the number here is almost `0.5`!
+C. 1.0 is all the rides! Double check your expression...
+D. We're looking for the fraction of rides that started before `2024-03-15`, not the number of rides!
+
+[question reference notebook] To answer this question, see the question "Fraction of Early March Rides" in the notebook "10. Summative - Quiz.ipynb".
+
+15. Group the following dataframe by `class`, and `.sum()` the `salient_appendages` column (which is a list type) to create a list of all `salient_appendages` for that animal class. What happens?
+
+[Correct Answer] A. The code runs smoothly, but the resultant aggregated columns is filled with just nulls.
+B. The code runs smoothly, the resultant column being a combined list of all `salient_appendages` for that animal class.
+C. The code crashes with a dataype error, saying that "list columns cannot be added together in a `group_by`".
+D. The code runs smoothly, the resultant column being a list of lists of all values for `salient_appendages` for that animal class.
+
+[Rationales]
+A. If you want to concatenate the lists together, you'd have to take a different approach! This is for your advanced learning ;)
+B. This is the goal, but it'd required an advanced technique to achieve!
+C. You're correct that the code doesn't run successfully in achieving the desired effect, however it doesn't quite throw an error.
+D. This is what would happen if we didn't use the `.sum()` function and just left the agg as a simple `.agg(pl.col("salient_appendages"))`.
+
+[question reference notebook] To answer this question, see the question "List Column Aggregation Behavior" in the notebook "10. Summative - Quiz.ipynb".
+
+16. True or False: weekend taxi trips (trips that have a `tpep_pickup_datetime` on Saturday or Sunday) have on average higher tip amounts than non-weekend taxi trips.
+
+[Correct Answer] A. False
+B. True
+
+[Rationales]
+A. Exactly! Weekend pickups have an average `tip_amount` of 2.97, while non-weekend pickups have an average `tip_amount` of 3.29.
+B. Are you sure you created correctly the column for grouping? Try again!
+
+[question reference notebook] To answer this question, see the question "Weekend vs Weekday Tip Comparison" in the notebook "10. Summative - Quiz.ipynb".
+
+17. Convert the following numpy array to a polars dataframe. What are the datatypes of the resultant dataframe?
+
+[Correct Answer] A. `f64`, `f64`
+B. `f32`, `f32`
+C. `f64`, `f64`, `f64`, `f64`
+D. The code doesn't run, due to a datatype conversion error
+
+[Rationales]
+A. Exactly! The data were Float64's in the numpy array, and they stayed that way when they got converted to a Polars dataframe.
+B. Despite being random floats between just 0 and 1, the floats are still 64 bit precision.
+C. Is it possible that you transposed the data somehow?
+D. There is no problem creating a polars dataframe from a numpy array like this!
+
+[question reference notebook] To answer this question, see the question "Numpy to Polars Dataframe Conversion" in the notebook "10. Summative - Quiz.ipynb".
+
+18. Create a Polars series, convert it to Pandas, and then convert it back to Polars. True or False: the result upon returning to Polars is now a single-column dataframe.
+
+A. True
+[Correct Answer] B. False
+
+[Rationales]
+A. This shouldn't be the case... perhaps you accidentally converted it to a dataframe yourself!
+B. Exactly! Polars handles this type of interoperation without a problem, cleanly able to convert a Polars Series to a Pandas Series and back.
+
+[question reference notebook] To answer this question, see the question "Polars to Pandas to Polars Series Conversion" in the notebook "10. Summative - Quiz.ipynb".
+
+19. Using `rides_df_raw`, which feature is most highly correlated (either positively or negatively) with `tip_amount` (excluding `tip_amount` itself)? Also, please filter out `null` values as done in the module!
+
+A. `tip_amount`
+[Correct Answer] B. `total_amount`
+C. `congestion_surcharge`
+D. `passenger_count`
+
+[Rationales]
+A. Please don't forget to exclude correlation with self!
+B. Indeed, `total_amount` is most highly correlated with `tip_amount`, which makes sense since `total_amount` is a sum which includes `tip_amount`!
+C. This is the feature least correlated with `tip_amount`! Make sure you're filtering, sorting, and/or selecting in the right direction.
+D. Are you sure you're filtering out nulls before checking correlation?
+
+[question reference notebook] To answer this question, see the question "Feature Most Correlated with Tip Amount" in the notebook "10. Summative - Quiz.ipynb".
+
+20. With `rides_df_raw`, make a plot of 'hour of day of taxi ride' vs 'average total_amount'. Which of the following statements is True (hint: there are multiple options)?
+
+A. There appears to be a peak in average total amount around 2:00.
+[Correct Answer] B. There appears to be a peak in average total amount around 5:00.
+[Correct Answer] C. There appears to be a peak in average total amount around 16:00.
+[Correct Answer] D. There appears to be a peak in average total amount around 23:00.
+
+[Rationales]
+A. 2:00 is not a peak; in fact it is the hour with the smallest `average_total_amount`.
+B. There is indeed a peak at this time! Check again your x-axis.
+C. There is indeed a peak at this time! Check again your x-axis.
+D. There is indeed a peak at this time! Check again your x-axis.
+
+[question reference notebook] To answer this question, see the question "Hourly Average Total Amount Analysis" in the notebook "10. Summative - Quiz.ipynb".
