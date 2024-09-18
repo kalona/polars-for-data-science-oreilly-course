@@ -115,9 +115,6 @@
       text: (`str`, `i64`, `cat`)
     question: Given the following data dictionary about school children, create a
       `pl.DataFrame` and display it. What are the datatypes of each column?
-    question_name: Creating DataFrame from Dictionary
-    question_reference_note: To answer this question, see the question "Creating DataFrame
-      from Dictionary" in the notebook "02. Getting Started - Quiz.ipynb".
     reference_video: 2.1 Creating a Polars DataFrame
   - answers:
     - is_correct: false
@@ -142,9 +139,6 @@
       of the columns `tpep_pickup_datetime` and `tpep_dropoff_datetime`, loading them
       as a `pl.Datetime` data type. Now, override the schema to load them as a `pl.Date`
       data type. What happens?
-    question_name: Loading CSV with Schema Override
-    question_reference_note: To answer this question, see the question "Loading CSV with
-      Schema Override" in the notebook "02. Getting Started - Quiz.ipynb".
     reference_video: 2.2 Reading Data From CSV with In-Memory Mode
   - answers:
     - is_correct: false
@@ -174,9 +168,6 @@
       from a `csv`. However, we only did this for csv, not for parquet. Which file
       type do you think would have a greater speedup from selecting on a `DataFrame`
       to selecting on a `LazyFrame`: `csv` or `parquet`? Why?'
-    question_name: LazyFrame vs DataFrame Selection Speed
-    question_reference_note: To answer this question, see the question "LazyFrame vs DataFrame
-      Selection Speed" in the notebook "02. Getting Started - Quiz.ipynb".
     reference_video: 2.4 Selecting Data - In-Memory vs Lazy Mode Comparison
   - answers:
     - is_correct: false
@@ -196,9 +187,6 @@
       text: '176836'
     question: Inspect the dataset with `df.describe()`. What is the highest `null_count`
       that any column has?
-    question_name: Highest Null Count in Dataset
-    question_reference_note: To answer this question, see the question "Highest Null Count
-      in Dataset" in the notebook "02. Getting Started - Quiz.ipynb".
     reference_video: 2.2 Reading Data From CSV with In-Memory Mode
 - module_name: 03. Data Manipulation I - Basics
   quiz_questions:
