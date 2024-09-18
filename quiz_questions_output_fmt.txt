@@ -947,7 +947,9 @@ B. Though both `street_number` and `id` appear to be strictly positive, Polars's
 C. Though both `street_number` and `id` appear to fit in the range of 8-bit values, Polars's default behavior is to load integers as `i64`.
 D. `street` gets loaded as a `str`.
 
+[reference module] 02. Getting Started
 [question reference notebook] To answer this question, see the question "Identifying Data Types in New DataFrame" in the notebook "10. Summative - Quiz.ipynb".
+
 
 2. Load the rides data from csv, using `schema_overrides` to force `trip_distance` to be `pl.Int64`. What happens?
 
@@ -962,7 +964,9 @@ B. The code isn't able to run successfully, take another look at your code!
 C. `float` data cannot be cast to `pl.Int64` upon reading data--it can certainly happen later though, once the data has been read!
 D. The code isn't able to run successfully, take another look at your code!
 
+[reference module] 02. Getting Started
 [question reference notebook] To answer this question, see the question "Schema Override for Trip Distance" in the notebook "10. Summative - Quiz.ipynb".
+
 
 3. What is the maximum `congestion_surcharge` in `rides_df_raw`?
 
@@ -977,7 +981,9 @@ B. This is the maximum `fare_amount`; make sure you're taking the right column!
 C. Exactly! You take this by using the `.max()` function.
 D. Are you sure you're using the correct column?
 
+[reference module] 03. Data Manipulation I - Basics
 [question reference notebook] To answer this question, see the question "Maximum Congestion Surcharge" in the notebook "10. Summative - Quiz.ipynb".
+
 
 4. Sort `rides_df_raw` descending in the following order: `congestion_surcharge`, `tip_amount`, `trip_distance`. What is the `trip_distance` of the top trip?
 
@@ -992,7 +998,9 @@ B. Make sure to sort descending, not ascending!
 C. Are you sure you're selecting the correct column?
 D. Exactly! This is the top row after sorting by all the requisite columns.
 
+[reference module] 03. Data Manipulation I - Basics
 [question reference notebook] To answer this question, see the question "Top Trip Distance After Sorting" in the notebook "10. Summative - Quiz.ipynb".
+
 
 5. How many trips had a trip_distance greater than 1km and less than 2km?
 
@@ -1007,7 +1015,9 @@ B. Don't forget to convert miles to kilometers!
 C. Make sure to take the number of rows for your answer, not the number of rows!
 D. Are you sure you're using the right column?
 
+[reference module] 03. Data Manipulation I - Basics
 [question reference notebook] To answer this question, see the question "Trips Within Distance Range" in the notebook "10. Summative - Quiz.ipynb".
+
 
 6. Try to add a column code which checks if `do_zone` is greater than 0. What happens, and why?
 
@@ -1019,10 +1029,12 @@ D. The code runs successfully; however, since strings and integers can't be comp
 [Rationales]
 A. To compare these two data types, something must be done to make them comparable, either casting the integer to a string or casting the string to an integer somehow.
 B. There's no problem with doing this, and in fact we did it in the module!
-C. Polars does not do type cating like this--you must request it explicitly.
+C. Polars does not do type casting like this--you must request it explicitly.
 D. Polars does not do this kind of handling, though you could likely write some behavior using column expressions to do something similar!
 
+[reference module] 07. Data Manipulation V - Working With Data Types
 [question reference notebook] To answer this question, see the question "Comparison of Different Data Types" in the notebook "10. Summative - Quiz.ipynb".
+
 
 7. See the following renaming which uses `.select` and `.rename()`. What is the expression using `.select` and name transformations from the `.name` namespace that accomplishes the same function?
 
@@ -1037,7 +1049,9 @@ B. Using the `.name.suffix()` function, we can accomplish the same as what's bei
 C. Using alias will simply replace the column name altogether, not add a suffix! Furthermore, this code will rename both columns to the same thing, which will give an error.
 D. This will select the wrong columns!
 
+[reference module] 04. Data Manipulation II - Advanced Selecting
 [question reference notebook] To answer this question, see the question "Equivalent Renaming Expression" in the notebook "10. Summative - Quiz.ipynb".
+
 
 8. Add a few new columns to the dataframe that copy all `pl.Int8` columns, simply giving them the suffix `_new`. What is the size of the resultant dataframe?
 
@@ -1052,7 +1066,9 @@ B. Make sure to use `.with_columns()`, not `.select()`.
 C. Exactly! There are no columns with this datatype, so the shape remains the same.
 D. Make sure you're checking for `pl.Int8` columns, not `pl.Float64` columns.
 
+[reference module] 04. Data Manipulation II - Advanced Selecting
 [question reference notebook] To answer this question, see the question "Adding Suffixed Columns for Int8 Type" in the notebook "10. Summative - Quiz.ipynb".
+
 
 9. Using `.group_by()`, what is the most common value for `congestion_surcharge` in the dataset?
 
@@ -1067,7 +1083,9 @@ B. Are you sure you're using the correct column?
 C. Are you sure you're using the correct column?
 D. Exactly! We can group by `congestion_surcharge`, aggregate for `.len()`, and sort.
 
+[reference module] 05. Data Manipulation III - Grouping and Aggregation.ipynb
 [question reference notebook] To answer this question, see the question "Most Common Congestion Surcharge" in the notebook "10. Summative - Quiz.ipynb".
+
 
 10. Create a `.pivot_table()`, where the rows are if the `tip_amount` was 0 and the columns are `passenger_count`; for each combination of "`tip_amount` is 0" and `passenger_count`, compute the number of instances by using `aggregate_function` `"len"`. How many rides had a `tip_amount` of 0 and a `passenger_count` of 2?
 
@@ -1080,9 +1098,11 @@ D. 1358
 A. Exactly right, we find this by viewing the appropriate cell in the pivot table.
 B. Close! This is the number of rides with 2 passengers that did have a tip; make sure to choose the correct cell from the pivot table!
 C. Your answer might look like this if you used "sum" instead of "len" as an aggregate_function. Try again!
-D. The `pivot_table` is easier to read when you first create a boolean colummn for "tip_amount is 0", as instructed in the question! Check again ;)
+D. The `pivot_table` is easier to read when you first create a boolean column for "tip_amount is 0", as instructed in the question! Check again ;)
 
+[reference module] 05. Data Manipulation III - Grouping and Aggregation.ipynb
 [question reference notebook] To answer this question, see the question "Zero-Tip Two-Passenger Rides Count" in the notebook "10. Summative - Quiz.ipynb".
+
 
 11. Join the following two dataframes using a left-join (`restaurant_df` into `name_df`, on the name of the restaurant). What is the shape of the resultant dataframe?
 
@@ -1097,7 +1117,9 @@ B. This would happen if you tried to join using the `on` input argument. Be sure
 C. Exactly! The join columns combine into one for a total of 3 columns.
 D. This is the result you'd get if you were doing an anti-join... make sure to do a left-join!
 
+[reference module] 06. Data Manipulation IV - Combining Data
 [question reference notebook] To answer this question, see the question "Left-Join Result Shape" in the notebook "10. Summative - Quiz.ipynb".
+
 
 12. Join the following two dataframes using an anti-join (`restaurant_df` into `name_df`, on the name of the restaurant). What is the shape of the resultant dataframe?
 
@@ -1112,9 +1134,11 @@ B. This would happen if you tried to join using the `on` input argument. Be sure
 C. This is the result you'd get if you were doing a left-join... try again!
 D. Exactly! There is nothing in `names_df` that is missing a row to join with in `restaurant_df`.
 
+[reference module] 06. Data Manipulation IV - Combining Data
 [question reference notebook] To answer this question, see the question "Anti-Join Result Shape" in the notebook "10. Summative - Quiz.ipynb".
 
-13. Vertically concatenate the following dataframes. How many null values are there in the entire resultant dataframe?
+
+13. Vertically concatenate the following dataframes (with setting "how='diagonal'"). How many null values are there in the entire resultant dataframe?
 
 [Correct Answer] A. 20
 B. 6
@@ -1127,9 +1151,11 @@ B. This is how many there are across the dataframes to begin with! Make sure to 
 C. Some dataframes here have non-overlapping columns, so make sure to set "how" as "diagonal"!
 D. Are you replacing the null values with something else somehow?
 
-[question reference notebook] To answer this question, see the question "Null Count After Vertical Concatenation" in the notebook "10. Summative - Quiz.ipynb".
+[reference module] 06. Data Manipulation IV - Combining Data
+[question reference notebook] To answer this question, see the question "Null Count After Diagonal Concatenation" in the notebook "10. Summative - Quiz.ipynb".
 
-14. What fraction of rides in the dataframe started before `2024-03-15` (i.e. had a `tpep_pickup_datetime` before `2024-03-15`?
+
+14. What fraction of rides in the dataframe started before `2024-03-15` (i.e. had a `tpep_pickup_datetime` before `2024-03-15`)?
 
 A. 0.455174
 [Correct Answer] B. 0.455173
@@ -1142,7 +1168,9 @@ B. `2024-3-15` is halfway through the month, so it makes sense that the number h
 C. 1.0 is all the rides! Double check your expression...
 D. We're looking for the fraction of rides that started before `2024-03-15`, not the number of rides!
 
+[reference module] 09. Integrating Polars Into the Data Science Workflow
 [question reference notebook] To answer this question, see the question "Fraction of Early March Rides" in the notebook "10. Summative - Quiz.ipynb".
+
 
 15. Group the following dataframe by `class`, and `.sum()` the `salient_appendages` column (which is a list type) to create a list of all `salient_appendages` for that animal class. What happens?
 
@@ -1157,7 +1185,9 @@ B. This is the goal, but it'd required an advanced technique to achieve!
 C. You're correct that the code doesn't run successfully in achieving the desired effect, however it doesn't quite throw an error.
 D. This is what would happen if we didn't use the `.sum()` function and just left the agg as a simple `.agg(pl.col("salient_appendages"))`.
 
+[reference module] 07. Working With Different Datatypes
 [question reference notebook] To answer this question, see the question "List Column Aggregation Behavior" in the notebook "10. Summative - Quiz.ipynb".
+
 
 16. True or False: weekend taxi trips (trips that have a `tpep_pickup_datetime` on Saturday or Sunday) have on average higher tip amounts than non-weekend taxi trips.
 
@@ -1168,7 +1198,9 @@ B. True
 A. Exactly! Weekend pickups have an average `tip_amount` of 2.97, while non-weekend pickups have an average `tip_amount` of 3.29.
 B. Are you sure you created correctly the column for grouping? Try again!
 
+[reference module] 07. Working With Different Datatypes
 [question reference notebook] To answer this question, see the question "Weekend vs Weekday Tip Comparison" in the notebook "10. Summative - Quiz.ipynb".
+
 
 17. Convert the following numpy array to a polars dataframe. What are the datatypes of the resultant dataframe?
 
@@ -1183,7 +1215,9 @@ B. Despite being random floats between just 0 and 1, the floats are still 64 bit
 C. Is it possible that you transposed the data somehow?
 D. There is no problem creating a polars dataframe from a numpy array like this!
 
+[reference module] 08. Data Manipulation VI - Interoperation and IO
 [question reference notebook] To answer this question, see the question "Numpy to Polars Dataframe Conversion" in the notebook "10. Summative - Quiz.ipynb".
+
 
 18. Create a Polars series, convert it to Pandas, and then convert it back to Polars. True or False: the result upon returning to Polars is now a single-column dataframe.
 
@@ -1194,7 +1228,9 @@ A. True
 A. This shouldn't be the case... perhaps you accidentally converted it to a dataframe yourself!
 B. Exactly! Polars handles this type of interoperation without a problem, cleanly able to convert a Polars Series to a Pandas Series and back.
 
+[reference module] 08. Data Manipulation VI - Interoperation and IO
 [question reference notebook] To answer this question, see the question "Polars to Pandas to Polars Series Conversion" in the notebook "10. Summative - Quiz.ipynb".
+
 
 19. Using `rides_df_raw`, which feature is most highly correlated (either positively or negatively) with `tip_amount` (excluding `tip_amount` itself)? Also, please filter out `null` values as done in the module!
 
@@ -1209,7 +1245,9 @@ B. Indeed, `total_amount` is most highly correlated with `tip_amount`, which mak
 C. This is the feature least correlated with `tip_amount`! Make sure you're filtering, sorting, and/or selecting in the right direction.
 D. Are you sure you're filtering out nulls before checking correlation?
 
+[reference module] 09. Integrating Polars Into the Data Science Workflow
 [question reference notebook] To answer this question, see the question "Feature Most Correlated with Tip Amount" in the notebook "10. Summative - Quiz.ipynb".
+
 
 20. With `rides_df_raw`, make a plot of 'hour of day of taxi ride' vs 'average total_amount'. Which of the following statements is True (hint: there are multiple options)?
 
@@ -1224,4 +1262,5 @@ B. There is indeed a peak at this time! Check again your x-axis.
 C. There is indeed a peak at this time! Check again your x-axis.
 D. There is indeed a peak at this time! Check again your x-axis.
 
+[reference module] 09. Integrating Polars Into the Data Science Workflow
 [question reference notebook] To answer this question, see the question "Hourly Average Total Amount Analysis" in the notebook "10. Summative - Quiz.ipynb".

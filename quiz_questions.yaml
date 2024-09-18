@@ -1334,6 +1334,7 @@
     question_name: Identifying Data Types in New DataFrame
     question_reference_note: To answer this question, see the question "Identifying Data
       Types in New DataFrame" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 02. Getting Started
   - answers:
     - is_correct: false
       rationale: An error is indeed thrown, but it's something besides this.
@@ -1359,6 +1360,7 @@
     question_name: Schema Override for Trip Distance
     question_reference_note: To answer this question, see the question "Schema Override
       for Trip Distance" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 02. Getting Started
   - answers:
     - is_correct: false
       rationale: This is the minimum `congestion_surcharge`; make sure you're checking
@@ -1378,6 +1380,7 @@
     question_name: Maximum Congestion Surcharge
     question_reference_note: To answer this question, see the question "Maximum Congestion
       Surcharge" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 03. Data Manipulation I - Basics
   - answers:
     - is_correct: false
       rationale: 'Make sure you''re sorting by the columns in precisely the correct
@@ -1397,6 +1400,7 @@
     question_name: Top Trip Distance After Sorting
     question_reference_note: To answer this question, see the question "Top Trip Distance
       After Sorting" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 03. Data Manipulation I - Basics
   - answers:
     - is_correct: true
       rationale: Indeed, we arrive to this answer by using `.gt()` and `.lt()`, after converting to kilometers!
@@ -1415,6 +1419,7 @@
     question_name: Trips Within Distance Range
     question_reference_note: To answer this question, see the question "Trips Within Distance
       Range" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 03. Data Manipulation I - Basics
   - answers:
     - is_correct: true
       rationale: To compare these two data types, something must be done to make them
@@ -1440,6 +1445,7 @@
     question_name: Comparison of Different Data Types
     question_reference_note: To answer this question, see the question "Comparison of Different
       Data Types" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 07. Data Manipulation V - Working With Data Types
   - answers:
     - is_correct: false
       rationale: This almost works, but it accidentally includes `vendor_id` in the
@@ -1463,6 +1469,7 @@
     question_name: Equivalent Renaming Expression
     question_reference_note: To answer this question, see the question "Equivalent Renaming
       Expression" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 04. Data Manipulation II - Advanced Selecting
   - answers:
     - is_correct: false
       rationale: Make sure you're checking for `pl.Int8` columns, not `pl.Int32` columns.
@@ -1483,6 +1490,7 @@
     question_name: Adding Suffixed Columns for Int8 Type
     question_reference_note: To answer this question, see the question "Adding Suffixed
       Columns for Int8 Type" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 04. Data Manipulation II - Advanced Selecting
   - answers:
     - is_correct: false
       rationale: This is the value of `congestion_surcharge` with the least occurrences
@@ -1502,6 +1510,7 @@
     question_name: Most Common Congestion Surcharge
     question_reference_note: To answer this question, see the question "Most Common Congestion
       Surcharge" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 05. Data Manipulation III - Grouping and Aggregation.ipynb
   - answers:
     - is_correct: true
       rationale: Exactly right, we find this by viewing the appropriate cell in the pivot table.
@@ -1526,6 +1535,7 @@
     question_name: Zero-Tip Two-Passenger Rides Count
     question_reference_note: To answer this question, see the question "Zero-Tip Two-Passenger
       Rides Count" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 05. Data Manipulation III - Grouping and Aggregation.ipynb
   - answers:
     - is_correct: false
       rationale: This is the result you'd get if you joined `name_df` into `restaurant_df`...
@@ -1549,6 +1559,7 @@
     question_name: Left-Join Result Shape
     question_reference_note: To answer this question, see the question "Left-Join Result
       Shape" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 06. Data Manipulation IV - Combining Data
   - answers:
     - is_correct: false
       rationale: This is the result you'd get if you anti-joined `name_df` into `restaurant_df`...
@@ -1573,6 +1584,7 @@
     question_name: Anti-Join Result Shape
     question_reference_note: To answer this question, see the question "Anti-Join Result
       Shape" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 06. Data Manipulation IV - Combining Data
   - answers:
     - is_correct: true
       rationale: Exactly, there are a few nulls in the dataframe to begin with, and
@@ -1590,11 +1602,12 @@
     - is_correct: false
       rationale: Are you replacing the null values with something else somehow?
       text: '0'
-    question: Vertically concatenate the following dataframes. How many null values
-      are there in the entire resultant dataframe?
-    question_name: Null Count After Vertical Concatenation
+    question: Vertically concatenate the following dataframes (with setting “how=’diagonal’”).
+      How many null values are there in the entire resultant dataframe?
+    question_name: Null Count After Diagonal Concatenation
     question_reference_note: To answer this question, see the question "Null Count After
-      Vertical Concatenation" in the notebook "10. Summative - Quiz.ipynb".
+      Diagonal Concatenation" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 06. Data Manipulation IV - Combining Data
   - answers:
     - is_correct: false
       rationale: Make sure to check rides before `2024-03-15`... you might be checking
@@ -1612,10 +1625,11 @@
         not the number of rides!
       text: '1630716'
     question: What fraction of rides in the dataframe started before `2024-03-15`
-      (i.e. had a `tpep_pickup_datetime` before `2024-03-15`?
+      (i.e. had a `tpep_pickup_datetime` before `2024-03-15`)?
     question_name: Fraction of Early March Rides
     question_reference_note: To answer this question, see the question "Fraction of Early
       March Rides" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 09. Integrating Polars Into the Data Science Workflow
   - answers:
     - is_correct: true
       rationale: If you want to concatenate the lists together, you'd have to take
@@ -1642,6 +1656,7 @@
     question_name: List Column Aggregation Behavior
     question_reference_note: To answer this question, see the question "List Column Aggregation
       Behavior" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 07. Working With Different Datatypes
   - answers:
     - is_correct: true
       rationale: Exactly! Weekend pickups have an average `tip_amount` of 2.97, while
@@ -1656,6 +1671,7 @@
     question_name: Weekend vs Weekday Tip Comparison
     question_reference_note: To answer this question, see the question "Weekend vs Weekday
       Tip Comparison" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 07. Working With Different Datatypes
   - answers:
     - is_correct: true
       rationale: Exactly! The data were Float64's in the numpy array, and they stayed
@@ -1677,6 +1693,7 @@
     question_name: Numpy to Polars Dataframe Conversion
     question_reference_note: To answer this question, see the question "Numpy to Polars
       Dataframe Conversion" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 08. Data Manipulation VI - Interoperation and IO
   - answers:
     - is_correct: false
       rationale: This shouldn't be the case... perhaps you accidentally converted
@@ -1692,6 +1709,7 @@
     question_name: Polars to Pandas to Polars Series Conversion
     question_reference_note: To answer this question, see the question "Polars to Pandas
       to Polars Series Conversion" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 08. Data Manipulation VI - Interoperation and IO
   - answers:
     - is_correct: false
       rationale: Please don't forget to exclude correlation with self!
@@ -1713,6 +1731,7 @@
     question_name: Feature Most Correlated with Tip Amount
     question_reference_note: To answer this question, see the question "Feature Most Correlated
       with Tip Amount" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 09. Integrating Polars Into the Data Science Workflow
   - answers:
     - is_correct: false
       rationale: 2:00 is not a peak; in fact it is the hour with the smallest `average_total_amount`.
@@ -1732,3 +1751,4 @@
     question_name: Hourly Average Total Amount Analysis
     question_reference_note: To answer this question, see the question "Hourly Average Total
       Amount Analysis" in the notebook "10. Summative - Quiz.ipynb".
+    reference_module: 09. Integrating Polars Into the Data Science Workflow
