@@ -1,5 +1,13 @@
+# General Files
 .venv/
 .ipynb_checkpoints/
 data/
 notebooks/html_outputs/
 .DS_Store
+
+# Internal files
+todo.txt
+tutorial_prompt.txt
+granular_course_outline.yaml
+quiz_questions.yaml
+quiz_questions_output_fmt.txt
