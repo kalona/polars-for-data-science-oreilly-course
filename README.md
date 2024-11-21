@@ -1,6 +1,12 @@
-# Polars for Data Science - A Practical Guide
+# Polars for Data Science: Tackling Real-World Data Challenges
 
-Welcome to "Polars for Data Science - a Practical Guide". This course, created in partnership with O'Reilly Publisher, is designed to provide a comprehensive and practical understanding of the Polars library, an innovative tool for data manipulation and analysis. Hosted entirely on this GitHub repository, this course will take you from the basics of Polars to integrating it within a full data science workflow.
+Welcome to "Polars for Data Science: Tackling Real-World Data Challenges"!
+
+This course, created in partnership with O'Reilly Media, is designed to provide a comprehensive and practical understanding of [Polars](https://github.com/pola-rs/polars), an innovative tool for data manipulation and analysis.
+
+Hosted entirely on this GitHub repository, this course will take you from the basics of Polars to integrating Polars into your data science workflow.
+
+The video course can be found on O'Reilly Media here: [Polars for Data Science: Tackling Real-World Data Challenges](https://learning.oreilly.com/course/polars-for-data/0642572019327/)
 
 ## Course Overview
 
