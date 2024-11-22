@@ -13,8 +13,6 @@ The course will take you from zero Polars all the way to integrating Polars into
 
 This README provides instructions for installing the required packages, as well as downloading the data files which are used throughout the course.
 
-If you have any questions or run into any issues while working through the course, please write me on [LinkedIn](https://www.linkedin.com/in/benjamin-feifke/), or by email at ben@beyonddataconsulting.io.
-
 ## Course Overview
 
 - **Introduction**: Understand what makes Polars a groundbreaking technology for data science, where it sits in the landscape of data science tooling, and have an intuition of the syntax differences between Polars, Pandas, and SQL.
@@ -101,10 +99,11 @@ These data files (in their required formats) can all be downloaded from the publ
 ### Option 1: Downloading the Data Manually
 1. Visit the following URLs in your web browser. For each URL, you should be prompted  to download the file; you should download each file to the directory `data/`:
    - https://polars-for-data-science-oreilly-course-data-resources.s3.amazonaws.com/yellow_tripdata_2024-02.parquet
-   - https://polars-for-data-science-oreilly-course-data-resources.s3.amazonaws.com/yellow_tripdata_2024-03.parquet
    - https://polars-for-data-science-oreilly-course-data-resources.s3.amazonaws.com/yellow_tripdata_2024-03.csv
+   - https://polars-for-data-science-oreilly-course-data-resources.s3.amazonaws.com/yellow_tripdata_2024-03.parquet
    - https://polars-for-data-science-oreilly-course-data-resources.s3.amazonaws.com/green_tripdata_2024-03.parquet
    - https://polars-for-data-science-oreilly-course-data-resources.s3.amazonaws.com/taxi_zone_lookup.csv
+   - https://polars-for-data-science-oreilly-course-data-resources.s3.amazonaws.com/taxi_zone_lookup.parquet
 
 ### Option 2: Downloading the Data with the AWS CLI
 1. **Install the AWS CLI** (if not already installed):
@@ -123,11 +122,8 @@ These data files (in their required formats) can all be downloaded from the publ
 
    Note: The AWS CLI commands above should work without AWS credentials since these files are publicly accessible.
 
-
-
-
 ## Additional Notes
 
 Ensure that you have Jupyter Notebook installed and ready to use, as the course modules are provided in the form of Jupyter notebooks. If you encounter any issues with the installation or setup, please refer to the [official documentation](https://jupyter.org/install) for additional support.
 
-Happy learning and enjoy your journey into the world of Polars!
+Happy learning, and enjoy your journey into the world of Polars!
