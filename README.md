@@ -13,6 +13,8 @@ The course will take you from zero Polars all the way to integrating Polars into
 
 This README provides instructions for installing the required packages, as well as downloading the data files which are used throughout the course.
 
+If you have any questions or run into any issues while working through the course, please write me on [LinkedIn](https://www.linkedin.com/in/benjamin-feifke/), or by email at ben@beyonddataconsulting.io.
+
 ## Course Overview
 
 - **Introduction**: Understand what makes Polars a groundbreaking technology for data science, where it sits in the landscape of data science tooling, and have an intuition of the syntax differences between Polars, Pandas, and SQL.
