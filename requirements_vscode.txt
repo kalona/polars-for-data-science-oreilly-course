@@ -1,0 +1,13 @@
+altair>=5.4.0
+fastexcel
+hvplot>=0.9.1
+lightgbm
+matplotlib
+pandas
+polars>=1.7.1
+pyarrow
+scikit-learn
+setuptools
+vegafusion
+xlsxwriter
+xlsx2csv

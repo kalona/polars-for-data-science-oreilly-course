@@ -15,3 +15,7 @@ internal_requirements.txt
 
 # Keep
 !data/.gitkeep
+
+# Data files
+*.csv
+*.parquet
